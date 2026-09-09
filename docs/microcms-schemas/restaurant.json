@@ -1,0 +1,236 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "brandJa",
+      "name": "店名（日本語）",
+      "kind": "text",
+      "description": "サイトに表示する日本語の店名です。未入力時はローカル設定を使用します。",
+      "required": false
+    },
+    {
+      "fieldId": "brandEn",
+      "name": "店名（英語）",
+      "kind": "text",
+      "description": "サイトに表示する英語の店名です。",
+      "required": false
+    },
+    {
+      "fieldId": "heroTitle",
+      "name": "メイン見出し",
+      "kind": "textArea",
+      "description": "トップ画像上の見出しです。改行も表示に反映されます。",
+      "required": false
+    },
+    {
+      "fieldId": "heroBody",
+      "name": "メイン説明",
+      "kind": "textArea",
+      "description": "トップ画像上の短い説明です。",
+      "required": false
+    },
+    {
+      "fieldId": "courseEyebrow",
+      "name": "コース英字見出し",
+      "kind": "text",
+      "description": "コースセクション上部の英字見出しです。",
+      "required": false
+    },
+    {
+      "fieldId": "courseSectionTitle",
+      "name": "コース見出し",
+      "kind": "text",
+      "description": "コースセクションの見出し前半です。",
+      "required": false
+    },
+    {
+      "fieldId": "courseTitleAccent",
+      "name": "コース強調見出し",
+      "kind": "text",
+      "description": "コースセクションの見出し後半です。",
+      "required": false
+    },
+    {
+      "fieldId": "courseSectionIntro",
+      "name": "コース導入文",
+      "kind": "textArea",
+      "description": "モバイル表示でコース見出しの下に表示する説明です。",
+      "required": false
+    },
+    {
+      "fieldId": "courseName",
+      "name": "コース名",
+      "kind": "text",
+      "description": "店舗情報に表示するコース名です。例：おまかせ",
+      "required": false
+    },
+    {
+      "fieldId": "coursePrice",
+      "name": "コース価格",
+      "kind": "number",
+      "description": "1名分のコース価格を円単位の数値で入力します。予約フォームの計算にも使用します。",
+      "required": false
+    },
+    {
+      "fieldId": "coursePriceSuffix",
+      "name": "価格の後ろの注記",
+      "kind": "text",
+      "description": "価格の後ろに表示する税込・サービス料などの注記です。",
+      "required": false
+    },
+    {
+      "fieldId": "serviceRatePercent",
+      "name": "サービス料率",
+      "kind": "number",
+      "description": "サービス料をパーセントで入力します。例：10",
+      "required": false
+    },
+    {
+      "fieldId": "address",
+      "name": "住所",
+      "kind": "text",
+      "description": "郵便番号を含む店舗住所です。",
+      "required": false
+    },
+    {
+      "fieldId": "access",
+      "name": "アクセス",
+      "kind": "textArea",
+      "description": "最寄駅、出口、徒歩分数などの案内です。",
+      "required": false
+    },
+    {
+      "fieldId": "telephone",
+      "name": "電話番号",
+      "kind": "text",
+      "description": "ハイフンを含む店舗電話番号です。",
+      "required": false
+    },
+    {
+      "fieldId": "reception",
+      "name": "電話受付時間",
+      "kind": "text",
+      "description": "電話番号の下に表示する受付時間です。",
+      "required": false
+    },
+    {
+      "fieldId": "hours",
+      "name": "営業時間",
+      "kind": "textArea",
+      "description": "サイトに表示する営業時間です。",
+      "required": false
+    },
+    {
+      "fieldId": "closed",
+      "name": "定休日",
+      "kind": "text",
+      "description": "サイトに表示する定休日です。",
+      "required": false
+    },
+    {
+      "fieldId": "pairing",
+      "name": "ペアリング",
+      "kind": "textArea",
+      "description": "ペアリングの種類と価格です。",
+      "required": false
+    },
+    {
+      "fieldId": "seats",
+      "name": "席情報",
+      "kind": "textArea",
+      "description": "カウンター、個室、席数などの情報です。",
+      "required": false
+    },
+    {
+      "fieldId": "children",
+      "name": "お子様の利用条件",
+      "kind": "textArea",
+      "description": "年齢や席種ごとの利用条件です。",
+      "required": false
+    },
+    {
+      "fieldId": "dress",
+      "name": "服装などのお願い",
+      "kind": "textArea",
+      "description": "服装や香水など、ご来店時のお願いです。",
+      "required": false
+    },
+    {
+      "fieldId": "allergy",
+      "name": "アレルギー案内",
+      "kind": "textArea",
+      "description": "アレルギー対応の条件と連絡期限です。予約フォームにも表示します。",
+      "required": false
+    },
+    {
+      "fieldId": "cancellation",
+      "name": "キャンセル規定",
+      "kind": "textArea",
+      "description": "キャンセル料と適用時期です。予約確認画面にも表示します。",
+      "required": false
+    },
+    {
+      "fieldId": "reservationTitle",
+      "name": "予約見出し",
+      "kind": "text",
+      "description": "予約セクションの見出しです。",
+      "required": false
+    },
+    {
+      "fieldId": "reservationNote",
+      "name": "予約案内",
+      "kind": "textArea",
+      "description": "予約開始日や電話受付についての案内です。",
+      "required": false
+    },
+    {
+      "fieldId": "reservationSlots",
+      "name": "予約時間枠",
+      "kind": "textArea",
+      "description": "HH:MM形式で1行に1枠ずつ入力します。例：18:00",
+      "required": false
+    },
+    {
+      "fieldId": "bookingWindowMonths",
+      "name": "予約受付月数",
+      "kind": "number",
+      "description": "何か月先まで予約を受け付けるか、1から12の数値で入力します。",
+      "required": false
+    },
+    {
+      "fieldId": "guestsMin",
+      "name": "予約最少人数",
+      "kind": "number",
+      "description": "予約フォームで選択できる最少人数です。1から20で入力します。",
+      "required": false
+    },
+    {
+      "fieldId": "guestsMax",
+      "name": "予約最大人数",
+      "kind": "number",
+      "description": "予約フォームで選択できる最大人数です。1から20で入力します。",
+      "required": false
+    },
+    {
+      "fieldId": "closedWeekdays",
+      "name": "予約不可の曜日",
+      "kind": "text",
+      "description": "日曜を0、土曜を6としてカンマ区切りで入力します。曜日定休なしはnoneです。",
+      "required": false
+    },
+    {
+      "fieldId": "secondMondayClosed",
+      "name": "第2月曜を予約不可にする",
+      "kind": "boolean",
+      "description": "オンにすると第2月曜を予約フォームで選択できなくします。",
+      "required": false
+    },
+    {
+      "fieldId": "timeZone",
+      "name": "タイムゾーン",
+      "kind": "text",
+      "description": "通常はAsia/Tokyoを入力します。",
+      "required": false
+    }
+  ],
+  "customFields": []
+}

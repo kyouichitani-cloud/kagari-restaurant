@@ -1,0 +1,84 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "chapter",
+      "name": "章",
+      "kind": "text",
+      "description": "序、先付、椀などの短い章名です。",
+      "required": true
+    },
+    {
+      "fieldId": "title",
+      "name": "料理名",
+      "kind": "text",
+      "description": "サイトに表示する料理名です。",
+      "required": true
+    },
+    {
+      "fieldId": "description",
+      "name": "料理説明",
+      "kind": "textArea",
+      "description": "素材、調理、味わいを説明する本文です。",
+      "required": true
+    },
+    {
+      "fieldId": "origin",
+      "name": "産地・生産者",
+      "kind": "textArea",
+      "description": "主要食材の産地や生産者です。",
+      "required": true
+    },
+    {
+      "fieldId": "photo",
+      "name": "料理写真",
+      "kind": "media",
+      "description": "横位置を基本とする料理の主写真です。メディア管理でaltテキストも設定してください。",
+      "required": true
+    },
+    {
+      "fieldId": "sortOrder",
+      "name": "並び順",
+      "kind": "number",
+      "description": "小さい数から表示します。10、20、30のように間隔を空けて入力します。",
+      "required": true
+    },
+    {
+      "fieldId": "details",
+      "name": "補足情報",
+      "kind": "repeater",
+      "description": "器、合わせる酒、火入れなどの補足情報を必要な数だけ追加します。",
+      "required": false,
+      "customFieldIds": [
+        "courseDetail"
+      ]
+    }
+  ],
+  "customFields": [
+    {
+      "fieldId": "courseDetail",
+      "name": "コース補足情報",
+      "fields": [
+        {
+          "fieldId": "label",
+          "name": "項目名",
+          "kind": "text",
+          "description": "例：器、合わせる酒、火入れ",
+          "required": true
+        },
+        {
+          "fieldId": "value",
+          "name": "内容",
+          "kind": "text",
+          "description": "項目の具体的な内容です。",
+          "required": true
+        }
+      ],
+      "fieldOrderByColumn": [
+        [
+          "label",
+          "value"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "date",
+      "name": "日付",
+      "kind": "date",
+      "description": "サイトに掲載するお知らせの日付です。",
+      "required": true
+    },
+    {
+      "fieldId": "title",
+      "name": "お知らせ本文",
+      "kind": "text",
+      "description": "サイトのお知らせ欄に表示する文章です。",
+      "required": true
+    },
+    {
+      "fieldId": "sortOrder",
+      "name": "並び順",
+      "kind": "number",
+      "description": "小さい数から表示します。10、20、30のように入力します。",
+      "required": true
+    }
+  ],
+  "customFields": []
+}
