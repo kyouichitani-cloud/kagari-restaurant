@@ -155,6 +155,73 @@ footer{position:relative;min-height:90svh;isolation:isolate;display:grid;align-i
 }
 
 .chef{overflow:visible}
+
+/* Chef: keep portrait and copy side by side on phone and tablet. */
+@media (min-width:768px) and (max-width:1024px){
+  section.chef{
+    grid-template-columns:minmax(0,42fr) minmax(0,58fr);
+    align-items:center;
+    gap:clamp(1.75rem,3.5vw,2.5rem);
+    padding-block:8rem;
+    padding-inline:clamp(2.5rem,6vw,4rem);
+    overflow:clip;
+  }
+  section.chef>.chef-image{
+    width:100%;
+    max-width:none;
+    justify-self:stretch;
+  }
+  section.chef>.chef-image img{
+    aspect-ratio:3/4;
+    object-fit:cover;
+    object-position:42% center;
+  }
+  section.chef>.chef-copy{min-width:0}
+  section.chef .chef-quote{
+    margin-bottom:1.75rem;
+    font-size:clamp(1.35rem,2.9vw,1.7rem);
+  }
+}
+@media (max-width:767px){
+  section.chef{
+    grid-template-columns:minmax(0,38fr) minmax(0,62fr);
+    align-items:start;
+    gap:clamp(.75rem,4vw,1rem);
+    padding-bottom:calc(7rem + 56px + env(safe-area-inset-bottom));
+    overflow:clip;
+  }
+  section.chef>.chef-image{
+    width:100%;
+    max-width:none;
+    justify-self:stretch;
+  }
+  section.chef>.chef-image img{
+    aspect-ratio:3/4;
+    object-fit:cover;
+    object-position:42% center;
+  }
+  section.chef>.chef-copy{min-width:0}
+  section.chef .chef-quote{
+    margin-bottom:1.35rem;
+    font-size:clamp(.74rem,3.4vw,.82rem);
+    line-height:1.72;
+  }
+  section.chef .chef-sign{
+    margin-bottom:1.2rem;
+    font-size:clamp(.86rem,3.8vw,1rem);
+  }
+  section.chef .chef-sign small{
+    margin-top:.35rem;
+    font-size:clamp(.56rem,2.5vw,.65rem);
+    letter-spacing:.1em;
+  }
+  section.chef .chef-copy>p:last-child{
+    max-width:none;
+    overflow-wrap:anywhere;
+    font-size:clamp(.75rem,2.9vw,.8rem);
+    line-height:1.85;
+  }
+}
 @media (max-width:767px){
   .nav-shell,.mobile-menu{padding-left:max(1.15rem,env(safe-area-inset-left));padding-right:max(1.15rem,env(safe-area-inset-right))}
   .persistent-book{padding-left:max(1.15rem,env(safe-area-inset-left));padding-right:max(1.15rem,env(safe-area-inset-right))}

@@ -35,7 +35,7 @@ export default async function Home() {
       <CourseExperience courses={restaurant.courses} section={restaurant.courseSection} />
 
       <section className="chef" id="chef" aria-labelledby="chef-title">
-        <picture className="chef-image"><source srcSet="/images/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.webp" type="image/webp" /><Image src="/images/chef-naoto-takase.png" alt="篝 料理長 髙瀬直人" width={1536} height={1024} sizes="(max-width: 767px) 100vw, 58vw" /></picture>
+        <picture className="chef-image"><source media="(max-width: 1024px)" srcSet="/images/responsive/portrait/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.webp" type="image/webp" /><Image src="/images/chef-naoto-takase.png" alt="篝 料理長 髙瀬直人" width={1536} height={1024} sizes="(max-width: 767px) 38vw, (max-width: 1024px) 42vw, 58vw" /></picture>
         <div className="chef-copy">
           <p className="section-label">{restaurant.chef.title}</p>
           <h2 id="chef-title" className="sr-only">料理長の言葉</h2>
