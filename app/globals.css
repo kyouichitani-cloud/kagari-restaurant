@@ -73,7 +73,6 @@ html[data-revisit="true"] .entrance-mark,html[data-revisit="true"] .entrance-cut
 .course-index button span{display:inline-block;width:2rem;color:var(--smoke);font:400 .7rem "Kagari Sans",sans-serif}.course-index button[data-active="true"]{color:var(--porcelain);transform:translateX(-5px)}.course-index button[data-active="true"] span{color:var(--ember-text)}.course-progress{position:absolute;z-index:4;inset:auto 0 0;height:2px;background:rgb(238 236 228/.18)}.course-progress i{display:block;width:100%;height:100%;background:var(--ember);transform:scaleX(0);transform-origin:left}.course-tablet,.course-mobile{display:none}.sr-course-list{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* Story */
-.chef{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);align-items:center;gap:clamp(3rem,6vw,7rem);max-width:100%;padding:12rem clamp(1.25rem,6vw,7rem);overflow:clip;background:#e6e1d4;color:#181a18}.chef-image,.chef-image img{display:block;width:100%;min-width:0}.chef-image img{aspect-ratio:3/2;object-fit:cover;object-position:42% center}.chef-copy{width:100%;min-width:0}.chef-copy h2{margin:0 0 2.5rem;max-width:21ch;padding-inline-end:.08em;font-size:clamp(1.75rem,2.2vw,2.7rem);line-height:1.55;line-break:strict;overflow-wrap:anywhere;text-wrap:pretty}.chef-copy>p:last-child{max-width:34ch;font:400 .95rem/2 var(--mincho);color:#454a46}.chef-sign{max-width:100%;margin:0 0 2rem;font:400 1.35rem var(--mincho)}.chef-sign small{display:block;max-width:100%;margin-top:.5rem;color:#5c625d;font:400 .75rem "Kagari Sans",sans-serif;letter-spacing:.14em;overflow-wrap:anywhere}
 .philosophy,.provenance{min-height:115svh;display:grid;align-items:center;gap:clamp(2rem,8vw,9rem);padding:12vh clamp(1.25rem,6vw,7rem)}.philosophy{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}.philosophy-image{position:relative;height:min(76vh,820px);overflow:hidden}.philosophy-image img{object-position:70% center}.philosophy-copy{min-width:0;align-self:end;padding-bottom:8vh}.philosophy h2,.provenance h2{margin:0 0 2rem;font-size:clamp(2.6rem,4.7vw,5.4rem);line-height:1.25}.philosophy p,.provenance p,.space p,.reservation-panel>p{max-width:34ch;font:400 .98rem/2.05 var(--mincho);color:rgb(238 236 228/.72)}.provenance{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}.provenance-copy{min-width:0;align-self:start;padding-top:8vh}.provenance-image{min-width:0;overflow:hidden}.provenance-image img{display:block;width:100%;height:min(76vh,820px)}
 .space{position:relative;min-height:105svh;isolation:isolate;display:grid;align-items:end;padding:10vh clamp(1.25rem,7vw,8rem)}.space>img{z-index:-3}.space-grade{position:absolute;inset:0;z-index:-2;background:linear-gradient(0deg,rgb(16 18 17/.82),transparent 58%)}.space>div:last-child{position:relative;z-index:0;margin-left:42%}.space>div:last-child::before{content:"";position:absolute;z-index:-1;inset:-3rem -5rem -3rem -5rem;background:radial-gradient(110% 100% at 30% 60%,rgb(16 18 17/.88),transparent 72%)}.space h2{margin:0 0 1.8rem;font-size:clamp(4rem,7vw,7rem)}
 .visit{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(3rem,8vw,10rem);padding:10rem clamp(1.25rem,6vw,7rem);background:#1b211f}.visit>div,.visit dl{min-width:0}.visit h2{margin:0 0 2rem;font-size:clamp(3rem,5vw,5.5rem)}.visit address{font-size:.9rem}.visit dl{margin:0}.visit dl>div{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:2rem;padding:1.5rem 0;border-bottom:1px solid rgb(238 236 228/.16)}.visit dt{color:var(--celadon);font-size:.75rem;letter-spacing:.1em}.visit dd{margin:0;overflow-wrap:anywhere;font:400 .88rem/1.9 var(--mincho);color:rgb(238 236 228/.78)}
@@ -115,8 +114,6 @@ footer{position:relative;min-height:90svh;isolation:isolate;display:grid;align-i
 
 /* Chef quotation: preserve natural Japanese line wrapping. */
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-.chef-quote{width:100%;max-width:100%;min-width:0;margin:0 0 2.5rem;padding:0;font:400 clamp(1.65rem,1.95vw,2.5rem)/1.62 var(--mincho);line-break:strict;word-break:normal;overflow-wrap:normal;text-wrap:pretty}
-@media (max-width:767px){.chef-quote{margin-bottom:2.25rem;font-size:clamp(1.12rem,5vw,1.35rem);line-height:1.72}}
 .mobile-phone{min-height:56px;display:flex;align-items:center;justify-content:space-between;font-size:.9rem}.mobile-phone small{color:var(--smoke);font-size:.75rem}
 .course-chapter{padding-inline-start:2.25rem}.course-kicker{writing-mode:vertical-rl;position:absolute;left:0;bottom:0;max-height:min(8rem,28vh);min-height:4rem}
 .system-page,.policy-page{min-height:100svh;padding:clamp(6rem,12vw,12rem) clamp(1.2rem,12vw,14rem);background:#e6e1d4;color:#181a18}.system-page h1,.policy-page h1{max-width:15ch;font-size:clamp(3rem,8vw,7rem);line-height:1.2}.system-page a,.system-page button,.policy-page>a{min-height:48px;display:inline-flex;align-items:center;margin-top:3rem;border:0;border-bottom:1px solid currentColor;background:transparent;color:inherit}.policy-page>p,.policy-page dl,.policy-page h2{max-width:48rem}.policy-page>p{font:400 1rem/2 var(--mincho)}.policy-page h2{margin-top:4rem;font-size:2rem}.policy-page dl>div{display:grid;grid-template-columns:10rem 1fr;gap:2rem;padding:1.2rem 0;border-bottom:1px solid rgb(16 18 17/.18)}.policy-page dd{margin:0}
@@ -153,88 +150,72 @@ footer{position:relative;min-height:90svh;isolation:isolate;display:grid;align-i
   .policy-page dd{min-width:0;overflow-wrap:anywhere}
 }
 
-.chef{overflow:visible}
-
-/* Chef: keep portrait and copy side by side on phone and tablet. */
-@media (min-width:768px) and (max-width:1024px){
-  section.chef{
-    grid-template-columns:clamp(220px,26vw,280px) minmax(0,1fr);
-    align-items:start;
-    gap:clamp(2rem,4vw,3.5rem);
-    height:auto;
-    min-height:0;
-    padding-block:clamp(6rem,12vw,8rem);
-    padding-inline:clamp(2.5rem,6vw,4rem);
-    scroll-margin-top:52px;
-    overflow:clip;
-  }
-  section.chef>.chef-image{
-    width:clamp(220px,26vw,280px);
-    max-width:100%;
-    justify-self:start;
-  }
-  section.chef>.chef-image img{
-    height:auto;
-    aspect-ratio:auto;
-    object-fit:contain;
-    object-position:center top;
-  }
-  section.chef>.chef-copy{min-width:0}
-  section.chef .chef-quote{
-    margin-bottom:1.75rem;
-    font-size:clamp(1.35rem,2.9vw,1.7rem);
-    line-height:1.65;
-  }
-}
-@media (max-width:767px){
-  section.chef{
-    grid-template-columns:clamp(110px,30vw,136px) minmax(0,1fr);
-    align-items:start;
-    gap:clamp(.875rem,4vw,1.25rem);
-    height:auto;
-    min-height:0;
-    padding-top:clamp(5rem,18vw,6.5rem);
-    padding-bottom:calc(5rem + 56px + env(safe-area-inset-bottom));
-    scroll-margin-top:66px;
-    overflow:clip;
-  }
-  section.chef>.chef-image{
-    width:clamp(110px,30vw,136px);
-    max-width:100%;
-    justify-self:start;
-  }
-  section.chef>.chef-image img{
-    height:auto;
-    aspect-ratio:auto;
-    object-fit:contain;
-    object-position:center top;
-  }
-  section.chef>.chef-copy{min-width:0}
-  section.chef .section-label{margin-bottom:.85rem}
-  section.chef .chef-quote{
-    margin-bottom:1.35rem;
-    font-size:clamp(.875rem,3.65vw,1rem);
-    line-height:1.75;
-  }
-  section.chef .chef-sign{
-    margin-bottom:1.2rem;
-    font-size:clamp(.86rem,3.8vw,1rem);
-  }
-  section.chef .chef-sign small{
-    margin-top:.35rem;
-    font-size:clamp(.56rem,2.5vw,.65rem);
-    letter-spacing:.1em;
-  }
-  section.chef .chef-copy>p:last-child{
-    max-width:none;
-    overflow-wrap:normal;
-    word-break:normal;
-    text-wrap:pretty;
-    font-size:clamp(.8rem,3.15vw,.875rem);
-    line-height:1.9;
-  }
-}
 @media (max-width:767px){
   .nav-shell,.mobile-menu{padding-left:max(1.15rem,env(safe-area-inset-left));padding-right:max(1.15rem,env(safe-area-inset-right))}
   .persistent-book{padding-left:max(1.15rem,env(safe-area-inset-left));padding-right:max(1.15rem,env(safe-area-inset-right))}
+}
+
+/* Width safety: fix the source of horizontal overflow instead of masking it. */
+html,body,main,main>section,footer{width:100%;max-width:100%;min-width:0}
+main>section>*,footer>*{min-width:0}
+p,dd,address,blockquote{max-width:100%;overflow-wrap:break-word}
+
+/* Compact course invitation on the home page. */
+.menu-intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(18rem,4fr);align-items:end;gap:clamp(3rem,9vw,10rem);padding:clamp(6rem,10vw,10rem) clamp(1.25rem,6vw,7rem);border-bottom:1px solid rgb(238 236 228/.15)}
+.menu-intro h2{margin:0;font-size:clamp(2.8rem,5.4vw,5.8rem);line-height:1.2}
+.menu-intro>div:last-child{max-width:34ch}
+.menu-intro>div:last-child p{margin:0 0 2rem;color:rgb(238 236 228/.72);font:400 1rem/2 var(--mincho)}
+.menu-intro a,.menu-reserve a{display:inline-flex;align-items:center;justify-content:space-between;gap:3rem;min-width:min(100%,16rem);min-height:52px;border-bottom:1px solid var(--ember-text);font:400 .9rem var(--mincho)}
+
+/* Menu page: static editorial flow, with no pinned or scrubbed content. */
+.menu-page{padding-top:76px}
+.menu-page .nav-shell{position:absolute;background:var(--soot)}
+.menu-plans{display:grid;grid-template-columns:minmax(16rem,4fr) minmax(0,7fr);gap:clamp(3rem,9vw,10rem);padding:clamp(6rem,10vw,10rem) clamp(1.25rem,6vw,7rem)}
+.menu-plans header>p:first-child,.menu-dishes header>p,.menu-dish-number{color:var(--celadon);font-size:.75rem;letter-spacing:.14em}
+.menu-plans h1{margin:.7rem 0 1.5rem;font-size:clamp(3.4rem,6vw,6rem);line-height:1.15}
+.menu-plans header>p:last-child{max-width:30ch;color:var(--smoke);font-family:var(--mincho)}
+.menu-plans ol{margin:0;padding:0;list-style:none;border-top:1px solid rgb(238 236 228/.22)}
+.menu-plans li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:2rem;padding:1.6rem 0;border-bottom:1px solid rgb(238 236 228/.18)}
+.menu-plans li h2{margin:0 0 .35rem;font-size:clamp(1.6rem,2.5vw,2.4rem)}
+.menu-plans li p{margin:0;color:var(--smoke);font:400 .9rem/1.8 var(--mincho)}
+.menu-plans li strong{font:400 clamp(1rem,1.5vw,1.25rem) var(--mincho);font-variant-numeric:tabular-nums;white-space:nowrap}
+.menu-dishes{padding:clamp(5rem,9vw,9rem) clamp(1.25rem,6vw,7rem);background:var(--charcoal)}
+.menu-dishes>header{width:min(100%,1200px);margin:0 auto clamp(4rem,8vw,8rem)}
+.menu-dishes h2{font-size:clamp(2.8rem,5vw,5rem)}
+.menu-dish-list{display:grid;gap:clamp(6rem,10vw,11rem);width:min(100%,1200px);margin:auto}
+.menu-dish-list article{display:grid;grid-template-columns:minmax(0,7fr) minmax(18rem,4fr);align-items:center;gap:clamp(2.5rem,6vw,7rem)}
+.menu-dish-list article:nth-child(even){grid-template-columns:minmax(18rem,4fr) minmax(0,7fr)}
+.menu-dish-list article:nth-child(even)>picture{order:2}
+.menu-dish-list picture{display:block;min-width:0;overflow:hidden}
+.menu-dish-list img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+.menu-dish-list h3{margin:.55rem 0 1rem;font-size:clamp(2rem,3.5vw,3.5rem);line-height:1.3}
+.menu-dish-list article>div>p:not(.menu-dish-number){max-width:34ch;color:rgb(238 236 228/.76);font:400 .95rem/1.95 var(--mincho)}
+.menu-dish-list dl{margin:1.5rem 0 0;padding-top:1rem;border-top:1px solid rgb(238 236 228/.16)}
+.menu-dish-list dl div{display:grid;grid-template-columns:5rem minmax(0,1fr);gap:1rem;padding:.35rem 0}
+.menu-dish-list dt{color:var(--celadon);font-size:.75rem}.menu-dish-list dd{margin:0;font:400 .8rem/1.7 var(--mincho)}
+.menu-reserve{display:flex;justify-content:center;padding:5rem 1.25rem 8rem;background:var(--charcoal)}
+
+@media (max-width:1023px){
+  .menu-intro,.menu-plans{grid-template-columns:minmax(0,1fr);gap:3rem}
+  .menu-page{padding-top:66px}
+  .menu-dish-list article,.menu-dish-list article:nth-child(even){grid-template-columns:minmax(0,1fr);gap:2rem}
+  .menu-dish-list article:nth-child(even)>picture{order:0}
+  .menu-dish-list article{width:min(100%,720px);margin-inline:auto}
+  .menu-dish-list picture{margin-inline:clamp(0rem,2vw,1.25rem)}
+  .menu-dish-list img{aspect-ratio:1/1}
+}
+@media (max-width:767px){
+  .menu-intro,.menu-plans,.menu-dishes{padding-inline:max(1rem,env(safe-area-inset-left)) max(1rem,env(safe-area-inset-right))}
+  .menu-intro{gap:2.25rem;padding-block:5rem}
+  .menu-intro h2{font-size:clamp(2.45rem,12vw,3.5rem)}
+  .menu-plans{padding-block:5rem}
+  .menu-plans h1{font-size:clamp(3rem,15vw,4.4rem)}
+  .menu-plans li{grid-template-columns:minmax(0,1fr);gap:.7rem}
+  .menu-dishes{padding-block:5rem}
+  .menu-dishes>header{margin-bottom:4.5rem}
+  .menu-dish-list{gap:6rem}
+  .menu-dish-list picture{margin-inline:0}
+  .menu-dish-list img{aspect-ratio:4/5}
+  .menu-dish-list h3{font-size:clamp(2rem,9vw,2.8rem)}
+  .menu-dish-list dl div{grid-template-columns:4.25rem minmax(0,1fr)}
 }

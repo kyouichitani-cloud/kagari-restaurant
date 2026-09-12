@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import type { RestaurantContent } from "@/content/restaurant";
 
 export function Navigation({ navigation, brand, details }: Pick<RestaurantContent, "navigation" | "brand" | "details">) {
@@ -60,16 +61,16 @@ export function Navigation({ navigation, brand, details }: Pick<RestaurantConten
     <header className="nav-shell">
       <a className="wordmark" href="#top" aria-label={`${brand.ja} ホーム`}><span>{brand.ja}</span><small>{brand.en}</small></a>
       <nav aria-label="メインナビゲーション">{navigation.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}</nav>
-      <a className="nav-book" href="#reservation">席を予約する</a>
+      <Link className="nav-book" href="/#reservation">席を予約する</Link>
       <button ref={triggerRef} className="menu-trigger" type="button" aria-label={open ? "メニューを閉じる" : "メニューを開く"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((value) => !value)}><span /><span /></button>
       <div className="mobile-menu" id="mobile-menu" data-open={open} aria-hidden={!open} role="dialog" aria-modal="true" aria-label="サイトメニュー">
         <nav aria-label="モバイルナビゲーション">{navigation.map((item, index) => <a href={item.href} key={item.href} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><small>{String(index + 1).padStart(2, "0")}</small>{item.label}</a>)}</nav>
-        <a className="mobile-book" href="#reservation" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>席を予約する</a>
+        <Link className="mobile-book" href="/#reservation" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>席を予約する</Link>
         <a className="mobile-phone" href={`tel:${details.telephone.replaceAll("-", "")}`} tabIndex={open ? 0 : -1}>{details.telephone}<small>{details.reception}</small></a>
         <p>火と水と器で、季節を結ぶ。</p>
       </div>
     </header>
-    <a className="persistent-book" data-visible={pastHero && !nearBooking} href="#reservation"><span className="persistent-mark">篝</span><span>席を予約する</span></a>
+    <Link className="persistent-book" data-visible={pastHero && !nearBooking} href="/#reservation"><span className="persistent-mark">篝</span><span>席を予約する</span></Link>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
 import { BackToTop } from "@/components/BackToTop";
-import { CourseExperience } from "@/components/CourseExperience";
 import { Entrance } from "@/components/Entrance";
 import { GlobalMotion } from "@/components/GlobalMotion";
 import { KagariHero } from "@/components/KagariHero";
@@ -32,17 +32,9 @@ export default async function Home() {
         <ol>{restaurant.notices.map((notice) => <li key={notice.id ?? `${notice.date}-${notice.title}`}><time dateTime={notice.date.replaceAll(".", "-")}>{notice.date}</time><span>{notice.title}</span></li>)}</ol>
       </section>
 
-      <CourseExperience courses={restaurant.courses} section={restaurant.courseSection} />
-
-      <section className="chef" id="chef" aria-labelledby="chef-title">
-        <picture className="chef-image"><source media="(max-width: 1024px)" srcSet="/images/responsive/portrait/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.webp" type="image/webp" /><Image src="/images/chef-naoto-takase.png" alt="篝 料理長 髙瀬直人" width={1536} height={1024} sizes="(max-width: 430px) 30vw, (max-width: 767px) 136px, (max-width: 1024px) 26vw, 58vw" /></picture>
-        <div className="chef-copy">
-          <p className="section-label">{restaurant.chef.title}</p>
-          <h2 id="chef-title" className="sr-only">料理長の言葉</h2>
-          <blockquote className="chef-quote">{restaurant.chef.quote}</blockquote>
-          <p className="chef-sign">{restaurant.chef.name}<small>{restaurant.chef.nameEn}</small></p>
-          <p>{restaurant.chef.bio}</p>
-        </div>
+      <section className="menu-intro" aria-labelledby="menu-intro-title">
+        <div><p className="section-label">OMAKASE</p><h2 id="menu-intro-title">季節を映す、<br />五つの仕立て</h2></div>
+        <div><p>{restaurant.courseSection.intro}</p><Link href="/menu">コースを見る<span aria-hidden="true">→</span></Link></div>
       </section>
 
       <section className="philosophy" id="philosophy" aria-labelledby="philosophy-title">

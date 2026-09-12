@@ -1,7 +1,7 @@
 import "server-only";
 
 import { restaurant as localRestaurant, type CmsImage, type Course, type RestaurantContent } from "@/content/restaurant";
-import { reservationPolicy as localReservationPolicy, type ReservationPolicy } from "@/content/reservation";
+import { reservationPolicy as localReservationPolicy, reservationSlots, type ReservationPolicy } from "@/content/reservation";
 
 export const MICROCMS_CACHE_TAG = "microcms-restaurant";
 
@@ -156,12 +156,6 @@ function mapNotices(contents: UnknownRecord[] | null): RestaurantContent["notice
   }).sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
 }
 
-function parseSlots(value: unknown, fallback: string[]) {
-  const raw = Array.isArray(value) ? value : typeof value === "string" ? value.split(/[\n,、／/]+/) : [];
-  const slots = raw.filter((slot): slot is string => typeof slot === "string").map((slot) => slot.trim()).filter((slot) => /^([01]\d|2[0-3]):[0-5]\d$/.test(slot));
-  return slots.length ? [...new Set(slots)] : fallback;
-}
-
 function parseClosedWeekdays(value: unknown, fallback: number[]) {
   if (typeof value === "string" && ["none", "なし", "-"].includes(value.trim().toLowerCase())) return [];
   const raw = Array.isArray(value) ? value : typeof value === "string" ? value.split(/[\s,、]+/) : [];
@@ -172,7 +166,8 @@ function parseClosedWeekdays(value: unknown, fallback: number[]) {
 function mergeSettings(settings: UnknownRecord | null) {
   if (!settings) return { restaurant: localRestaurant, reservationPolicy: localReservationPolicy };
 
-  const slots = parseSlots(settings.reservationSlots, localReservationPolicy.slots);
+  // Reservation slots are operational data and must not be narrowed by legacy CMS values.
+  const slots = reservationSlots;
   const coursePrice = Math.round(numberValue(settings.coursePrice, localReservationPolicy.coursePrice, 0, 10_000_000));
   const serviceRate = numberValue(settings.serviceRatePercent, localReservationPolicy.serviceRate * 100, 0, 100) / 100;
   const reservationPolicy: ReservationPolicy = {
@@ -184,6 +179,7 @@ function mergeSettings(settings: UnknownRecord | null) {
       max: Math.round(numberValue(settings.guestsMax, localReservationPolicy.guestRange.max, 1, 20)),
     },
     coursePrice,
+    courses: localReservationPolicy.courses,
     serviceRate,
     closedWeekdays: parseClosedWeekdays(settings.closedWeekdays, localReservationPolicy.closedWeekdays),
     secondMondayClosed: booleanValue(settings.secondMondayClosed, localReservationPolicy.secondMondayClosed),

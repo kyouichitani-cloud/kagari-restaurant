@@ -52,9 +52,8 @@ export type RestaurantContent = {
 export const restaurant: RestaurantContent = {
   brand: { ja: "篝", en: "KAGARI" },
   navigation: [
-    { label: "十皿", href: "#course" },
-    { label: "料理長", href: "#chef" },
-    { label: "店舗案内", href: "#access" },
+    { label: "お品書き", href: "/menu" },
+    { label: "店舗案内", href: "/#access" },
   ],
   hero: {
     title: "火と余白。",

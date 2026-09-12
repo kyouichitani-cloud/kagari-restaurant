@@ -4,17 +4,36 @@ export type ReservationPolicy = {
   bookingWindowMonths: number;
   guestRange: { min: number; max: number };
   coursePrice: number;
+  courses: ReservationCourse[];
   serviceRate: number;
   closedWeekdays: number[];
   secondMondayClosed: boolean;
 };
 
+export type ReservationCourse = {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+};
+
+export const reservationCourses: ReservationCourse[] = [
+  { id: "yoi", name: "宵", price: 16_500, description: "季節の味を五皿で楽しむ軽めのコース" },
+  { id: "akari", name: "灯", price: 22_000, description: "魚介と野菜を中心に組み立てる七皿" },
+  { id: "kagari", name: "篝", price: 33_000, description: "現在の十皿のおまかせコース" },
+  { id: "honoo", name: "炎", price: 44_000, description: "炭火料理を中心にした特選コース" },
+  { id: "special", name: "特別仕立て", price: 55_000, description: "旬の食材と器を個別に組み立てるコース" },
+];
+
+export const reservationSlots = ["17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "20:45", "21:00"];
+
 export const reservationPolicy: ReservationPolicy = {
   timeZone: "Asia/Tokyo",
-  slots: ["18:00", "20:45"],
+  slots: reservationSlots,
   bookingWindowMonths: 2,
   guestRange: { min: 1, max: 6 },
   coursePrice: 33_000,
+  courses: reservationCourses,
   serviceRate: 0.1,
   closedWeekdays: [0],
   secondMondayClosed: true,
@@ -72,6 +91,6 @@ export function validateReservationDate(value: string, now = new Date(), policy 
   return null;
 }
 
-export function getReservationTotal(guests: number, policy = reservationPolicy) {
-  return Math.round(policy.coursePrice * (1 + policy.serviceRate) * guests);
+export function getReservationTotal(guests: number, policy = reservationPolicy, coursePrice = policy.coursePrice) {
+  return Math.round(coursePrice * (1 + policy.serviceRate) * guests);
 }

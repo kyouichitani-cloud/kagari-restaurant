@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { cancelPageScroll, scrollPageTo } from "@/components/pageScroll";
 
 export function GlobalMotion() {
   useEffect(() => {
@@ -11,12 +10,14 @@ export function GlobalMotion() {
         const target = document.querySelector(anchor.hash);
         if (!target) return;
         event.preventDefault();
-        scrollPageTo(target.getBoundingClientRect().top + window.scrollY);
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const touchLayout = window.matchMedia("(max-width: 1279px), (pointer: coarse)").matches;
+        target.scrollIntoView({ behavior: reduced || touchLayout ? "auto" : "smooth", block: "start" });
       };
       anchor.addEventListener("click", handler);
       return () => anchor.removeEventListener("click", handler);
       });
-    return () => { listeners.forEach((remove) => remove()); cancelPageScroll(); };
+    return () => { listeners.forEach((remove) => remove()); };
   }, []);
   return null;
 }

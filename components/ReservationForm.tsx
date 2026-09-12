@@ -10,6 +10,7 @@ import {
 import type { ReservationPolicy } from "@/content/reservation";
 
 type FormData = {
+  courseId: string;
   guests: string;
   date: string;
   time: string;
@@ -25,6 +26,7 @@ type FormData = {
 
 function createInitial(policy: ReservationPolicy): FormData {
   return {
+    courseId: "",
     guests: String(Math.min(policy.guestRange.max, Math.max(policy.guestRange.min, 2))),
     date: "",
     time: policy.slots[0],
@@ -71,6 +73,7 @@ export function ReservationForm({ policy, allergyNote, cancellation }: { policy:
   const collectErrors = (targetStep: number) => {
     const nextErrors: Record<string, string> = {};
     if (targetStep === 1) {
+      if (!policy.courses.some((course) => course.id === data.courseId)) nextErrors.courseId = "コースを選択してください。";
       const guests = Number(data.guests);
       const dateError = validateReservationDate(data.date, undefined, policy);
       if (!Number.isInteger(guests) || guests < policy.guestRange.min || guests > policy.guestRange.max) nextErrors.guests = "人数をご確認ください。";
@@ -106,7 +109,7 @@ export function ReservationForm({ policy, allergyNote, cancellation }: { policy:
     const nextErrors = { ...collectErrors(1), ...collectErrors(2) };
     if (Object.keys(nextErrors).length) {
       setErrors(nextErrors);
-      setStep(nextErrors.date || nextErrors.time || nextErrors.guests ? 1 : 2);
+      setStep(nextErrors.courseId || nextErrors.date || nextErrors.time || nextErrors.guests ? 1 : 2);
       focusFirstError(nextErrors);
       return;
     }
@@ -116,7 +119,7 @@ export function ReservationForm({ policy, allergyNote, cancellation }: { policy:
       const response = await fetch("/api/reservations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, coursePrice }),
       });
       const result = await response.json() as { receipt?: string; error?: string; fieldErrors?: Record<string, string> };
       if (result.fieldErrors && Object.keys(result.fieldErrors).length) {
@@ -141,8 +144,10 @@ export function ReservationForm({ policy, allergyNote, cancellation }: { policy:
   }
 
   const guests = Number(data.guests);
-  const serviceFee = policy.coursePrice * policy.serviceRate * guests;
-  const total = getReservationTotal(guests, policy);
+  const selectedCourse = policy.courses.find((course) => course.id === data.courseId);
+  const coursePrice = selectedCourse?.price ?? 0;
+  const serviceFee = coursePrice * policy.serviceRate * guests;
+  const total = getReservationTotal(guests, policy, coursePrice);
   const serviceRatePercent = Math.round(policy.serviceRate * 1000) / 10;
   const yen = (value: number) => `${value.toLocaleString("ja-JP")}円`;
 
@@ -154,7 +159,7 @@ export function ReservationForm({ policy, allergyNote, cancellation }: { policy:
         <h3 id="request-title" ref={successRef} tabIndex={-1}>予約リクエストを承りました。</h3>
         <p className="complete-note">受付内容を記録しました。店舗からの確認連絡をもって予約成立となります。</p>
         <dl className="complete-summary">
-          <div><dt>来店希望</dt><dd>{data.date}　{data.time}</dd></div>
+          <div><dt>コース</dt><dd>{selectedCourse?.name}</dd></div><div><dt>来店希望</dt><dd>{data.date}　{data.time}</dd></div>
           <div><dt>人数</dt><dd>{data.guests}名</dd></div>
           <div><dt>お名前</dt><dd>{data.name}</dd></div>
           <div><dt>お支払額</dt><dd>{yen(total)}（サービス料込）</dd></div>
@@ -170,9 +175,9 @@ export function ReservationForm({ policy, allergyNote, cancellation }: { policy:
       <p className="demo-disclosure">{allergyNote}</p>
       <div className="step-track" aria-label={`予約入力 ${step}/3`}><span style={{ transform: `scaleX(${step / 3})` }} /><p><b>0{step}</b> / 03</p></div>
       <div ref={stageRef} tabIndex={-1} className="form-stage">
-        {step === 1 && <fieldset><legend><small>日時と人数</small><span>席の輪郭を決める。</span></legend><div className="field-row"><Field id="guests" name="guests" label="人数" required error={errors.guests}><select value={data.guests} onChange={(event) => set("guests", event.target.value)}>{Array.from({ length: policy.guestRange.max - policy.guestRange.min + 1 }, (_, index) => index + policy.guestRange.min).map((n) => <option key={n} value={n}>{n}名</option>)}</select></Field><Field id="date" name="date" label="ご希望日" required error={errors.date}><input type="date" min={getTokyoDateString(undefined, policy)} max={getReservationEndDate(undefined, policy)} value={data.date} onChange={(event) => set("date", event.target.value)} /></Field><Field id="time" name="time" label="ご希望時間" required error={errors.time}><select value={data.time} onChange={(event) => set("time", event.target.value)}>{policy.slots.map((slot) => <option key={slot} value={slot}>{slot}</option>)}</select></Field></div></fieldset>}
+        {step === 1 && <fieldset><legend><small>コース・日時・人数</small><span>席の輪郭を決める。</span></legend><div className="field-row"><Field id="courseId" name="courseId" label="コース" required error={errors.courseId}><select value={data.courseId} onChange={(event) => set("courseId", event.target.value)}><option value="">お選びください</option>{policy.courses.map((course) => <option key={course.id} value={course.id}>{course.name}　{course.price.toLocaleString("ja-JP")}円</option>)}</select></Field><Field id="guests" name="guests" label="人数" required error={errors.guests}><select value={data.guests} onChange={(event) => set("guests", event.target.value)}>{Array.from({ length: policy.guestRange.max - policy.guestRange.min + 1 }, (_, index) => index + policy.guestRange.min).map((n) => <option key={n} value={n}>{n}名</option>)}</select></Field><Field id="date" name="date" label="ご希望日" required error={errors.date}><input type="date" min={getTokyoDateString(undefined, policy)} max={getReservationEndDate(undefined, policy)} value={data.date} onChange={(event) => set("date", event.target.value)} /></Field><Field id="time" name="time" label="ご希望時間" required error={errors.time}><select value={data.time} onChange={(event) => set("time", event.target.value)}>{policy.slots.map((slot) => <option key={slot} value={slot}>{slot}</option>)}</select></Field></div></fieldset>}
         {step === 2 && <fieldset><legend><small>ご連絡と食事の情報</small><span>一席ずつ、準備する。</span></legend><div className="field-row"><Field id="name" name="name" label="お名前" required error={errors.name}><input autoComplete="name" value={data.name} onChange={(event) => set("name", event.target.value)} /></Field><Field id="email" name="email" label="メールアドレス" required error={errors.email}><input type="email" autoComplete="email" inputMode="email" value={data.email} onChange={(event) => set("email", event.target.value)} /></Field><Field id="phone" name="phone" label="電話番号" required error={errors.phone}><input type="tel" autoComplete="tel" inputMode="tel" value={data.phone} onChange={(event) => set("phone", event.target.value)} /></Field><Field id="allergies" name="allergies" label="アレルギー"><textarea rows={2} value={data.allergies} onChange={(event) => set("allergies", event.target.value)} placeholder="ない場合は空欄で構いません" /></Field><Field id="dislikes" name="dislikes" label="苦手な食材"><textarea rows={2} value={data.dislikes} onChange={(event) => set("dislikes", event.target.value)} placeholder="ない場合は空欄で構いません" /></Field><Field id="anniversary" name="anniversary" label="記念日について"><select value={data.anniversary} onChange={(event) => set("anniversary", event.target.value)}><option value="none">利用しない</option><option value="birthday">誕生日</option><option value="anniversary">記念日</option><option value="other">その他</option></select></Field></div><label className="consent" htmlFor="consent"><input id="consent" name="consent" type="checkbox" checked={data.consent} aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "consent-error" : undefined} onChange={(event) => set("consent", event.target.checked)} /><span><a href="/privacy" target="_blank" rel="noreferrer">個人情報の取り扱い</a>を確認し、予約情報の送信に同意します。</span></label>{errors.consent && <em className="consent-error" id="consent-error" role="alert">{errors.consent}</em>}</fieldset>}
-        {step === 3 && <fieldset><legend><small>入力内容の確認</small><span>火を入れる前に、確かめる。</span></legend><dl className="confirmation"><div><dt>来店希望</dt><dd>{data.date}　{data.time}</dd></div><div><dt>人数</dt><dd>{data.guests}名</dd></div><div><dt>お名前</dt><dd>{data.name}</dd></div><div><dt>ご連絡先</dt><dd>{data.email}<br />{data.phone}</dd></div><div><dt>料理代</dt><dd>{yen(policy.coursePrice)} × {guests}名</dd></div><div><dt>サービス料</dt><dd>{yen(serviceFee)}（{serviceRatePercent}%）</dd></div><div><dt>合計</dt><dd><strong>{yen(total)}</strong></dd></div></dl><p className="request-caveat">店舗からの確認連絡までは予約確定ではありません。{cancellation}</p></fieldset>}
+        {step === 3 && <fieldset><legend><small>入力内容の確認</small><span>火を入れる前に、確かめる。</span></legend><dl className="confirmation"><div><dt>コース</dt><dd>{selectedCourse?.name}</dd></div><div><dt>来店希望</dt><dd>{data.date}　{data.time}</dd></div><div><dt>人数</dt><dd>{data.guests}名</dd></div><div><dt>お名前</dt><dd>{data.name}</dd></div><div><dt>ご連絡先</dt><dd>{data.email}<br />{data.phone}</dd></div><div><dt>料理代</dt><dd>{yen(coursePrice)} × {guests}名</dd></div><div><dt>サービス料</dt><dd>{yen(serviceFee)}（{serviceRatePercent}%）</dd></div><div><dt>合計</dt><dd><strong>{yen(total)}</strong></dd></div></dl><p className="request-caveat">店舗からの確認連絡までは予約確定ではありません。{cancellation}</p></fieldset>}
       </div>
       <div className="form-actions">{step > 1 && <button className="secondary-button" type="button" onClick={back}>ひとつ戻る</button>}{step < 3 ? <button className="submit-button" type="submit">次へ進む</button> : <button className="submit-button" type="submit" disabled={status === "sending"}>{status === "sending" ? "送信しています" : "予約リクエストを送る"}</button>}</div>
       {status === "error" && <p className="form-error" role="alert">{statusMessage}</p>}
