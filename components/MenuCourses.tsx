@@ -2,15 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import type { Course } from "@/content/restaurant";
-import { reservationCourses } from "@/content/reservation";
+import type { CompleteMenuCourse, MenuDish } from "@/content/menu";
 
-export function MenuCourses({ dishes }: { dishes: Course[] }) {
+export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sections = Array.from(rootRef.current?.querySelectorAll<HTMLElement>(".menu-course") ?? []);
-    if (!sections.length) return;
+    const revealItems = Array.from(rootRef.current?.querySelectorAll<HTMLElement>(".menu-course-copy, .menu-course-dishes article") ?? []);
+    if (!revealItems.length) return;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
@@ -18,7 +17,7 @@ export function MenuCourses({ dishes }: { dishes: Course[] }) {
         observer.unobserve(entry.target);
       });
     }, { rootMargin: "0px 0px -12%", threshold: 0.08 });
-    sections.forEach((section) => observer.observe(section));
+    revealItems.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
   }, []);
 
@@ -29,14 +28,12 @@ export function MenuCourses({ dishes }: { dishes: Course[] }) {
         <h1>五つのコース</h1>
         <p>季節とお席の時間に合わせて、仕立てをお選びください。</p>
         <nav aria-label="コース目次">
-          {reservationCourses.map((course) => <a href={`#course-${course.id}`} key={course.id}><span>{course.name}</span><small>{course.price.toLocaleString("ja-JP")}円</small></a>)}
+          {courses.map((course) => <a href={`#course-${course.id}`} key={course.id}><span>{course.name}</span><small>{course.price.toLocaleString("ja-JP")}円</small></a>)}
         </nav>
       </header>
 
       <div className="menu-course-list">
-        {reservationCourses.map((course, courseIndex) => {
-          const included = dishes.slice(courseIndex * 2, courseIndex * 2 + 2);
-          return (
+        {courses.map((course, courseIndex) => (
             <section className="menu-course" id={`course-${course.id}`} aria-labelledby={`course-${course.id}-title`} key={course.id}>
               <header className="menu-course-copy">
                 <p>COURSE {String(courseIndex + 1).padStart(2, "0")}</p>
@@ -44,25 +41,25 @@ export function MenuCourses({ dishes }: { dishes: Course[] }) {
                 <p>{course.description}</p>
               </header>
               <div className="menu-course-dishes">
-                {included.map((dish, dishIndex) => <article className={dishIndex === 0 ? "menu-course-main" : undefined} key={dish.id ?? dish.image}>
+                {course.dishes.map((dish, dishIndex) => <article className={dishIndex === 0 ? "menu-course-main" : undefined} key={dish.imageSrc}>
                   <CoursePicture dish={dish} eager={courseIndex === 0} />
                   <div className="menu-course-dish-copy">
-                    <p><span>{String(courseIndex * 2 + dishIndex + 1).padStart(2, "0")}</span>{dish.chapter}</p>
+                    <p><span>{String(dishIndex + 1).padStart(2, "0")}</span>{dish.chapter}</p>
                     <h3>{dish.title}</h3>
-                    <p>{dish.description}</p>
-                    <dl><div><dt>産地</dt><dd>{dish.origin}</dd></div>{dish.details.map((detail) => <div key={detail.label}><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}</dl>
+                    {dish.description && <p>{dish.description}</p>}
+                    {(dish.origin || dish.details.length > 0) && <dl>{dish.origin && <div><dt>産地</dt><dd>{dish.origin}</dd></div>}{dish.details.map((detail) => <div key={detail.label}><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}</dl>}
                   </div>
                 </article>)}
               </div>
             </section>
-          );
-        })}
+        ))}
       </div>
       <div className="menu-reserve"><Link href="/#reservation">席を予約する</Link></div>
     </div>
   );
 }
 
-function CoursePicture({ dish, eager }: { dish: Course; eager: boolean }) {
-  return <picture><source media="(max-width: 767px)" srcSet={`/images/course/portrait/${dish.image}.avif`} type="image/avif" /><source media="(max-width: 1023px)" srcSet={`/images/course/square/${dish.image}.avif`} type="image/avif" /><source srcSet={`/images/course/avif/${dish.image}.avif`} type="image/avif" /><source srcSet={`/images/course/webp/${dish.image}.webp`} type="image/webp" /><img src={`/images/course/${dish.image}.png`} alt={`${dish.chapter}「${dish.title}」`} width="1672" height="941" loading={eager ? "eager" : "lazy"} /></picture>;
+function CoursePicture({ dish, eager }: { dish: MenuDish; eager: boolean }) {
+  const existing = dish.imageSrc.startsWith("/images/course/");
+  return <picture><img src={dish.imageSrc} alt={dish.alt} width={existing ? 1672 : 1440} height={existing ? 941 : 960} loading={eager ? "eager" : "lazy"} /></picture>;
 }
