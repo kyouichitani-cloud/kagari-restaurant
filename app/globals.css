@@ -113,10 +113,9 @@ footer{position:relative;min-height:90svh;isolation:isolate;display:grid;align-i
 @media (min-width:768px) and (max-width:1023px){.provenance{grid-template-columns:minmax(0,1fr);gap:3.5rem}.provenance-copy{order:1}.provenance-image{order:2}.provenance-copy h2{font-size:clamp(2.7rem,6.2vw,3.8rem)}}
 @media (max-width:767px){.provenance{grid-template-columns:minmax(0,1fr);gap:3rem}.provenance-copy h2{font-size:clamp(2.1rem,10vw,2.75rem);line-height:1.3}.provenance-copy>p:last-child{width:min(100%,30ch)}}
 
-/* Chef quotation: semantic, phrase-led line setting. */
+/* Chef quotation: preserve natural Japanese line wrapping. */
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-.chef-quote{width:100%;max-width:100%;min-width:0;margin:0 0 2.5rem;padding:0;font:400 clamp(1.65rem,1.95vw,2.5rem)/1.62 var(--mincho);line-break:strict;word-break:normal;overflow-wrap:normal}
-.chef-quote span{display:block;max-width:100%;white-space:normal}
+.chef-quote{width:100%;max-width:100%;min-width:0;margin:0 0 2.5rem;padding:0;font:400 clamp(1.65rem,1.95vw,2.5rem)/1.62 var(--mincho);line-break:strict;word-break:normal;overflow-wrap:normal;text-wrap:pretty}
 @media (max-width:767px){.chef-quote{margin-bottom:2.25rem;font-size:clamp(1.12rem,5vw,1.35rem);line-height:1.72}}
 .mobile-phone{min-height:56px;display:flex;align-items:center;justify-content:space-between;font-size:.9rem}.mobile-phone small{color:var(--smoke);font-size:.75rem}
 .course-chapter{padding-inline-start:2.25rem}.course-kicker{writing-mode:vertical-rl;position:absolute;left:0;bottom:0;max-height:min(8rem,28vh);min-height:4rem}
@@ -159,52 +158,63 @@ footer{position:relative;min-height:90svh;isolation:isolate;display:grid;align-i
 /* Chef: keep portrait and copy side by side on phone and tablet. */
 @media (min-width:768px) and (max-width:1024px){
   section.chef{
-    grid-template-columns:minmax(0,42fr) minmax(0,58fr);
-    align-items:center;
-    gap:clamp(1.75rem,3.5vw,2.5rem);
-    padding-block:8rem;
+    grid-template-columns:clamp(220px,26vw,280px) minmax(0,1fr);
+    align-items:start;
+    gap:clamp(2rem,4vw,3.5rem);
+    height:auto;
+    min-height:0;
+    padding-block:clamp(6rem,12vw,8rem);
     padding-inline:clamp(2.5rem,6vw,4rem);
+    scroll-margin-top:52px;
     overflow:clip;
   }
   section.chef>.chef-image{
-    width:100%;
-    max-width:none;
-    justify-self:stretch;
+    width:clamp(220px,26vw,280px);
+    max-width:100%;
+    justify-self:start;
   }
   section.chef>.chef-image img{
-    aspect-ratio:3/4;
-    object-fit:cover;
-    object-position:42% center;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+    object-position:center top;
   }
   section.chef>.chef-copy{min-width:0}
   section.chef .chef-quote{
     margin-bottom:1.75rem;
     font-size:clamp(1.35rem,2.9vw,1.7rem);
+    line-height:1.65;
   }
 }
 @media (max-width:767px){
   section.chef{
-    grid-template-columns:minmax(0,38fr) minmax(0,62fr);
+    grid-template-columns:clamp(110px,30vw,136px) minmax(0,1fr);
     align-items:start;
-    gap:clamp(.75rem,4vw,1rem);
-    padding-bottom:calc(7rem + 56px + env(safe-area-inset-bottom));
+    gap:clamp(.875rem,4vw,1.25rem);
+    height:auto;
+    min-height:0;
+    padding-top:clamp(5rem,18vw,6.5rem);
+    padding-bottom:calc(5rem + 56px + env(safe-area-inset-bottom));
+    scroll-margin-top:66px;
     overflow:clip;
   }
   section.chef>.chef-image{
-    width:100%;
-    max-width:none;
-    justify-self:stretch;
+    width:clamp(110px,30vw,136px);
+    max-width:100%;
+    justify-self:start;
   }
   section.chef>.chef-image img{
-    aspect-ratio:3/4;
-    object-fit:cover;
-    object-position:42% center;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+    object-position:center top;
   }
   section.chef>.chef-copy{min-width:0}
+  section.chef .section-label{margin-bottom:.85rem}
   section.chef .chef-quote{
     margin-bottom:1.35rem;
-    font-size:clamp(.74rem,3.4vw,.82rem);
-    line-height:1.72;
+    font-size:clamp(.875rem,3.65vw,1rem);
+    line-height:1.75;
   }
   section.chef .chef-sign{
     margin-bottom:1.2rem;
@@ -217,9 +227,11 @@ footer{position:relative;min-height:90svh;isolation:isolate;display:grid;align-i
   }
   section.chef .chef-copy>p:last-child{
     max-width:none;
-    overflow-wrap:anywhere;
-    font-size:clamp(.75rem,2.9vw,.8rem);
-    line-height:1.85;
+    overflow-wrap:normal;
+    word-break:normal;
+    text-wrap:pretty;
+    font-size:clamp(.8rem,3.15vw,.875rem);
+    line-height:1.9;
   }
 }
 @media (max-width:767px){

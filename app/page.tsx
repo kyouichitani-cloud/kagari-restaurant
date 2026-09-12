@@ -35,17 +35,11 @@ export default async function Home() {
       <CourseExperience courses={restaurant.courses} section={restaurant.courseSection} />
 
       <section className="chef" id="chef" aria-labelledby="chef-title">
-        <picture className="chef-image"><source media="(max-width: 1024px)" srcSet="/images/responsive/portrait/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.webp" type="image/webp" /><Image src="/images/chef-naoto-takase.png" alt="篝 料理長 髙瀬直人" width={1536} height={1024} sizes="(max-width: 767px) 38vw, (max-width: 1024px) 42vw, 58vw" /></picture>
+        <picture className="chef-image"><source media="(max-width: 1024px)" srcSet="/images/responsive/portrait/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.avif" type="image/avif" /><source srcSet="/images/chef-naoto-takase.webp" type="image/webp" /><Image src="/images/chef-naoto-takase.png" alt="篝 料理長 髙瀬直人" width={1536} height={1024} sizes="(max-width: 430px) 30vw, (max-width: 767px) 136px, (max-width: 1024px) 26vw, 58vw" /></picture>
         <div className="chef-copy">
           <p className="section-label">{restaurant.chef.title}</p>
           <h2 id="chef-title" className="sr-only">料理長の言葉</h2>
-          <blockquote className="chef-quote" aria-label={restaurant.chef.quote}>
-            <span aria-hidden="true">鮎の青い香りが残る、</span>
-            <span aria-hidden="true">わずかな旬を逃さない。</span>
-            <span aria-hidden="true">炭との距離を見極め、</span>
-            <span aria-hidden="true">皮は香ばしく、</span>
-            <span aria-hidden="true">身はしっとりと焼き上げます。</span>
-          </blockquote>
+          <blockquote className="chef-quote">{restaurant.chef.quote}</blockquote>
           <p className="chef-sign">{restaurant.chef.name}<small>{restaurant.chef.nameEn}</small></p>
           <p>{restaurant.chef.bio}</p>
         </div>
