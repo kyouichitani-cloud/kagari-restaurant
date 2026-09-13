@@ -34,7 +34,7 @@ export default async function Home() {
 
       <section className="menu-intro" aria-labelledby="menu-intro-title">
         <div><p className="section-label">OMAKASE</p><h2 id="menu-intro-title">季節を映す、<br />五つの仕立て</h2></div>
-        <div><p>{restaurant.courseSection.intro}</p><Link href="/menu">コースを見る<span aria-hidden="true">→</span></Link></div>
+        <div><p>{restaurant.courseSection.intro}</p><Link href="/menu">全コースのお品書きを見る<span aria-hidden="true">→</span></Link></div>
       </section>
 
       <section className="philosophy" id="philosophy" aria-labelledby="philosophy-title">

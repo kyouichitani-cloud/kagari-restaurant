@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { RestaurantContent } from "@/content/restaurant";
 
 export function Navigation({ navigation, brand, details }: Pick<RestaurantContent, "navigation" | "brand" | "details">) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [nearBooking, setNearBooking] = useState(false);
@@ -60,11 +62,18 @@ export function Navigation({ navigation, brand, details }: Pick<RestaurantConten
     <>
     <header className="nav-shell">
       <a className="wordmark" href="#top" aria-label={`${brand.ja} ホーム`}><span>{brand.ja}</span><small>{brand.en}</small></a>
-      <nav aria-label="メインナビゲーション">{navigation.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}</nav>
+      <nav aria-label="メインナビゲーション">{navigation.map((item) => {
+        const current = item.href === "/menu" && pathname === "/menu";
+        return <Link href={item.href} key={item.href} aria-current={current ? "page" : undefined}>{item.label}</Link>;
+      })}</nav>
+      <Link className="header-menu-link" href="/menu" aria-current={pathname === "/menu" ? "page" : undefined}>お品書き</Link>
       <Link className="nav-book" href="/#reservation">席を予約する</Link>
       <button ref={triggerRef} className="menu-trigger" type="button" aria-label={open ? "メニューを閉じる" : "メニューを開く"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((value) => !value)}><span /><span /></button>
       <div className="mobile-menu" id="mobile-menu" data-open={open} aria-hidden={!open} role="dialog" aria-modal="true" aria-label="サイトメニュー">
-        <nav aria-label="モバイルナビゲーション">{navigation.map((item, index) => <a href={item.href} key={item.href} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><small>{String(index + 1).padStart(2, "0")}</small>{item.label}</a>)}</nav>
+        <nav aria-label="モバイルナビゲーション">{navigation.map((item, index) => {
+          const current = item.href === "/menu" && pathname === "/menu";
+          return <Link href={item.href} key={item.href} aria-current={current ? "page" : undefined} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><small>{String(index + 1).padStart(2, "0")}{current && <span> 現在地</span>}</small>{item.label}</Link>;
+        })}</nav>
         <Link className="mobile-book" href="/#reservation" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>席を予約する</Link>
         <a className="mobile-phone" href={`tel:${details.telephone.replaceAll("-", "")}`} tabIndex={open ? 0 : -1}>{details.telephone}<small>{details.reception}</small></a>
         <p>火と水と器で、季節を結ぶ。</p>

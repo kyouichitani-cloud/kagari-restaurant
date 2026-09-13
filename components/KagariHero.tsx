@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useLayoutEffect, useState } from "react";
 import type { RestaurantContent } from "@/content/restaurant";
 
@@ -51,7 +52,13 @@ export function KagariHero({ hero, brand }: Pick<RestaurantContent, "hero" | "br
         </div>
         <div className="hero-action">
           <p>{hero.body}</p>
-          <a className="primary-action" href="#reservation">席を予約する</a>
+          <div className="hero-actions">
+            <a className="primary-action" href="#reservation">席を予約する</a>
+            <div className="hero-menu-action">
+              <Link href="/menu">五つのコースを見る<span aria-hidden="true">→</span></Link>
+              <small>全5コース・各10皿</small>
+            </div>
+          </div>
         </div>
       </div>
     </section>

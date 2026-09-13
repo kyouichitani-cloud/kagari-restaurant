@@ -8,8 +8,10 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const revealItems = Array.from(rootRef.current?.querySelectorAll<HTMLElement>(".menu-course-copy, .menu-course-dishes article") ?? []);
+    const root = rootRef.current;
+    const revealItems = Array.from(root?.querySelectorAll<HTMLElement>(".menu-course-copy, .menu-course-dishes article") ?? []);
     if (!revealItems.length) return;
+    root?.setAttribute("data-motion", "ready");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
@@ -18,11 +20,14 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
       });
     }, { rootMargin: "0px 0px -12%", threshold: 0.08 });
     revealItems.forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      root?.removeAttribute("data-motion");
+    };
   }, []);
 
   return (
-    <div ref={rootRef}>
+    <div className="menu-content" ref={rootRef}>
       <header className="menu-page-header" id="menu-content">
         <p>お品書き</p>
         <h1>五つのコース</h1>
@@ -36,9 +41,9 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
         {courses.map((course, courseIndex) => (
             <section className="menu-course" id={`course-${course.id}`} aria-labelledby={`course-${course.id}-title`} key={course.id}>
               <header className="menu-course-copy">
-                <p>COURSE {String(courseIndex + 1).padStart(2, "0")}</p>
-                <div><h2 id={`course-${course.id}-title`}>{course.name}</h2><strong>{course.price.toLocaleString("ja-JP")}円</strong></div>
-                <p>{course.description}</p>
+                <p className="menu-course-number">COURSE {String(courseIndex + 1).padStart(2, "0")}</p>
+                <div className="menu-course-heading"><h2 id={`course-${course.id}-title`}>{course.name}</h2><strong>{course.price.toLocaleString("ja-JP")}円</strong></div>
+                <p className="menu-course-description">{course.description}</p>
               </header>
               <div className="menu-course-dishes">
                 {course.dishes.map((dish, dishIndex) => <article className={dishIndex === 0 ? "menu-course-main" : undefined} key={dish.imageSrc}>
