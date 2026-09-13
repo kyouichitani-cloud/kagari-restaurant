@@ -7,6 +7,7 @@ export type MenuDish = Pick<Course, "chapter" | "title" | "description" | "origi
 };
 
 export type CompleteMenuCourse = ReservationCourse & { dishes: MenuDish[] };
+export const courseSlug = (id: string) => id === "honoo" ? "homura" : id;
 
 const chapters = ["先付", "前菜", "椀", "向付", "焼物", "温物", "肉", "食事", "甘味", "余韻"];
 const dish = (title: string, file: string, index: number): MenuDish => ({ chapter: chapters[index], title, description: "", origin: "", details: [], imageSrc: file, alt: `${title}を盛り付けた一皿` });
