@@ -113,19 +113,17 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
                 <div className="dish-carousel-track">
                   {course.dishes.map((dish, dishIndex) => (
                     <article className="dish-panel" data-dish-index={dishIndex} data-active={dishIndex === currentDish ? "true" : "false"} aria-current={dishIndex === currentDish ? "step" : undefined} tabIndex={-1} key={dish.imageSrc}>
-                      <CoursePicture dish={dish} eager={courseIndex === 0 && dishIndex < 2} />
-                      <div className="dish-panel-copy">
-                        <p className="dish-panel-number"><span>{pad(dishIndex + 1)}</span> / 10</p>
-                        <p className="dish-panel-chapter">{dish.chapter}</p>
-                        <h3>{dish.title}</h3>
-                        {dish.description && <p className="dish-panel-description">{dish.description}</p>}
-                        {(dish.origin || dish.details.length > 0) && <dl>{dish.origin && <div><dt>産地</dt><dd>{dish.origin}</dd></div>}{dish.details.map((detail) => <div key={detail.label}><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}</dl>}
-                        <div className="dish-panel-controls">
-                          <button type="button" aria-label={`${course.name}コースの前の料理を表示`} disabled={dishIndex === 0} onClick={() => goToDish(course.id, dishIndex - 1)}>← 前の料理</button>
-                          <button type="button" aria-label={`${course.name}コースの次の料理を表示`} disabled={dishIndex === 9} onClick={() => goToDish(course.id, dishIndex + 1)}>次の料理 →</button>
+                      <div className="dish-panel-frame">
+                        <CoursePicture dish={dish} eager={courseIndex === 0 && dishIndex < 2} />
+                        <div className="dish-panel-copy">
+                          <p className="dish-panel-number"><span>{pad(dishIndex + 1)}</span> / 10</p>
+                          <p className="dish-panel-chapter">{dish.chapter}</p>
+                          <h3>{dish.title}</h3>
+                          {dish.description && <p className="dish-panel-description">{dish.description}</p>}
                         </div>
-                        {dishIndex === 9 && nextCourse && <a className="dish-next-course" href={`#${courseSlug(nextCourse.id)}`}>↓ 次のコース「{nextCourse.name}」へ</a>}
                       </div>
+                      {(dish.origin || dish.details.length > 0) && <dl className="dish-panel-details">{dish.origin && <div><dt>産地</dt><dd>{dish.origin}</dd></div>}{dish.details.map((detail) => <div key={detail.label}><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}</dl>}
+                      {dishIndex === 9 && nextCourse && <a className="dish-next-course" href={`#${courseSlug(nextCourse.id)}`}>↓ 次のコース「{nextCourse.name}」へ</a>}
                     </article>
                   ))}
                 </div>
