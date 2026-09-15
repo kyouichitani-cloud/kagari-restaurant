@@ -56,7 +56,7 @@ export function KagariHero({ hero, brand }: Pick<RestaurantContent, "hero" | "br
             <a className="primary-action" href="#reservation">席を予約する</a>
             <div className="hero-menu-action">
               <Link href="/menu">五つのコースを見る<span aria-hidden="true">→</span></Link>
-              <small>全5コース・各10皿</small>
+              <small>下へコースを巡り、横へ一皿ずつご覧ください</small>
             </div>
           </div>
         </div>
