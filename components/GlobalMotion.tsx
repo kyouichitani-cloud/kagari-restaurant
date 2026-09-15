@@ -12,6 +12,9 @@ export function GlobalMotion() {
         event.preventDefault();
         const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const touchLayout = window.matchMedia("(max-width: 1279px), (pointer: coarse)").matches;
+        if (window.location.hash !== anchor.hash) {
+          window.history.pushState(window.history.state, "", anchor.hash);
+        }
         target.scrollIntoView({ behavior: reduced || touchLayout ? "auto" : "smooth", block: "start" });
       };
       anchor.addEventListener("click", handler);
