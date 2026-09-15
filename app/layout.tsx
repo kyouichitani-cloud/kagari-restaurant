@@ -1,19 +1,20 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
+import { ReloadScrollReset } from "@/components/ReloadScrollReset";
 import { publicationReady, siteUrl } from "@/content/site";
 
 const scrollBootstrap = `(() => {
   try {
     if (sessionStorage.getItem("kagari-entered") === "1") document.documentElement.dataset.revisit = "true";
   } catch {}
-  const historyState = window.history;
-  try { historyState.scrollRestoration = "manual"; } catch {}
   const navigation = window.performance?.getEntriesByType?.("navigation")[0];
   const navigationType = navigation?.type || (window.performance?.navigation?.type === 1 ? "reload" : "navigate");
-  const reset = () => window.scrollTo(0, 0);
-  if (navigationType === "navigate" || navigationType === "reload") reset();
   if (navigationType === "reload") {
-    window.addEventListener("pageshow", (event) => { if (!event.persisted) reset(); }, { once: true });
+    document.documentElement.dataset.reload = "true";
+    document.documentElement.dataset.previousScrollRestoration = window.history.scrollRestoration;
+    try { window.history.scrollRestoration = "manual"; } catch {}
+    if (window.location.hash) window.history.replaceState(window.history.state, "", window.location.pathname + window.location.search);
+    window.scrollTo(0, 0);
   }
 })();`;
 
@@ -37,7 +38,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ja">
       <head><script dangerouslySetInnerHTML={{ __html: scrollBootstrap }} /></head>
-      <body>{children}</body>
+      <body><ReloadScrollReset />{children}</body>
     </html>
   );
 }

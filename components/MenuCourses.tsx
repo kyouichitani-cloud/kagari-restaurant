@@ -37,7 +37,6 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
       const index = Number((visible.target as HTMLElement).dataset.courseIndex);
       if (!Number.isFinite(index)) return;
       setActiveCourse((current) => current === index ? current : index);
-      window.history.replaceState(window.history.state, "", `/menu#${courseSlug(courses[index].id)}`);
     }, { rootMargin: "-28% 0px -58%", threshold: 0 });
     root.querySelectorAll<HTMLElement>(".menu-axis-course").forEach((section) => courseObserver.observe(section));
 
