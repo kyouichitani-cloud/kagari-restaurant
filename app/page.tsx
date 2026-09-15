@@ -38,7 +38,7 @@ export default async function Home() {
       </section>
 
       <section className="philosophy" id="philosophy" aria-labelledby="philosophy-title">
-        <div className="philosophy-image"><Image src="/images/avif/philosophy.avif" alt="炭火の前で一皿を仕上げる料理人の手元" fill sizes="(max-width: 1023px) 100vw, 58vw" /></div>
+        <div className="philosophy-image"><Image src="/images/avif/philosophy.avif" alt="炭火の前で一皿を仕上げる料理人の手元" fill sizes="(max-width: 767px) calc(100vw - 2.4rem), (max-width: 1023px) 90vw, 58vw" /></div>
         <div className="philosophy-copy"><p className="section-label">PHILOSOPHY</p><h2 id="philosophy-title">{restaurant.philosophy.title}</h2><p>{restaurant.philosophy.body}</p></div>
       </section>
 
@@ -51,7 +51,7 @@ export default async function Home() {
           </h2>
           <p>{restaurant.provenance.body}</p>
         </div>
-        <div className="provenance-image"><Image src="/images/avif/provenance.avif" alt="畑から届いた根菜と葉、魚介の素材" width={1672} height={941} sizes="(max-width: 1023px) 100vw, 64vw" /></div>
+        <div className="provenance-image"><Image src="/images/avif/provenance.avif" alt="畑から届いた根菜と葉、魚介の素材" width={1672} height={941} sizes="(max-width: 767px) calc(100vw - 2.4rem), (max-width: 1023px) 90vw, 64vw" /></div>
       </section>
 
       <section className="space" id="space" aria-labelledby="space-title">

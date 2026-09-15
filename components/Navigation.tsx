@@ -8,7 +8,7 @@ import type { RestaurantContent } from "@/content/restaurant";
 export function Navigation({ navigation, brand, details }: Pick<RestaurantContent, "navigation" | "brand" | "details">) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [pastHero, setPastHero] = useState(false);
+  const [pastHero, setPastHero] = useState(() => pathname.startsWith("/menu"));
   const [nearBooking, setNearBooking] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -47,7 +47,7 @@ export function Navigation({ navigation, brand, details }: Pick<RestaurantConten
   }, []);
 
   useEffect(() => {
-    const targets = [document.getElementById("reservation"), document.querySelector("footer")].filter(Boolean) as Element[];
+    const targets = [document.getElementById("reservation"), document.querySelector("footer"), document.querySelector(".menu-axis-footer")].filter(Boolean) as Element[];
     if (!targets.length) return;
     const visible = new Set<Element>();
     const observer = new IntersectionObserver((entries) => {
