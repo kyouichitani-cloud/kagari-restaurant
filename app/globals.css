@@ -339,7 +339,7 @@ p,dd,address,blockquote{max-width:100%;overflow-wrap:break-word}
 .course-index-page[data-motion="ready"] [data-menu-reveal]:not([data-visible="true"]) .course-index-copy>*,.course-detail-page[data-motion="ready"] [data-menu-reveal]:not([data-visible="true"]) .course-detail-copy>*{opacity:0;transform:translateY(12px)}
 .course-index-copy>h2,.course-detail-copy>h2{transition-delay:50ms}.course-index-copy>p:nth-of-type(2),.course-detail-description{transition-delay:100ms}.course-index-copy>dl,.course-detail-copy>dl{transition-delay:150ms}.course-index-copy>a{transition-delay:200ms}
 
-@media (hover:hover) and (pointer:fine){.course-index-copy a:hover,.course-back-link:hover,.course-reserve-link:hover{color:#fffdf4;border-color:var(--celadon)}.course-index-copy a:hover span,.course-reserve-link:hover span{transform:translateX(6px)}.course-index-copy a span,.course-reserve-link span{transition:transform 140ms var(--ease-out)}}
+@media (hover:hover) and (pointer:fine){.course-index-item:hover .course-index-image img{transform:scale(1.03)}.course-index-copy a:hover,.course-back-link:hover,.course-reserve-link:hover{color:#fffdf4;border-color:var(--celadon)}.course-index-copy a:hover span,.course-reserve-link:hover span{transform:translateX(6px)}.course-index-copy a span,.course-reserve-link span{transition:transform 140ms var(--ease-out)}}
 
 @media (max-width:767px){
   .course-index-header,.course-detail-header{padding-inline:max(1.25rem,env(safe-area-inset-left)) max(1.25rem,env(safe-area-inset-right))}
@@ -355,3 +355,71 @@ p,dd,address,blockquote{max-width:100%;overflow-wrap:break-word}
 }
 
 @media (prefers-reduced-motion:reduce){.course-index-image,.course-index-image img,.course-detail-image,.course-detail-image img,.course-index-copy>*,.course-detail-copy>*{transform:none!important;clip-path:none!important;transition:opacity 180ms var(--ease-out)!important;transition-delay:0ms!important}}
+
+/* Single-dish course viewer. */
+.course-index-title-mask,.course-intro-title-mask{display:block;overflow:hidden}
+.course-index-title-mask h2{transform:none;transition:transform 800ms var(--ease-out)}
+.course-index-image{transition-delay:100ms}
+.course-index-page[data-motion="ready"] [data-menu-reveal]:not([data-visible="true"]) .course-index-title-mask h2{transform:translateY(110%)}
+.course-index-copy>.course-index-title-mask{transition-delay:50ms}.course-index-copy>p:nth-of-type(2){transition-delay:150ms}.course-index-copy>dl{transition-delay:200ms}.course-index-copy>a{transition-delay:250ms}
+
+.course-detail-page{--course-glow:rgb(124 154 146/.2)}
+.course-detail-page[data-accent="akari"]{--course-glow:rgb(190 157 94/.2)}
+.course-detail-page[data-accent="kagari"]{--course-glow:rgb(212 71 47/.18)}
+.course-detail-page[data-accent="homura"]{--course-glow:rgb(212 93 47/.24)}
+.course-detail-page[data-accent="special"]{--course-glow:rgb(177 145 83/.18)}
+.course-detail-header{position:relative;isolation:isolate;overflow:hidden}
+.course-detail-header::after{content:"";position:absolute;z-index:-1;inset:auto 8% 0 auto;width:38vw;height:1px;background:var(--course-glow)}
+.course-detail-header>.course-intro-title-mask{display:block;overflow:hidden}
+.course-intro-title-mask h1{transform:none;transition:transform 800ms var(--ease-out)}
+.course-detail-header>.course-intro-meta{display:grid;grid-template-columns:minmax(0,28ch) auto auto auto;align-items:end;gap:clamp(1.25rem,4vw,4rem)}
+.course-intro-meta>a{display:inline-flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:48px;border-bottom:1px solid var(--ember-text);font:400 .84rem var(--mincho)}
+.course-intro-number,.course-intro-meta>*{opacity:1;transform:none;transition:opacity 600ms var(--ease-out),transform 600ms var(--ease-out)}
+.course-detail-page[data-motion="ready"]:not([data-entered="true"]) .course-intro-number{opacity:0;transform:translateY(10px)}
+.course-detail-page[data-motion="ready"]:not([data-entered="true"]) .course-intro-title-mask h1{transform:translateY(110%)}
+.course-detail-page[data-motion="ready"]:not([data-entered="true"]) .course-intro-meta>*{opacity:0;transform:translateY(12px)}
+.course-intro-meta>p:first-child{transition-delay:80ms}.course-intro-meta>p:nth-child(2){transition-delay:130ms}.course-intro-meta>strong{transition-delay:180ms}.course-intro-meta>a{transition-delay:230ms}
+
+.dish-viewer{display:grid;grid-template-columns:minmax(0,55fr) minmax(18rem,45fr);grid-template-areas:"image copy" "progress progress";align-items:center;gap:clamp(2.5rem,6vw,6rem);width:min(calc(100% - 2.5rem),1200px);margin:0 auto;padding-block:clamp(4.5rem,7vw,7rem);outline-offset:8px;touch-action:pan-y}
+.dish-viewer-image{grid-area:image;display:block;overflow:hidden;width:100%;max-width:700px;max-height:620px;aspect-ratio:3/2;background:#0b0d0c;clip-path:inset(0);opacity:1;transform:none;transition:opacity 480ms var(--ease-in-out),transform 480ms var(--ease-in-out),clip-path 650ms var(--ease-out)}
+.dish-viewer-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transform:none;transition:transform 480ms var(--ease-in-out)}
+.dish-viewer-copy{grid-area:copy;min-width:0;min-height:24rem;display:flex;flex-direction:column;justify-content:center}
+.dish-viewer-copy>*{opacity:1;transform:none;transition:opacity 480ms var(--ease-in-out),transform 480ms var(--ease-in-out)}
+.dish-viewer-copy h2{max-width:13ch;margin:0 0 1.25rem;font-size:clamp(2rem,3.5vw,3.8rem);line-height:1.3;word-break:normal;line-break:strict;text-wrap:balance}
+.dish-viewer-copy dl{margin:1.5rem 0 0;padding-top:1rem;border-top:1px solid rgb(238 236 228/.14)}
+.dish-viewer-copy dl div{display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:.8rem;padding:.3rem 0}.dish-viewer-copy dt{color:var(--celadon);font-size:.72rem}.dish-viewer-copy dd{margin:0;font:400 .78rem/1.7 var(--mincho)}
+.dish-viewer-controls{display:flex;gap:1rem;margin-top:auto;padding-top:2rem}
+.dish-viewer-controls button{min-width:8.5rem;min-height:48px;padding:0 1rem;border:0;border-bottom:1px solid rgb(238 236 228/.34);background:transparent;color:var(--porcelain);font:400 .82rem var(--mincho);transition:opacity 140ms var(--ease-out),transform 140ms var(--ease-out),border-color 180ms var(--ease-out)}
+.dish-viewer-controls button:last-child{margin-left:auto}.dish-viewer-controls button:disabled{opacity:.28}.dish-viewer-controls button:active:not(:disabled){transform:translateY(1px)}
+.dish-progress{grid-area:progress;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:.35rem;width:100%;margin-top:1rem;border-top:1px solid rgb(238 236 228/.14)}
+.dish-progress button{position:relative;min-width:44px;min-height:48px;padding:.85rem .15rem .35rem;border:0;background:transparent;color:var(--smoke);font:.7rem "Kagari Sans",sans-serif;font-variant-numeric:tabular-nums;transition:color 180ms var(--ease-out),transform 140ms var(--ease-out)}
+.dish-progress button::before{content:"";position:absolute;inset:-1px 0 auto;height:1px;background:var(--course-glow);transform:scaleX(0);transform-origin:left;transition:transform 400ms var(--ease-in-out)}
+.dish-progress button[aria-current="step"]{color:var(--porcelain)}.dish-progress button[aria-current="step"]::before{height:2px;transform:scaleX(1)}
+.dish-progress button:disabled{opacity:1}.dish-progress button:active{transform:translateY(1px)}
+.dish-viewer[data-phase="out"] .dish-viewer-image{opacity:0}
+.dish-viewer[data-phase="out"][data-direction="next"] .dish-viewer-copy>*{opacity:0;transform:translateX(-20px)}
+.dish-viewer[data-phase="out"][data-direction="previous"] .dish-viewer-copy>*{opacity:0;transform:translateX(20px)}
+.dish-viewer[data-phase="in"] .dish-viewer-image{opacity:0}.dish-viewer[data-phase="in"] .dish-viewer-image img{transform:scale(1.03)}
+.dish-viewer[data-phase="in"][data-direction="next"] .dish-viewer-image{transform:translateX(20px)}.dish-viewer[data-phase="in"][data-direction="previous"] .dish-viewer-image{transform:translateX(-20px)}
+.dish-viewer[data-phase="in"][data-direction="next"] .dish-viewer-copy>*{opacity:0;transform:translateX(20px)}
+.dish-viewer[data-phase="in"][data-direction="previous"] .dish-viewer-copy>*{opacity:0;transform:translateX(-20px)}
+.dish-viewer[data-phase="idle"] .dish-viewer-copy>.course-detail-chapter{transition-delay:50ms}.dish-viewer[data-phase="idle"] .dish-viewer-copy>h2{transition-delay:100ms}.dish-viewer[data-phase="idle"] .dish-viewer-copy>.course-detail-description,.dish-viewer[data-phase="idle"] .dish-viewer-copy>dl{transition-delay:150ms}.dish-viewer[data-phase="idle"] .dish-viewer-controls{transition-delay:200ms}
+.course-detail-page[data-motion="ready"]:not([data-entered="true"]) .dish-viewer-image{opacity:0;clip-path:inset(0 0 100% 0)}
+.course-detail-page[data-motion="ready"]:not([data-entered="true"]) .dish-viewer-image img{transform:scale(1.03)}
+.course-detail-page[data-motion="ready"]:not([data-entered="true"]) .dish-viewer-copy>*{opacity:0;transform:translateY(12px)}
+.course-detail-page[data-intro="true"] .dish-viewer-image{transition-delay:300ms}
+.course-detail-page[data-intro="true"] .dish-viewer-copy>.course-detail-number{transition-delay:360ms}.course-detail-page[data-intro="true"] .dish-viewer-copy>.course-detail-chapter{transition-delay:410ms}.course-detail-page[data-intro="true"] .dish-viewer-copy>h2{transition-delay:460ms}.course-detail-page[data-intro="true"] .dish-viewer-copy>.course-detail-description,.course-detail-page[data-intro="true"] .dish-viewer-copy>dl{transition-delay:510ms}.course-detail-page[data-intro="true"] .dish-viewer-controls{transition-delay:560ms}
+.course-noscript-list{width:min(calc(100% - 2.5rem),900px);margin:3rem auto;padding:0;list-style-position:inside}.course-noscript-list li{padding:1rem 0;border-bottom:1px solid rgb(238 236 228/.14)}
+
+@media (hover:hover) and (pointer:fine){.dish-viewer-controls button:hover:not(:disabled){border-color:var(--celadon)}.dish-progress button:hover{color:var(--porcelain)}.course-intro-meta>a:hover span{transform:translateX(6px)}.course-intro-meta>a span{transition:transform 140ms var(--ease-out)}}
+
+@media (max-width:767px){
+  .course-detail-header>.course-intro-meta{grid-template-columns:minmax(0,1fr) auto;gap:1rem}.course-intro-meta>p:first-child{grid-column:1/-1}.course-intro-meta>a{grid-column:1/-1;width:min(100%,18rem);margin-top:1rem}
+  .dish-viewer{grid-template-columns:minmax(0,1fr);grid-template-areas:"image" "copy" "progress";gap:1.5rem;width:auto;margin-inline:max(1.25rem,env(safe-area-inset-left)) max(1.25rem,env(safe-area-inset-right));padding-block:4rem}
+  .dish-viewer-image{max-width:none;max-height:23rem}
+  .dish-viewer-copy{min-height:19rem}.dish-viewer-copy h2{max-width:14ch;font-size:clamp(2rem,9vw,2.8rem)}
+  .dish-viewer-controls{gap:.5rem}.dish-viewer-controls button{min-width:0;flex:1;padding-inline:.5rem}
+  .dish-progress{grid-template-columns:repeat(5,minmax(44px,1fr));gap:0}.dish-progress button{min-width:44px;min-height:44px;font-size:.68rem}.dish-progress button span{display:inline-block;transform:scale(.9)}
+}
+
+@media (prefers-reduced-motion:reduce){.course-index-title-mask h2,.course-intro-title-mask h1,.course-intro-number,.course-intro-meta>*,.dish-viewer-image,.dish-viewer-image img,.dish-viewer-copy>*,.dish-progress button::before{transform:none!important;clip-path:none!important;transition:opacity 180ms var(--ease-out)!important;transition-delay:0ms!important}}
