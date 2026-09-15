@@ -94,7 +94,6 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
       <div className="menu-axis-courses">
         {courses.map((course, courseIndex) => {
           const currentDish = activeDishes[course.id] ?? 0;
-          const nextCourse = courses[courseIndex + 1];
           return (
             <section className="menu-axis-course" id={courseSlug(course.id)} data-course-index={courseIndex} aria-labelledby={`${course.id}-title`} key={course.id}>
               <header className="menu-axis-course-header">
@@ -123,7 +122,6 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
                         </div>
                       </div>
                       {(dish.origin || dish.details.length > 0) && <dl className="dish-panel-details">{dish.origin && <div><dt>産地</dt><dd>{dish.origin}</dd></div>}{dish.details.map((detail) => <div key={detail.label}><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}</dl>}
-                      {dishIndex === 9 && nextCourse && <a className="dish-next-course" href={`#${courseSlug(nextCourse.id)}`}>↓ 次のコース「{nextCourse.name}」へ</a>}
                     </article>
                   ))}
                 </div>
