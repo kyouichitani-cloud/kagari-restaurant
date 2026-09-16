@@ -12,14 +12,15 @@
   --text-primary: #eeece5;
   --text-secondary: #a8aaa4;
   --celadon: #879b92;
-  --ember: #b94a2f;
+  --ember: #cf6448;
+  --ember-strong: #9f3f28;
   --color-line: rgb(135 155 146/0.22);
   --mincho:
     "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif CJK JP",
     "Noto Serif JP", "IPAexMincho", serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-axis: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --course-anchor-header-clearance: 4rem;
   --course-anchor-extra-gap: 48px;
@@ -29,6 +30,7 @@
 }
 html {
   background: var(--canvas);
+  color-scheme: dark;
   text-spacing-trim: trim-start;
 }
 body {
@@ -38,6 +40,8 @@ body {
   font:
     16px/1.7 "Kagari Sans",
     sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 html[data-loading="true"],
 html[data-loading="true"] body,
@@ -85,6 +89,14 @@ input,
 select,
 textarea {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+button,
+summary {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
 }
 :focus-visible {
   outline: 2px solid var(--celadon);
@@ -136,6 +148,10 @@ button {
 }
 .skip-link:focus-visible {
   transform: none;
+}
+#content-start:focus,
+#menu-content:focus {
+  outline: none;
 }
 .section-label {
   position: relative;
@@ -1153,8 +1169,8 @@ html[data-revisit="true"] .entrance-cut {
   cursor: wait;
 }
 .reservation-form[data-step="3"] .submit-button {
-  border-color: var(--ember);
-  background: var(--ember);
+  border-color: var(--ember-strong);
+  background: var(--ember-strong);
   color: #fff;
 }
 .confirmation {
@@ -1362,8 +1378,8 @@ address {
     .reservation-form[data-step="3"]
     .submit-button:hover:not(:disabled),
   .reservation-panel .complete-actions a:hover {
-    border-color: #9f3f28;
-    background: #9f3f28;
+    border-color: var(--ember-strong);
+    background: var(--ember-strong);
     color: #fff;
   }
   .course-index button:hover {
@@ -2048,6 +2064,13 @@ address {
   .course-image {
     transition-property: opacity !important;
   }
+  .mobile-menu {
+    transform: none !important;
+    transition-property: opacity !important;
+  }
+  .course-picker-chevron {
+    transition: none !important;
+  }
   @keyframes reduced-fade {
     from {
       opacity: 0;
@@ -2213,7 +2236,7 @@ address a {
   grid-template-columns: 10rem 1fr;
   gap: 2rem;
   padding: 1.2rem 0;
-  border-bottom: 1px solid rgb(24 32 28/0.18);
+  border-bottom: 1px solid var(--color-line);
 }
 .policy-page dd {
   margin: 0;
@@ -2411,6 +2434,23 @@ blockquote {
   border-bottom: 1px solid var(--celadon);
   font: 400 0.9rem var(--mincho);
 }
+@media (max-width: 767px) {
+  .menu-intro {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 2.5rem;
+    padding-block: 6rem 6.5rem;
+    padding-inline: max(1.2rem, env(safe-area-inset-left))
+      max(1.2rem, env(safe-area-inset-right));
+  }
+  .menu-intro h2 {
+    font-size: clamp(2.65rem, 13vw, 3.75rem);
+  }
+  .menu-intro > div:last-child {
+    width: 100%;
+    max-width: 32ch;
+  }
+}
 
 /* Menu shell */
 .menu-page {
@@ -2526,7 +2566,7 @@ blockquote {
 .menu-axis-header > nav a span {
   color: var(--celadon);
   font:
-    0.68rem "Kagari Sans",
+    0.75rem "Kagari Sans",
     sans-serif;
 }
 .menu-axis-header > nav a::after {
@@ -2537,7 +2577,7 @@ blockquote {
   background: var(--ember);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 320ms var(--ease-in-out);
+  transition: transform 320ms var(--ease-axis);
 }
 .menu-axis-header > nav a[aria-current="location"]::after {
   height: 2px;
@@ -2571,7 +2611,7 @@ blockquote {
 .menu-desktop-course-nav a span {
   color: var(--celadon);
   font:
-    0.62rem "Kagari Sans",
+    0.75rem "Kagari Sans",
     sans-serif;
 }
 .menu-desktop-course-nav a::after {
@@ -2583,7 +2623,7 @@ blockquote {
   background: var(--ember);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 320ms var(--ease-in-out);
+  transition: transform 320ms var(--ease-axis);
 }
 .menu-desktop-course-nav a[aria-current="location"] {
   color: var(--text-primary);
@@ -2625,7 +2665,7 @@ blockquote {
   margin: 0 0 0 1rem;
   color: var(--celadon);
   font:
-    0.72rem "Kagari Sans",
+    0.75rem "Kagari Sans",
     sans-serif;
   letter-spacing: 0.18em;
 }
@@ -2657,7 +2697,7 @@ blockquote {
 .menu-axis-course-header > div:nth-of-type(2) span {
   color: var(--celadon);
   font:
-    0.72rem "Kagari Sans",
+    0.75rem "Kagari Sans",
     sans-serif;
   letter-spacing: 0.14em;
 }
@@ -2884,7 +2924,7 @@ blockquote {
 }
 .dish-panel-details dt {
   color: var(--celadon);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
 }
 .dish-panel-details dd {
   margin: 0;
@@ -2903,7 +2943,7 @@ blockquote {
   margin: 0;
   color: var(--text-secondary);
   font:
-    0.72rem "Kagari Sans",
+    0.75rem "Kagari Sans",
     sans-serif;
 }
 .dish-axis-progress > p span {
@@ -2912,6 +2952,7 @@ blockquote {
 .dish-axis-progress > div {
   display: grid;
   grid-template-columns: repeat(10, minmax(44px, 1fr));
+  gap: 0.25rem;
   border-top: 1px solid var(--color-line);
 }
 .dish-axis-progress button {
@@ -2937,7 +2978,7 @@ blockquote {
   background: var(--ember);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 320ms var(--ease-in-out);
+  transition: transform 320ms var(--ease-axis);
 }
 .dish-axis-progress button[aria-current="step"] {
   color: var(--ember);
@@ -3010,7 +3051,8 @@ blockquote {
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 1rem;
-    padding: 0 max(1.25rem, env(safe-area-inset-left));
+    padding-inline: max(1.25rem, env(safe-area-inset-left))
+      max(1.25rem, env(safe-area-inset-right));
     cursor: pointer;
     list-style: none;
     font: 400 0.9rem var(--mincho);
@@ -3021,18 +3063,26 @@ blockquote {
   .menu-mobile-course-picker summary span {
     color: var(--celadon);
     font:
-      0.68rem "Kagari Sans",
+      0.75rem "Kagari Sans",
       sans-serif;
   }
-  .menu-mobile-course-picker summary i {
-    font-style: normal;
+  .course-picker-chevron {
+    display: block;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-right: 1px solid var(--celadon);
+    border-bottom: 1px solid var(--celadon);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 180ms var(--ease-out);
   }
-  .menu-mobile-course-picker[open] summary i {
-    transform: rotate(180deg);
+  .menu-mobile-course-picker[open] .course-picker-chevron {
+    transform: rotate(225deg) translate(-2px, -2px);
   }
   .menu-mobile-course-picker nav {
     display: grid;
-    padding: 0 max(1.25rem, env(safe-area-inset-left)) 1rem;
+    padding-block: 0 1rem;
+    padding-inline: max(1.25rem, env(safe-area-inset-left))
+      max(1.25rem, env(safe-area-inset-right));
   }
   .menu-mobile-course-picker nav a {
     display: grid;
@@ -3045,7 +3095,7 @@ blockquote {
   .menu-mobile-course-picker nav a span {
     color: var(--celadon);
     font:
-      0.65rem "Kagari Sans",
+      0.75rem "Kagari Sans",
       sans-serif;
   }
   .menu-mobile-course-picker nav a[aria-current="location"] {
@@ -3076,20 +3126,26 @@ blockquote {
     padding-bottom: 0.5rem;
   }
   .dish-panel-frame {
-    aspect-ratio: 4/3;
+    overflow: visible;
+    aspect-ratio: auto;
   }
   .dish-panel-frame::after {
-    inset: 8% 0 0;
-    background: linear-gradient(
-      180deg,
-      transparent,
-      rgb(11 13 12/0.5) 38%,
-      rgb(11 13 12/0.98)
-    );
+    display: none;
+  }
+  .dish-panel-image {
+    height: auto;
+    aspect-ratio: 4/3;
+    opacity: 1;
   }
   .dish-panel-copy {
-    inset: auto 1.25rem 1.25rem;
+    position: relative;
+    inset: auto;
     width: auto;
+    padding: 1.5rem 0.25rem 0.5rem;
+  }
+  .dish-panel-copy::before {
+    top: 0.65rem;
+    left: 0.25rem;
   }
   .dish-panel-copy h3 {
     max-width: 15ch;
@@ -3106,8 +3162,9 @@ blockquote {
   }
   .dish-panel-description {
     max-width: 34ch;
-    font-size: 0.8rem;
-    line-height: 1.65;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.8;
   }
   .dish-panel-details {
     display: grid;
@@ -3116,6 +3173,9 @@ blockquote {
   }
   .dish-panel-details div {
     grid-template-columns: 4.25rem minmax(0, 1fr);
+  }
+  .dish-panel-details dd {
+    font-size: 0.8125rem;
   }
   .dish-axis-progress {
     grid-template-columns: auto 1fr;

@@ -73,7 +73,7 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
 
   return (
     <div className="menu-axis-page" ref={rootRef}>
-      <header className="menu-axis-header" id="menu-content">
+      <header className="menu-axis-header" id="menu-content" tabIndex={-1}>
         <p>お品書き</p>
         <h1>五つのコース</h1>
         <p>下へコースを巡り、横へ一皿ずつご覧ください。</p>
@@ -83,7 +83,7 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
       </header>
 
       <details className="menu-mobile-course-picker">
-        <summary><span>{pad(activeCourse + 1)} / 05</span>{courses[activeCourse].name}<i aria-hidden="true">⌄</i></summary>
+        <summary><span>{pad(activeCourse + 1)} / 05</span>{courses[activeCourse].name}<i className="course-picker-chevron" aria-hidden="true" /></summary>
         <nav aria-label="コースを選択">{courses.map((course, index) => <a href={`#${courseSlug(course.id)}`} aria-current={index === activeCourse ? "location" : undefined} onClick={closeCoursePicker} key={course.id}><span>{pad(index + 1)}</span>{course.name}</a>)}</nav>
       </details>
 
@@ -101,13 +101,13 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
                 <div className="menu-axis-title-mask"><h2 id={`${course.id}-title`}>{course.name}</h2></div>
                 <p>{course.description}</p>
                 <div><span>全10皿</span><strong>{course.price.toLocaleString("ja-JP")}円</strong></div>
-                {courseIndex === 0 && <div className="menu-axis-guide"><p>← 左へスワイプして料理を見る</p><p>↓ 下へスクロールして次のコース</p></div>}
+                {courseIndex === 0 && <div className="menu-axis-guide"><p>横にスワイプして料理を見る</p><p>下にスクロールして次のコースへ</p></div>}
               </header>
 
               <div className="dish-carousel" data-course-id={course.id} aria-label={`${course.name}コース、全10皿。横へスクロールして料理を選択`} tabIndex={0}
                 onKeyDown={(event) => {
                   if (event.key === "ArrowLeft") { event.preventDefault(); goToDish(course.id, Math.max(0, currentDish - 1)); }
-                  if (event.key === "ArrowRight") { event.preventDefault(); goToDish(course.id, Math.min(9, currentDish + 1)); }
+                  if (event.key === "ArrowRight") { event.preventDefault(); goToDish(course.id, Math.min(course.dishes.length - 1, currentDish + 1)); }
                 }}>
                 <div className="dish-carousel-track">
                   {course.dishes.map((dish, dishIndex) => (

@@ -170,7 +170,7 @@ export function ReservationForm({ policy, allergyNote, cancellation }: { policy:
   }
 
   return (
-    <form className="reservation-form" data-step={step} key={step} onSubmit={submitStep} noValidate>
+    <form className="reservation-form" data-step={step} key={step} onSubmit={submitStep} aria-busy={status === "sending"} noValidate>
       <div className="honeypot" aria-hidden="true"><label htmlFor="website">ウェブサイト</label><input id="website" name="website" tabIndex={-1} autoComplete="off" value={data.website} onChange={(event) => set("website", event.target.value)} /></div>
       <p className="demo-disclosure">{allergyNote}</p>
       <div className="step-track" aria-label={`予約入力 ${step}/3`}><span style={{ transform: `scaleX(${step / 3})` }} /><p><b>0{step}</b> / 03</p></div>

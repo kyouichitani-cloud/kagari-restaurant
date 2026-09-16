@@ -4,23 +4,25 @@ import { useEffect } from "react";
 
 export function GlobalMotion() {
   useEffect(() => {
-    const anchors = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'));
-    const listeners = anchors.map((anchor) => {
-      const handler = (event: MouseEvent) => {
-        const target = document.querySelector(anchor.hash);
-        if (!target) return;
-        event.preventDefault();
-        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const touchLayout = window.matchMedia("(max-width: 1279px), (pointer: coarse)").matches;
-        if (window.location.hash !== anchor.hash) {
-          window.history.pushState(window.history.state, "", anchor.hash);
-        }
-        target.scrollIntoView({ behavior: reduced || touchLayout ? "auto" : "smooth", block: "start" });
-      };
-      anchor.addEventListener("click", handler);
-      return () => anchor.removeEventListener("click", handler);
-      });
-    return () => { listeners.forEach((remove) => remove()); };
+    const handler = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const source = event.target;
+      if (!(source instanceof Element)) return;
+      const anchor = source.closest<HTMLAnchorElement>('a[href^="#"]');
+      if (!anchor?.hash) return;
+      const id = decodeURIComponent(anchor.hash.slice(1));
+      const target = document.getElementById(id);
+      if (!target) return;
+      event.preventDefault();
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (window.location.hash !== anchor.hash) window.history.pushState(window.history.state, "", anchor.hash);
+      target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+      if (anchor.classList.contains("skip-link")) {
+        window.requestAnimationFrame(() => target.focus({ preventScroll: true }));
+      }
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
   }, []);
   return null;
 }

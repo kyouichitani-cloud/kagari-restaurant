@@ -11,7 +11,12 @@ for (const image of courseImages) for (const path of [`public/images/course/avif
 const sourcePaths = ["app/page.tsx", "app/globals.css", "content/reservation.ts", "content/site.ts", ...["BackToTop", "CourseExperience", "Entrance", "GlobalMotion", "KagariHero", "Navigation", "ReservationForm"].map((name) => `components/${name}.tsx`)];
 const sources = sourcePaths.map(read).join("\n");
 for (const banned of [/transition:\s*all/, /ease-in\b/, /scale\(0\)/, /Lorem Ipsum/i, /TODO/, /\u672a\u78ba\u5b9a|\u6e96\u5099\u4e2d|\u9078\u5b9a\u4e2d|\u30c7\u30e2/]) if (banned.test(sources + content)) throw new Error(`Banned pattern found: ${banned}`);
-for (const required of ["viewportFit", "application/ld+json", "prefers-reduced-motion:reduce", "aria-current", "aria-modal=\"true\""]) if (!sources.includes(required) && !read("app/layout.tsx").includes(required)) throw new Error(`Required production behavior missing: ${required}`);
-for (const forbiddenSlot of ["18:30", "19:00", "19:30", "20:00"]) if (sources.includes(forbiddenSlot)) throw new Error(`Unsupported reservation slot found: ${forbiddenSlot}`);
-for (const slot of ["18:00", "20:45"]) if (!read("content/reservation.ts").includes(slot)) throw new Error(`Reservation slot missing: ${slot}`);
+for (const required of ["viewportFit", "application/ld+json", "prefers-reduced-motion: reduce", "aria-current", "aria-modal=\"true\""]) if (!sources.includes(required) && !read("app/layout.tsx").includes(required)) throw new Error(`Required production behavior missing: ${required}`);
+const reservationSource = read("content/reservation.ts");
+const slotDeclaration = reservationSource.match(/reservationSlots\s*=\s*\[([^\]]+)\]/s)?.[1] ?? "";
+const slots = [...slotDeclaration.matchAll(/"(\d{2}:\d{2})"/g)].map((match) => match[1]);
+if (!slots.length) throw new Error("At least one reservation slot is required.");
+if (new Set(slots).size !== slots.length) throw new Error("Reservation slots must be unique.");
+if (slots.some((slot) => !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(slot))) throw new Error("Reservation slots must use 24-hour HH:mm format.");
+if (slots.some((slot, index) => index > 0 && slot <= slots[index - 1])) throw new Error("Reservation slots must be in ascending order.");
 console.log("Production verification passed: content, responsive assets, metadata, accessibility and motion guards.");

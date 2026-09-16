@@ -10,7 +10,7 @@ function isReloadNavigation() {
 
 export function ReloadScrollReset() {
   useLayoutEffect(() => {
-    if (!isReloadNavigation()) return;
+    if (!isReloadNavigation() || window.location.hash) return;
 
     const previousRestoration = document.documentElement.dataset.previousScrollRestoration === "manual" ? "manual" : "auto";
     const timers: number[] = [];
@@ -24,14 +24,6 @@ export function ReloadScrollReset() {
     };
 
     window.history.scrollRestoration = "manual";
-    if (window.location.hash) {
-      window.history.replaceState(
-        window.history.state,
-        "",
-        `${window.location.pathname}${window.location.search}`,
-      );
-    }
-
     reset();
     firstFrame = window.requestAnimationFrame(() => {
       reset();

@@ -27,7 +27,7 @@ export default async function Home() {
 
       <KagariHero hero={restaurant.hero} brand={restaurant.brand} />
 
-      <section className="news" id="content-start" aria-labelledby="news-title">
+      <section className="news" id="content-start" aria-labelledby="news-title" tabIndex={-1}>
         <header><p>INFORMATION</p><h2 id="news-title">お知らせ</h2></header>
         <ol>{restaurant.notices.map((notice) => <li key={notice.id ?? `${notice.date}-${notice.title}`}><time dateTime={notice.date.replaceAll(".", "-")}>{notice.date}</time><span>{notice.title}</span></li>)}</ol>
       </section>
