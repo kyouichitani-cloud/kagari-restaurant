@@ -9,24 +9,11 @@
 :root {
   --canvas: #0b0d0c;
   --surface: #131714;
-  --surface-raised: #131714;
   --text-primary: #eeece5;
   --text-secondary: #a8aaa4;
   --celadon: #879b92;
   --ember: #b94a2f;
-  --color-ink: var(--canvas);
-  --color-ink-soft: var(--surface);
-  --color-ivory: var(--text-primary);
-  --color-body: var(--text-secondary);
-  --color-sage: var(--celadon);
-  --color-ember: var(--ember);
-  --color-muted: #a8aaa4;
   --color-line: rgb(135 155 146/0.22);
-  --soot: var(--color-ink);
-  --charcoal: var(--color-ink-soft);
-  --porcelain: var(--color-ivory);
-  --smoke: var(--color-muted);
-  --indigo-gray: var(--celadon);
   --mincho:
     "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif CJK JP",
     "Noto Serif JP", "IPAexMincho", serif;
@@ -41,7 +28,7 @@
   box-sizing: border-box;
 }
 html {
-  background: var(--soot);
+  background: var(--canvas);
   text-spacing-trim: trim-start;
 }
 body {
@@ -109,7 +96,7 @@ h3,
 legend span {
   max-width: 100%;
   margin-block-start: 0;
-  color: var(--color-ivory);
+  color: var(--text-primary);
   font-family: var(--mincho);
   font-weight: 400;
   letter-spacing: -0.018em;
@@ -141,8 +128,8 @@ button {
   align-items: center;
   min-height: 44px;
   padding: 0.6rem 1rem;
-  background: var(--porcelain);
-  color: var(--soot);
+  background: var(--text-primary);
+  color: var(--canvas);
   font: 400 0.85rem var(--mincho);
   transform: translateY(calc(-100% - 2rem));
   transition: transform 180ms var(--ease-out);
@@ -154,7 +141,7 @@ button {
   position: relative;
   margin: 0 0 1.2rem;
   padding-left: 1.35rem;
-  color: var(--color-sage);
+  color: var(--celadon);
   font-size: 0.75rem;
   letter-spacing: 0.2em;
 }
@@ -203,7 +190,7 @@ button {
   animation: mark-settle 420ms 60ms var(--ease-out) forwards;
 }
 .entrance-mark small {
-  color: var(--smoke);
+  color: var(--text-secondary);
   font-size: 0.75rem;
   letter-spacing: 0.32em;
   opacity: 0;
@@ -224,7 +211,7 @@ button {
     90deg,
     transparent,
     var(--ember),
-    var(--porcelain),
+    var(--text-primary),
     var(--ember),
     transparent
   );
@@ -316,7 +303,7 @@ html[data-revisit="true"] .entrance-cut {
   font: 400 1.55rem var(--mincho);
 }
 .wordmark small {
-  color: var(--smoke);
+  color: var(--text-secondary);
   font-size: 0.75rem;
   letter-spacing: 0.2em;
 }
@@ -395,7 +382,7 @@ html[data-revisit="true"] .entrance-cut {
   display: grid;
   align-items: end;
   overflow: hidden;
-  background: var(--soot);
+  background: var(--canvas);
 }
 .hero-media {
   position: absolute;
@@ -403,7 +390,7 @@ html[data-revisit="true"] .entrance-cut {
   z-index: -3;
   display: block;
   overflow: hidden;
-  background: var(--soot);
+  background: var(--canvas);
   opacity: 0.36;
   transform: scale(1.012);
   transition:
@@ -616,7 +603,7 @@ html[data-revisit="true"] .entrance-cut {
   font-family: var(--mincho);
 }
 .news time {
-  color: var(--smoke);
+  color: var(--text-secondary);
   font:
     400 0.75rem "Kagari Sans",
     sans-serif;
@@ -625,7 +612,7 @@ html[data-revisit="true"] .entrance-cut {
 /* Course */
 .course {
   position: relative;
-  background: var(--color-ink);
+  background: var(--canvas);
 }
 .course-stage {
   position: relative;
@@ -704,7 +691,7 @@ html[data-revisit="true"] .entrance-cut {
   letter-spacing: 0.16em;
 }
 .course-count {
-  color: var(--smoke);
+  color: var(--text-secondary);
 }
 .course-count span,
 .course-kicker {
@@ -777,13 +764,13 @@ html[data-revisit="true"] .entrance-cut {
 .course-index button span {
   display: inline-block;
   width: 2rem;
-  color: var(--smoke);
+  color: var(--text-secondary);
   font:
     400 0.7rem "Kagari Sans",
     sans-serif;
 }
 .course-index button[data-active="true"] {
-  color: var(--porcelain);
+  color: var(--text-primary);
   transform: translateX(-5px);
 }
 .course-index button[data-active="true"] span {
@@ -819,14 +806,15 @@ html[data-revisit="true"] .entrance-cut {
 /* Story */
 .philosophy,
 .provenance {
-  min-height: 115svh;
+  min-height: auto;
   display: grid;
   align-items: center;
   gap: clamp(2rem, 8vw, 9rem);
-  padding: 12vh clamp(1.25rem, 6vw, 7rem);
+  padding: clamp(7rem, 11vw, 11rem) clamp(1.25rem, 6vw, 7rem);
 }
 .philosophy {
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  background: var(--surface);
 }
 .philosophy-image {
   position: relative;
@@ -853,10 +841,11 @@ html[data-revisit="true"] .entrance-cut {
 .reservation-panel > p {
   max-width: 34ch;
   font: 400 0.98rem/2.05 var(--mincho);
-  color: rgb(238 236 228/0.72);
+  color: var(--text-secondary);
 }
 .provenance {
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  background: var(--canvas);
 }
 .provenance-copy {
   min-width: 0;
@@ -892,7 +881,12 @@ html[data-revisit="true"] .entrance-cut {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: linear-gradient(0deg, rgb(16 18 17/0.82), transparent 58%);
+  background: linear-gradient(
+    0deg,
+    rgb(11 13 12/0.88),
+    rgb(11 13 12/0.2) 55%,
+    transparent
+  );
 }
 .space > div:last-child {
   position: relative;
@@ -906,7 +900,7 @@ html[data-revisit="true"] .entrance-cut {
   inset: -3rem -5rem -3rem -5rem;
   background: radial-gradient(
     110% 100% at 30% 60%,
-    rgb(16 18 17/0.88),
+    rgb(11 13 12/0.88),
     transparent 72%
   );
 }
@@ -919,7 +913,7 @@ html[data-revisit="true"] .entrance-cut {
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
   gap: clamp(3rem, 8vw, 10rem);
   padding: 10rem clamp(1.25rem, 6vw, 7rem);
-  background: var(--color-ink-soft);
+  background: var(--surface);
 }
 .visit > div,
 .visit dl {
@@ -943,7 +937,7 @@ html[data-revisit="true"] .entrance-cut {
   border-bottom: 1px solid var(--color-line);
 }
 .visit dt {
-  color: var(--color-sage);
+  color: var(--celadon);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
 }
@@ -951,12 +945,12 @@ html[data-revisit="true"] .entrance-cut {
   margin: 0;
   overflow-wrap: anywhere;
   font: 400 0.88rem/1.9 var(--mincho);
-  color: var(--color-body);
+  color: var(--text-secondary);
 }
 
 /* Reservation */
 .reservation {
-  min-height: 125svh;
+  min-height: auto;
   display: grid;
   grid-template-columns: 7fr minmax(24rem, 5fr);
   background: var(--canvas);
@@ -971,6 +965,12 @@ html[data-revisit="true"] .entrance-cut {
   justify-content: center;
   padding: clamp(7rem, 14vh, 11rem) clamp(1.5rem, 4.5vw, 6rem);
   background: var(--surface);
+  color: var(--text-secondary);
+}
+.reservation-panel h2,
+.reservation-panel h3,
+.reservation-panel legend span {
+  color: var(--text-primary);
 }
 .reservation-panel h2 {
   margin: 0 0 1.4rem;
@@ -983,7 +983,7 @@ html[data-revisit="true"] .entrance-cut {
 }
 .demo-disclosure {
   margin: 0 0 1.2rem;
-  color: var(--smoke);
+  color: var(--text-secondary);
   font-size: 0.75rem;
 }
 .step-track {
@@ -992,7 +992,7 @@ html[data-revisit="true"] .entrance-cut {
   justify-content: flex-end;
   height: 1px;
   margin-bottom: 3rem;
-  background: rgb(238 236 228/0.18);
+  background: rgb(238 236 229/0.16);
 }
 .step-track > span {
   position: absolute;
@@ -1003,7 +1003,7 @@ html[data-revisit="true"] .entrance-cut {
 }
 .step-track p {
   margin: 0.65rem 0 0;
-  color: var(--smoke);
+  color: var(--text-secondary);
   font-size: 0.75rem;
 }
 .step-track b {
@@ -1053,7 +1053,7 @@ html[data-revisit="true"] .entrance-cut {
   margin-bottom: 1.25rem;
 }
 .field > span {
-  color: var(--smoke);
+  color: var(--text-secondary);
   font: 400 0.75rem var(--mincho);
   letter-spacing: 0.08em;
 }
@@ -1071,10 +1071,10 @@ html[data-revisit="true"] .entrance-cut {
   min-height: 52px;
   padding: 0.65rem 0.2rem;
   border: 0;
-  border-bottom: 1px solid rgb(238 236 228/0.46);
+  border-bottom: 1px solid rgb(238 236 229/0.38);
   border-radius: 0;
-  background: transparent;
-  color: var(--porcelain);
+  background: rgb(238 236 229/0.025);
+  color: var(--text-primary);
   caret-color: var(--celadon);
   color-scheme: dark;
   transition:
@@ -1085,8 +1085,8 @@ html[data-revisit="true"] .entrance-cut {
   appearance: none;
   padding-right: 2rem;
   background-image:
-    linear-gradient(45deg, transparent 50%, var(--smoke) 50%),
-    linear-gradient(135deg, var(--smoke) 50%, transparent 50%);
+    linear-gradient(45deg, transparent 50%, var(--text-secondary) 50%),
+    linear-gradient(135deg, var(--text-secondary) 50%, transparent 50%);
   background-position:
     calc(100% - 13px) 50%,
     calc(100% - 8px) 50%;
@@ -1098,18 +1098,19 @@ html[data-revisit="true"] .entrance-cut {
 }
 .field input::placeholder,
 .field textarea::placeholder {
-  color: rgb(238 236 228/0.6);
+  color: rgb(168 170 164/0.72);
 }
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
   outline: 0;
   border-color: var(--celadon);
-  background: rgb(238 236 228/0.03);
+  background: rgb(238 236 229/0.05);
 }
 .field em,
+.consent-error,
 .form-error {
-  color: #ff9a85;
+  color: #ff9f8d;
   font-size: 0.75rem;
   font-style: normal;
 }
@@ -1134,21 +1135,27 @@ html[data-revisit="true"] .entrance-cut {
 }
 .submit-button {
   min-width: 13rem;
-  border: 0;
-  background: var(--porcelain);
-  color: var(--soot);
+  border: 1px solid var(--celadon);
+  background: transparent;
+  color: var(--text-primary);
 }
 .secondary-button,
 .complete-actions button {
   border: 0;
   border-bottom: 1px solid rgb(238 236 228/0.5);
   background: transparent;
-  color: var(--smoke);
+  color: var(--text-secondary);
 }
 .submit-button:disabled {
-  background: #d4d2ca;
-  color: #101211;
+  border-color: #545a56;
+  background: #545a56;
+  color: var(--text-primary);
   cursor: wait;
+}
+.reservation-form[data-step="3"] .submit-button {
+  border-color: var(--ember);
+  background: var(--ember);
+  color: #fff;
 }
 .confirmation {
   margin: 0;
@@ -1171,6 +1178,7 @@ html[data-revisit="true"] .entrance-cut {
   margin: 0;
   overflow-wrap: anywhere;
   font: 400 0.82rem/1.65 var(--mincho);
+  color: var(--text-primary);
 }
 .request-caveat,
 .form-error {
@@ -1188,7 +1196,7 @@ html[data-revisit="true"] .entrance-cut {
   width: 1px;
   height: 6rem;
   margin-bottom: 2rem;
-  background: linear-gradient(0deg, transparent, var(--ember));
+  background: var(--celadon);
 }
 .reservation-step {
   color: var(--celadon);
@@ -1201,7 +1209,7 @@ html[data-revisit="true"] .entrance-cut {
 }
 .complete-note {
   max-width: 34ch;
-  color: var(--smoke);
+  color: var(--text-secondary);
   font: 400 0.86rem/1.9 var(--mincho);
 }
 .complete-summary {
@@ -1215,8 +1223,9 @@ html[data-revisit="true"] .entrance-cut {
 .complete-actions a {
   display: inline-grid;
   place-items: center;
-  background: var(--porcelain);
-  color: var(--soot);
+  border: 1px solid var(--celadon);
+  background: transparent;
+  color: var(--text-primary);
 }
 .sr-status {
   position: absolute;
@@ -1253,6 +1262,7 @@ footer {
   isolation: isolate;
   display: grid;
   align-items: end;
+  background: var(--canvas);
 }
 .footer-image {
   position: absolute;
@@ -1263,7 +1273,12 @@ footer {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgb(16 18 17/0.97), rgb(16 18 17/0.08) 72%);
+  background: linear-gradient(
+    0deg,
+    rgb(11 13 12/0.99),
+    rgb(19 23 20/0.52) 55%,
+    rgb(11 13 12/0.06) 82%
+  );
 }
 .footer-content {
   min-height: 42vh;
@@ -1278,7 +1293,7 @@ footer {
   font: 400 clamp(4rem, 8vw, 8rem)/1 var(--mincho);
 }
 .footer-brand span {
-  color: var(--smoke);
+  color: var(--text-secondary);
   font-size: 0.75rem;
   letter-spacing: 0.32em;
 }
@@ -1302,9 +1317,9 @@ address {
   min-width: 56px;
   min-height: 48px;
   padding: 0 0.8rem;
-  border: 1px solid rgb(238 236 228/0.35);
-  background: rgb(16 18 17/0.94);
-  color: var(--porcelain);
+  border: 1px solid var(--color-line);
+  background: rgb(11 13 12/0.94);
+  color: var(--text-primary);
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
@@ -1322,181 +1337,6 @@ address {
 }
 .back-top i {
   display: none;
-}
-
-/* Shared dark art direction */
-.philosophy {
-  background: var(--surface);
-}
-.provenance,
-.menu-intro {
-  background: var(--canvas);
-}
-.philosophy,
-.provenance {
-  min-height: auto;
-  padding-block: clamp(7rem, 11vw, 11rem);
-}
-.philosophy-image,
-.provenance-image {
-  overflow: hidden;
-}
-.space-grade {
-  background: linear-gradient(
-    0deg,
-    rgb(11 13 12/0.88),
-    rgb(11 13 12/0.2) 55%,
-    transparent
-  );
-}
-.space > div:last-child::before {
-  background: radial-gradient(
-    110% 100% at 30% 60%,
-    rgb(11 13 12/0.88),
-    transparent 72%
-  );
-}
-.visit {
-  background: var(--surface);
-}
-.reservation {
-  background: var(--canvas);
-  min-height: auto;
-}
-.reservation-panel {
-  background: var(--surface);
-  color: var(--text-secondary);
-}
-.reservation-panel h2,
-.reservation-panel h3,
-.reservation-panel legend span {
-  color: var(--text-primary);
-}
-.reservation-panel > p,
-.reservation-panel .demo-disclosure,
-.reservation-panel .step-track p,
-.reservation-panel .field > span,
-.reservation-panel .complete-note {
-  color: var(--text-secondary);
-}
-.reservation-panel .step-track {
-  background: rgb(238 236 229/0.16);
-}
-.reservation-panel .step-track > span {
-  background: var(--ember);
-}
-.reservation-panel .step-track b,
-.reservation-panel .reservation-form legend small,
-.reservation-panel .reservation-step,
-.reservation-panel .confirmation dt,
-.reservation-panel .complete-summary dt {
-  color: var(--celadon);
-}
-.reservation-panel .field input,
-.reservation-panel .field select,
-.reservation-panel .field textarea {
-  border-bottom-color: rgb(238 236 229/0.38);
-  background-color: rgb(238 236 229/0.025);
-  color: var(--text-primary);
-  caret-color: var(--celadon);
-  color-scheme: dark;
-}
-.reservation-panel .field select {
-  background-image:
-    linear-gradient(45deg, transparent 50%, var(--text-secondary) 50%),
-    linear-gradient(135deg, var(--text-secondary) 50%, transparent 50%);
-}
-.reservation-panel .field input::placeholder,
-.reservation-panel .field textarea::placeholder {
-  color: rgb(168 170 164/0.72);
-}
-.reservation-panel .field input:focus,
-.reservation-panel .field select:focus,
-.reservation-panel .field textarea:focus {
-  border-color: var(--celadon);
-  background-color: rgb(238 236 229/0.05);
-}
-.reservation-panel .confirmation div,
-.reservation-panel .complete-summary div {
-  border-bottom-color: rgb(238 236 229/0.16);
-}
-.reservation-panel .confirmation dd,
-.reservation-panel .complete-summary dd,
-.reservation-panel .confirmation strong {
-  color: var(--text-primary);
-}
-.reservation-panel .secondary-button,
-.reservation-panel .complete-actions button {
-  border-bottom-color: rgb(238 236 229/0.42);
-  color: var(--text-secondary);
-}
-.reservation-panel .submit-button {
-  border: 1px solid var(--celadon);
-  background: transparent;
-  color: var(--text-primary);
-}
-.reservation-panel .reservation-form[data-step="3"] .submit-button {
-  border-color: var(--ember);
-  background: var(--ember);
-  color: #fff;
-}
-.reservation-panel .submit-button:disabled {
-  border-color: #545a56;
-  background: #545a56;
-  color: var(--text-primary);
-}
-.reservation-panel .complete-actions a {
-  border: 1px solid var(--celadon);
-  background: transparent;
-  color: var(--text-primary);
-}
-.reservation-panel .field em,
-.reservation-panel .consent-error,
-.reservation-panel .form-error {
-  color: #ff9f8d;
-}
-.reservation-panel .request-caveat,
-.reservation-panel .form-error {
-  border-left-color: var(--ember);
-}
-footer {
-  background: var(--canvas);
-}
-.footer-image::after {
-  background: linear-gradient(
-    0deg,
-    rgb(11 13 12/0.99),
-    rgb(19 23 20/0.52) 55%,
-    rgb(11 13 12/0.06) 82%
-  );
-}
-.nav-book,
-.mobile-book,
-.persistent-book,
-.hero-menu-action a {
-  border-color: var(--celadon);
-}
-.back-top {
-  border-color: var(--color-line);
-  background: rgb(11 13 12/0.94);
-  color: var(--text-primary);
-}
-.course-count span,
-.course-kicker,
-.course-index button[data-active="true"] span {
-  color: var(--ember);
-}
-.course-progress i {
-  background: var(--ember);
-}
-.news header p,
-.visit dt,
-.confirmation dt,
-.complete-summary dt,
-.step-track b,
-.reservation-form legend small,
-.reservation-step {
-  color: var(--celadon);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1527,13 +1367,13 @@ footer {
     color: #fff;
   }
   .course-index button:hover {
-    color: var(--porcelain);
+    color: var(--text-primary);
     transform: translateX(-4px);
   }
   .field input:hover,
   .field select:hover,
   .field textarea:hover {
-    border-color: var(--color-sage);
+    border-color: var(--celadon);
   }
   .primary-action:active,
   .submit-button:active,
@@ -1567,7 +1407,7 @@ footer {
     display: block;
     width: 26px;
     height: 1px;
-    background: var(--porcelain);
+    background: var(--text-primary);
     transition: transform 220ms var(--ease-out);
   }
   .menu-trigger[aria-expanded="true"] span:first-child {
@@ -1623,7 +1463,7 @@ footer {
     font-family: var(--mincho);
   }
   .mobile-menu > p {
-    color: var(--smoke);
+    color: var(--text-secondary);
     font-size: 0.75rem;
   }
   .hero-copy {
@@ -1686,7 +1526,6 @@ footer {
     margin: 0;
     font: 400 0.78rem/1.7 var(--mincho);
   }
-  .chef,
   .philosophy,
   .provenance,
   .reservation {
@@ -1705,9 +1544,6 @@ footer {
   .philosophy-copy,
   .provenance-copy {
     padding: 0;
-  }
-  .chef {
-    padding-block: 8rem;
   }
   .visit {
     grid-template-columns: 1fr;
@@ -1754,7 +1590,7 @@ footer {
     display: block;
     width: 26px;
     height: 1px;
-    background: var(--porcelain);
+    background: var(--text-primary);
     transition: transform 220ms var(--ease-out);
   }
   .menu-trigger[aria-expanded="true"] span:first-child {
@@ -1809,7 +1645,7 @@ footer {
     font-family: var(--mincho);
   }
   .mobile-menu > p {
-    color: var(--smoke);
+    color: var(--text-secondary);
     font-size: 0.75rem;
   }
   .persistent-book {
@@ -1849,7 +1685,6 @@ footer {
     margin-bottom: 1.5rem;
   }
   .news,
-  .chef,
   .philosophy,
   .provenance,
   .visit,
@@ -1885,7 +1720,7 @@ footer {
   }
   .course-mobile > header p {
     max-width: 30ch;
-    color: var(--smoke);
+    color: var(--text-secondary);
     font-size: 0.8rem;
   }
   .course-group {
@@ -1992,18 +1827,6 @@ footer {
     margin: 0;
     font-size: 0.75rem;
   }
-  .chef {
-    gap: 3rem;
-    padding: 7rem 1.2rem;
-  }
-  .chef-image img {
-    aspect-ratio: 3/4;
-    object-position: 38% center;
-  }
-  .chef-copy h2 {
-    max-width: 21ch;
-    font-size: clamp(1.25rem, 5.4vw, 1.6rem);
-  }
   .philosophy,
   .provenance {
     min-height: auto;
@@ -2045,7 +1868,7 @@ footer {
     min-height: 58svh;
   }
   .reservation-panel {
-    padding: 6rem 1.2rem;
+    padding: 6rem 1.2rem calc(6rem + env(safe-area-inset-bottom));
   }
   .reservation-panel h2 {
     font-size: 3.7rem;
@@ -2168,7 +1991,6 @@ footer {
   }
   .philosophy,
   .provenance,
-  .chef,
   .visit {
     padding-block: 7rem;
   }
@@ -2178,7 +2000,6 @@ footer {
     min-height: 94dvh;
   }
   .course-stage,
-  .chef,
   footer {
     min-height: 100dvh;
   }
@@ -2336,7 +2157,7 @@ address a {
   font-size: 0.9rem;
 }
 .mobile-phone small {
-  color: var(--smoke);
+  color: var(--text-secondary);
   font-size: 0.75rem;
 }
 .course-chapter {
@@ -2430,7 +2251,7 @@ address a {
 }
 .confirmation strong {
   font-weight: 600;
-  color: var(--porcelain);
+  color: var(--text-primary);
 }
 .verification-note {
   margin-top: 2.5rem;
@@ -2564,7 +2385,7 @@ blockquote {
   gap: clamp(3rem, 9vw, 10rem);
   padding: clamp(6rem, 10vw, 10rem) clamp(1.25rem, 6vw, 7rem);
   border-bottom: 1px solid var(--color-line);
-  background: var(--color-ink);
+  background: var(--canvas);
 }
 .menu-intro h2 {
   margin: 0;
@@ -2661,11 +2482,11 @@ blockquote {
   padding: clamp(5rem, 9vw, 8rem) clamp(1.25rem, 7vw, 8rem)
     clamp(4rem, 7vw, 6rem);
   border-bottom: 1px solid var(--color-line);
-  background: var(--surface-raised);
+  background: var(--surface);
 }
 .menu-axis-header > p:first-child {
   margin: 0;
-  color: var(--color-sage);
+  color: var(--celadon);
   font:
     0.75rem "Kagari Sans",
     sans-serif;
@@ -2679,7 +2500,7 @@ blockquote {
 .menu-axis-header > p:nth-of-type(2) {
   max-width: 34ch;
   margin: 0;
-  color: var(--smoke);
+  color: var(--text-secondary);
   font: 400 0.95rem/1.9 var(--mincho);
 }
 .menu-axis-header > nav {
@@ -2703,7 +2524,7 @@ blockquote {
   border-left: 1px solid rgb(143 168 157/0.12);
 }
 .menu-axis-header > nav a span {
-  color: var(--color-sage);
+  color: var(--celadon);
   font:
     0.68rem "Kagari Sans",
     sans-serif;
@@ -2713,7 +2534,7 @@ blockquote {
   position: absolute;
   inset: auto 0.7rem -1px;
   height: 1px;
-  background: var(--color-ember);
+  background: var(--ember);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 320ms var(--ease-in-out);
@@ -2741,14 +2562,14 @@ blockquote {
   gap: 0.45rem;
   min-width: 7.5rem;
   min-height: 44px;
-  color: var(--smoke);
+  color: var(--text-secondary);
   font: 400 0.75rem var(--mincho);
   transition:
     color 180ms var(--ease-out),
     transform 180ms var(--ease-out);
 }
 .menu-desktop-course-nav a span {
-  color: var(--color-sage);
+  color: var(--celadon);
   font:
     0.62rem "Kagari Sans",
     sans-serif;
@@ -2759,13 +2580,13 @@ blockquote {
   inset: auto 0 4px;
   width: 2rem;
   height: 1px;
-  background: var(--color-ember);
+  background: var(--ember);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 320ms var(--ease-in-out);
 }
 .menu-desktop-course-nav a[aria-current="location"] {
-  color: var(--porcelain);
+  color: var(--text-primary);
   font-weight: 600;
   transform: translateX(-6px);
 }
@@ -2802,7 +2623,7 @@ blockquote {
 .menu-axis-course-header > p:first-child {
   grid-column: 1/-1;
   margin: 0 0 0 1rem;
-  color: var(--color-sage);
+  color: var(--celadon);
   font:
     0.72rem "Kagari Sans",
     sans-serif;
@@ -2834,14 +2655,14 @@ blockquote {
   gap: 0.45rem;
 }
 .menu-axis-course-header > div:nth-of-type(2) span {
-  color: var(--color-sage);
+  color: var(--celadon);
   font:
     0.72rem "Kagari Sans",
     sans-serif;
   letter-spacing: 0.14em;
 }
 .menu-axis-course-header > div:nth-of-type(2) strong {
-  color: var(--color-ivory);
+  color: var(--text-primary);
   font: 400 1rem var(--mincho);
 }
 .menu-axis-guide {
@@ -2905,6 +2726,7 @@ blockquote {
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
   scrollbar-color: rgb(124 154 146/0.48) transparent;
@@ -3010,7 +2832,7 @@ blockquote {
 }
 .dish-panel-number {
   margin: 0;
-  color: var(--color-ivory);
+  color: var(--text-primary);
   font:
     0.78rem "Kagari Sans",
     sans-serif;
@@ -3019,11 +2841,11 @@ blockquote {
   transition-delay: 0ms !important;
 }
 .dish-panel-number span {
-  color: var(--color-ember);
+  color: var(--ember);
 }
 .dish-panel-chapter {
   margin: 0.45rem 0 0.65rem;
-  color: var(--color-sage);
+  color: var(--celadon);
   font: 400 0.8rem var(--mincho);
   letter-spacing: 0.14em;
   transition-delay: 60ms !important;
@@ -3042,7 +2864,7 @@ blockquote {
 .dish-panel-description {
   max-width: 38ch;
   margin: 0;
-  color: var(--color-ivory);
+  color: var(--text-primary);
   font: 400 clamp(0.78rem, 1vw, 0.92rem)/1.8 var(--mincho);
   text-wrap: pretty;
   transition-delay: 180ms !important;
@@ -3061,12 +2883,12 @@ blockquote {
   gap: 0.65rem;
 }
 .dish-panel-details dt {
-  color: var(--color-sage);
+  color: var(--celadon);
   font-size: 0.72rem;
 }
 .dish-panel-details dd {
   margin: 0;
-  color: var(--color-body);
+  color: var(--text-secondary);
   font: 400 0.76rem/1.65 var(--mincho);
 }
 .dish-axis-progress {
@@ -3079,13 +2901,13 @@ blockquote {
 }
 .dish-axis-progress > p {
   margin: 0;
-  color: var(--smoke);
+  color: var(--text-secondary);
   font:
     0.72rem "Kagari Sans",
     sans-serif;
 }
 .dish-axis-progress > p span {
-  color: var(--porcelain);
+  color: var(--text-primary);
 }
 .dish-axis-progress > div {
   display: grid;
@@ -3099,7 +2921,7 @@ blockquote {
   padding: 0.65rem 0.2rem 0;
   border: 0;
   background: transparent;
-  color: var(--color-muted);
+  color: var(--text-secondary);
   font:
     0.75rem "Kagari Sans",
     sans-serif;
@@ -3112,13 +2934,13 @@ blockquote {
   position: absolute;
   inset: -1px 0 auto;
   height: 1px;
-  background: var(--color-ember);
+  background: var(--ember);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 320ms var(--ease-in-out);
 }
 .dish-axis-progress button[aria-current="step"] {
-  color: var(--color-ember);
+  color: var(--ember);
   font-weight: 700;
 }
 .dish-axis-progress button[aria-current="step"]::before {
@@ -3148,7 +2970,7 @@ blockquote {
 }
 @media (hover: hover) and (pointer: fine) {
   .dish-axis-progress button:hover {
-    color: var(--porcelain);
+    color: var(--text-primary);
   }
   .menu-axis-header > nav a:hover::after {
     transform: scaleX(1);
@@ -3197,7 +3019,7 @@ blockquote {
     display: none;
   }
   .menu-mobile-course-picker summary span {
-    color: var(--color-sage);
+    color: var(--celadon);
     font:
       0.68rem "Kagari Sans",
       sans-serif;
