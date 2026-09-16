@@ -625,200 +625,6 @@ html[data-revisit="true"] .entrance-cut {
     sans-serif;
 }
 
-/* Course */
-.course {
-  position: relative;
-  background: var(--canvas);
-}
-.course-stage {
-  position: relative;
-  height: 100svh;
-  overflow: hidden;
-  isolation: isolate;
-}
-.course-images,
-.course-image,
-.course-image img,
-.course-scrim {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.course-image {
-  opacity: 0;
-  transition: opacity 400ms var(--ease-out);
-}
-.course-image img {
-  transform: scale(1.012);
-  transition: transform 440ms var(--ease-out);
-}
-.course-image[data-active="true"] {
-  opacity: 1;
-}
-.course-image[data-active="true"] img {
-  transform: none;
-}
-.course-image:nth-child(3n + 1) img {
-  object-position: 68% center;
-}
-.course-image:nth-child(3n + 2) img {
-  object-position: 50% center;
-}
-.course-image:nth-child(3n) img {
-  object-position: 72% center;
-}
-.course-scrim {
-  background: linear-gradient(0deg, rgb(16 18 17/0.7), transparent 54%);
-  pointer-events: none;
-}
-.course-heading {
-  position: absolute;
-  z-index: 3;
-  left: clamp(1.25rem, 5vw, 6rem);
-  top: clamp(6rem, 12vh, 9rem);
-}
-.course-heading p {
-  margin: 0 0 1rem;
-  color: var(--celadon);
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-}
-.course-heading h2 {
-  margin: 0;
-  font-size: clamp(2.7rem, 5vw, 5.8rem);
-  line-height: 1.15;
-}
-.course-heading h2 span {
-  display: block;
-}
-.course-chapter {
-  position: absolute;
-  z-index: 3;
-  left: clamp(1.25rem, 5vw, 6rem);
-  bottom: clamp(3.5rem, 8vh, 6rem);
-  width: min(38rem, 45vw);
-  animation: chapter-in 240ms var(--ease-out) both;
-}
-.course-count,
-.course-kicker {
-  margin: 0 0 0.8rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-}
-.course-count {
-  color: var(--text-secondary);
-}
-.course-count span,
-.course-kicker {
-  color: var(--ember);
-}
-.course-chapter h3 {
-  margin: 0 0 1rem;
-  font-size: clamp(2.3rem, 4vw, 4.8rem);
-  line-height: 1.2;
-}
-.course-description {
-  max-width: 34ch;
-  margin: 0;
-  font: 400 0.95rem/2 var(--mincho);
-  color: rgb(238 236 228/0.82);
-}
-.course-chapter dl {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.7rem 1.4rem;
-  margin: 1.5rem 0 0;
-  padding-top: 1rem;
-  border-top: 1px solid rgb(238 236 228/0.24);
-}
-.course-chapter dl div {
-  display: grid;
-  grid-template-columns: 5rem 1fr;
-  gap: 0.5rem;
-}
-.course-chapter dt {
-  color: var(--celadon);
-  font-size: 0.75rem;
-}
-.course-chapter dd {
-  margin: 0;
-  font: 400 0.78rem/1.65 var(--mincho);
-}
-@keyframes chapter-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.course-index {
-  position: absolute;
-  z-index: 4;
-  right: clamp(1.25rem, 3vw, 3.5rem);
-  top: 50%;
-  display: grid;
-  transform: translateY(-50%);
-}
-.course-index button {
-  min-width: 74px;
-  min-height: 44px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: rgb(238 236 228/0.65);
-  text-align: right;
-  cursor: pointer;
-  font: 400 0.75rem var(--mincho);
-  transition:
-    color 180ms var(--ease-out),
-    transform 180ms var(--ease-out);
-}
-.course-index button span {
-  display: inline-block;
-  width: 2rem;
-  color: var(--text-secondary);
-  font:
-    400 0.7rem "Kagari Sans",
-    sans-serif;
-}
-.course-index button[data-active="true"] {
-  color: var(--text-primary);
-  transform: translateX(-5px);
-}
-.course-index button[data-active="true"] span {
-  color: var(--ember);
-}
-.course-progress {
-  position: absolute;
-  z-index: 4;
-  inset: auto 0 0;
-  height: 2px;
-  background: rgb(238 236 228/0.18);
-}
-.course-progress i {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--ember);
-  transform: scaleX(0);
-  transform-origin: left;
-}
-.course-tablet,
-.course-mobile {
-  display: none;
-}
-.sr-course-list {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-}
-
 /* Story */
 .philosophy,
 .provenance {
@@ -1382,10 +1188,6 @@ address {
     background: var(--ember-strong);
     color: #fff;
   }
-  .course-index button:hover {
-    color: var(--text-primary);
-    transform: translateX(-4px);
-  }
   .field input:hover,
   .field select:hover,
   .field textarea:hover {
@@ -1488,59 +1290,6 @@ address {
   }
   .news {
     grid-template-columns: 1fr;
-  }
-  .course-stage {
-    display: none;
-  }
-  .course-tablet {
-    display: grid;
-    gap: 7rem;
-    padding: 8rem 5vw;
-  }
-  .course-tablet .mobile-plate {
-    display: grid;
-    grid-template-columns: 5fr 4fr;
-    align-items: center;
-    gap: 3rem;
-  }
-  .course-tablet .mobile-plate:nth-child(even) picture {
-    order: 2;
-  }
-  .course-tablet .mobile-plate img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1/1;
-  }
-  .course-tablet .mobile-plate-copy h3 {
-    margin: 0.5rem 0 1rem;
-    font-size: 2.4rem;
-  }
-  .course-tablet .mobile-plate-copy > p {
-    font: 400 0.9rem/1.9 var(--mincho);
-  }
-  .course-tablet .mobile-plate-copy > p:first-child {
-    color: var(--celadon);
-    font:
-      400 0.75rem "Kagari Sans",
-      sans-serif;
-  }
-  .course-tablet dl {
-    margin-top: 1.3rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgb(238 236 228/0.18);
-  }
-  .course-tablet dl div {
-    display: grid;
-    grid-template-columns: 5rem 1fr;
-    padding: 0.35rem 0;
-  }
-  .course-tablet dt {
-    color: var(--celadon);
-    font-size: 0.75rem;
-  }
-  .course-tablet dd {
-    margin: 0;
-    font: 400 0.78rem/1.7 var(--mincho);
   }
   .philosophy,
   .provenance,
@@ -1715,134 +1464,6 @@ address {
     grid-template-columns: 6.2rem 1fr;
     gap: 0.8rem;
   }
-  .course-stage,
-  .course-tablet {
-    display: none;
-  }
-  .course-mobile {
-    display: block;
-    padding: 7rem 1.15rem 8rem;
-  }
-  .course-mobile > header {
-    margin-bottom: 4rem;
-  }
-  .course-mobile > header h2 {
-    margin: 0 0 1.4rem;
-    font-size: clamp(2.8rem, 12vw, 4rem);
-    line-height: 1.25;
-  }
-  .course-mobile > header h2 span {
-    display: block;
-  }
-  .course-mobile > header p {
-    max-width: 30ch;
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-  }
-  .course-group {
-    border-top: 1px solid rgb(238 236 228/0.24);
-  }
-  .course-group:last-child {
-    border-bottom: 1px solid rgb(238 236 228/0.24);
-  }
-  .course-group summary {
-    min-height: 70px;
-    display: grid;
-    grid-template-columns: 3rem 1fr auto;
-    align-items: center;
-    cursor: pointer;
-    list-style: none;
-  }
-  .course-group summary::-webkit-details-marker {
-    display: none;
-  }
-  .course-group summary span,
-  .course-group summary small {
-    color: var(--celadon);
-    font-size: 0.75rem;
-  }
-  .course-group summary strong {
-    font: 400 1.35rem var(--mincho);
-  }
-  .course-group .mobile-plate {
-    display: none;
-  }
-  .course-group[open] .mobile-plate {
-    display: block;
-  }
-  .mobile-plate {
-    margin-bottom: 6rem;
-    scroll-margin-top: 5rem;
-  }
-  .mobile-plate picture {
-    display: block;
-    overflow: hidden;
-  }
-  .mobile-plate img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4/5;
-  }
-  .mobile-plate-0 picture {
-    margin-right: 12%;
-  }
-  .mobile-plate-0 img {
-    object-position: 70% center;
-  }
-  .mobile-plate-1 picture {
-    margin-left: 18%;
-  }
-  .mobile-plate-1 img {
-    object-position: 64% center;
-  }
-  .mobile-plate-2 picture {
-    margin-inline: 4%;
-  }
-  .mobile-plate-2 img {
-    aspect-ratio: 1/1;
-  }
-  .mobile-plate-copy {
-    position: relative;
-    margin-top: -1.2rem;
-    padding: 1.7rem 1rem 0;
-    background: linear-gradient(180deg, rgb(16 18 17/0.97), transparent);
-  }
-  .mobile-plate-copy > p:first-child {
-    margin: 0 0 0.65rem;
-    color: var(--celadon);
-    font:
-      400 0.75rem "Kagari Sans",
-      sans-serif;
-  }
-  .mobile-plate-copy h3 {
-    margin: 0 0 0.85rem;
-    font-size: clamp(2rem, 9vw, 3rem);
-    line-height: 1.28;
-  }
-  .mobile-plate-copy > p {
-    margin: 0;
-    font: 400 0.88rem/1.9 var(--mincho);
-    color: rgb(238 236 228/0.78);
-  }
-  .mobile-plate-copy dl {
-    margin: 1.2rem 0 0;
-    padding-top: 0.8rem;
-    border-top: 1px solid rgb(238 236 228/0.16);
-  }
-  .mobile-plate-copy dl div {
-    display: grid;
-    grid-template-columns: 4.5rem 1fr;
-    padding: 0.4rem 0;
-  }
-  .mobile-plate-copy dt {
-    color: var(--celadon);
-    font-size: 0.75rem;
-  }
-  .mobile-plate-copy dd {
-    margin: 0;
-    font-size: 0.75rem;
-  }
   .philosophy,
   .provenance {
     min-height: auto;
@@ -1944,19 +1565,6 @@ address {
   }
 }
 @media (min-width: 1024px) and (max-width: 1279px) {
-  .course-heading {
-    top: 5.5rem;
-  }
-  .course-chapter {
-    bottom: 2.5rem;
-    width: 48vw;
-  }
-  .course-chapter h3 {
-    font-size: 2.7rem;
-  }
-  .course-index {
-    right: 1rem;
-  }
   .philosophy {
     grid-template-columns: 1fr 1fr;
   }
@@ -1977,8 +1585,7 @@ address {
   }
 }
 @media (orientation: landscape) and (max-height: 820px) and (min-width: 768px) {
-  .hero,
-  .course-stage {
+  .hero {
     min-height: 100svh;
   }
   .hero-copy {
@@ -1986,24 +1593,6 @@ address {
   }
   .hero h1 {
     font-size: clamp(3.5rem, 8vw, 6.5rem);
-  }
-  .course-heading {
-    top: 4.5rem;
-  }
-  .course-heading h2 {
-    font-size: 2.7rem;
-  }
-  .course-chapter {
-    bottom: 1.5rem;
-  }
-  .course-chapter h3 {
-    font-size: 2.5rem;
-  }
-  .course-description {
-    line-height: 1.7;
-  }
-  .course-chapter dl {
-    margin-top: 0.8rem;
   }
   .philosophy,
   .provenance,
@@ -2015,7 +1604,6 @@ address {
   .hero {
     min-height: 94dvh;
   }
-  .course-stage,
   footer {
     min-height: 100dvh;
   }
@@ -2051,7 +1639,6 @@ address {
   .brand-kana,
   .hero-line > span,
   .hero-action,
-  .course-image img,
   .menu-trigger span,
   .back-top {
     transform: none !important;
@@ -2060,8 +1647,7 @@ address {
   .hero-media,
   .brand-kana,
   .hero-line > span,
-  .hero-action,
-  .course-image {
+  .hero-action {
     transition-property: opacity !important;
   }
   .mobile-menu {
@@ -2093,12 +1679,6 @@ address a {
   min-height: 44px;
   align-items: center;
 }
-@media (prefers-reduced-motion: reduce) {
-  .course-chapter {
-    animation: reduced-fade 180ms var(--ease-out) both !important;
-  }
-}
-
 /* Producers: preserve the two-line title without sacrificing the image. */
 .provenance {
   grid-template-columns: minmax(18rem, 5fr) minmax(0, 7fr);
@@ -2160,18 +1740,6 @@ address a {
   }
 }
 
-/* Chef quotation: preserve natural Japanese line wrapping. */
-.sr-only {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
 .mobile-phone {
   min-height: 56px;
   display: flex;
@@ -2182,17 +1750,6 @@ address a {
 .mobile-phone small {
   color: var(--text-secondary);
   font-size: 0.75rem;
-}
-.course-chapter {
-  padding-inline-start: 2.25rem;
-}
-.course-kicker {
-  writing-mode: vertical-rl;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  max-height: min(8rem, 28vh);
-  min-height: 4rem;
 }
 .system-page,
 .policy-page {
@@ -2282,66 +1839,6 @@ address a {
   border-top: 1px solid rgb(16 18 17/0.18);
 }
 
-@media (min-width: 1024px) and (max-width: 1279px),
-  (min-width: 1280px) and (hover: none),
-  (min-width: 1280px) and (pointer: coarse),
-  (min-width: 768px) and (prefers-reduced-motion: reduce) {
-  .course-stage {
-    display: none;
-  }
-  .course-tablet {
-    display: grid;
-    gap: 7rem;
-    padding: 8rem 5vw;
-  }
-  .course-tablet .mobile-plate {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
-    align-items: center;
-    gap: clamp(2rem, 4vw, 4rem);
-  }
-  .course-tablet .mobile-plate:nth-child(even) picture {
-    order: 2;
-  }
-  .course-tablet .mobile-plate img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1/1;
-  }
-  .course-tablet .mobile-plate-copy h3 {
-    margin: 0.5rem 0 1rem;
-    font-size: clamp(2rem, 3.2vw, 2.8rem);
-  }
-  .course-tablet .mobile-plate-copy > p {
-    font: 400 0.9rem/1.9 var(--mincho);
-  }
-  .course-tablet .mobile-plate-copy > p:first-child {
-    color: var(--celadon);
-    font:
-      400 0.75rem "Kagari Sans",
-      sans-serif;
-  }
-  .course-tablet dl {
-    margin-top: 1.3rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgb(238 236 228/0.18);
-  }
-  .course-tablet dl div {
-    display: grid;
-    grid-template-columns: 5rem minmax(0, 1fr);
-    padding: 0.35rem 0;
-  }
-  .course-tablet dt {
-    color: var(--celadon);
-    font-size: 0.75rem;
-  }
-  .course-tablet dd {
-    margin: 0;
-    overflow-wrap: anywhere;
-    font: 400 0.78rem/1.7 var(--mincho);
-  }
-}
-
 @media (max-width: 600px) {
   .policy-page {
     padding-inline: max(1.1rem, env(safe-area-inset-left))
@@ -2423,8 +1920,7 @@ blockquote {
   color: rgb(238 236 228/0.72);
   font: 400 1rem/2 var(--mincho);
 }
-.menu-intro a,
-.menu-reserve a {
+.menu-intro a {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -2766,7 +2262,7 @@ blockquote {
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
-  touch-action: pan-x pan-y;
+  touch-action: pan-x pan-y pinch-zoom;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
   scrollbar-color: rgb(124 154 146/0.48) transparent;

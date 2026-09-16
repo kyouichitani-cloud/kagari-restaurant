@@ -85,9 +85,10 @@ export function Entrance() {
     let revisiting = false;
     try { revisiting = sessionStorage.getItem("kagari-entered") === "1"; } catch { revisiting = false; }
     overlayRef.current?.setAttribute("data-revisit", String(revisiting));
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const resources = revisiting ? Promise.resolve() : Promise.allSettled([waitForHero(signal), after(200)]).then(() => undefined);
-    const failSafe = after(revisiting ? 0 : 430);
+    const resources = revisiting || reducedMotion ? Promise.resolve() : Promise.allSettled([waitForHero(signal), after(200)]).then(() => undefined);
+    const failSafe = after(revisiting || reducedMotion ? 0 : 430);
 
     Promise.race([resources, failSafe]).then(() => {
       if (signal.aborted || run !== runRef.current) return;

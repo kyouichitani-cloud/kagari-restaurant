@@ -6,7 +6,7 @@ import { Navigation } from "@/components/Navigation";
 import { getRestaurantContent } from "@/content/microcms";
 import { getCompleteMenu } from "@/content/menu";
 
-export const metadata: Metadata = { title: "お品書き | 篝 KAGARI" };
+export const metadata: Metadata = { title: "お品書き", alternates: { canonical: "/menu" } };
 
 export default async function MenuPage() {
   const { restaurant } = await getRestaurantContent();

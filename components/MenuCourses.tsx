@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
@@ -113,7 +114,7 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
                   {course.dishes.map((dish, dishIndex) => (
                     <article className="dish-panel" data-dish-index={dishIndex} data-active={dishIndex === currentDish ? "true" : "false"} aria-current={dishIndex === currentDish ? "step" : undefined} tabIndex={-1} key={dish.imageSrc}>
                       <div className="dish-panel-frame">
-                        <CoursePicture dish={dish} eager={courseIndex === 0 && dishIndex < 2} />
+                        <CoursePicture dish={dish} priority={courseIndex === 0 && dishIndex === 0} />
                         <div className="dish-panel-copy">
                           <p className="dish-panel-number"><span>{pad(dishIndex + 1)}</span> / 10</p>
                           <p className="dish-panel-chapter">{dish.chapter}</p>
@@ -140,7 +141,18 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
   );
 }
 
-function CoursePicture({ dish, eager }: { dish: MenuDish; eager: boolean }) {
+function CoursePicture({ dish, priority }: { dish: MenuDish; priority: boolean }) {
   const existing = dish.imageSrc.startsWith("/images/course/");
-  return <picture className="dish-panel-image"><img src={dish.imageSrc} alt={dish.alt} width={existing ? 1672 : 1440} height={existing ? 941 : 960} loading={eager ? "eager" : "lazy"} decoding="async" /></picture>;
+  return (
+    <picture className="dish-panel-image">
+      <Image
+        src={dish.imageSrc}
+        alt={dish.alt}
+        width={existing ? 1672 : 1440}
+        height={existing ? 941 : 960}
+        sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 959px) calc(100vw - 96px), (max-width: 1279px) 900px, (max-width: 1666px) 72vw, 1200px"
+        priority={priority}
+      />
+    </picture>
+  );
 }

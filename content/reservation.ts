@@ -18,8 +18,8 @@ export type ReservationCourse = {
 };
 
 export const reservationCourses: ReservationCourse[] = [
-  { id: "yoi", name: "宵", price: 16_500, description: "季節の味を五皿で楽しむ軽めのコース" },
-  { id: "akari", name: "灯", price: 22_000, description: "魚介と野菜を中心に組み立てる七皿" },
+  { id: "yoi", name: "宵", price: 16_500, description: "季節の味を軽やかに楽しむコース" },
+  { id: "akari", name: "灯", price: 22_000, description: "魚介と野菜を中心に組み立てるコース" },
   { id: "kagari", name: "篝", price: 33_000, description: "現在の十皿のおまかせコース" },
   { id: "honoo", name: "炎", price: 44_000, description: "炭火料理を中心にした特選コース" },
   { id: "special", name: "特別仕立て", price: 55_000, description: "旬の食材と器を個別に組み立てるコース" },

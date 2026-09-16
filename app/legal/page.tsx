@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = { title: "特定商取引法に基づく表記", alternates: { canonical: "/legal" } };
 
 export default function Legal() {
   return (

@@ -17,6 +17,20 @@ export function ReloadScrollReset() {
     let firstFrame = 0;
     let secondFrame = 0;
     let active = true;
+    const interruptEvents: (keyof WindowEventMap)[] = ["wheel", "touchstart", "pointerdown", "keydown"];
+
+    const finish = () => {
+      if (!active) return;
+      active = false;
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+      timers.forEach((timer) => window.clearTimeout(timer));
+      window.removeEventListener("pageshow", reset);
+      interruptEvents.forEach((event) => window.removeEventListener(event, finish));
+      window.history.scrollRestoration = previousRestoration;
+      delete document.documentElement.dataset.reload;
+      delete document.documentElement.dataset.previousScrollRestoration;
+    };
 
     const reset = () => {
       if (!active) return;
@@ -30,25 +44,12 @@ export function ReloadScrollReset() {
       secondFrame = window.requestAnimationFrame(reset);
     });
     timers.push(window.setTimeout(reset, 60));
-    timers.push(window.setTimeout(() => {
-      reset();
-      window.history.scrollRestoration = previousRestoration;
-      window.removeEventListener("pageshow", reset);
-      delete document.documentElement.dataset.reload;
-      delete document.documentElement.dataset.previousScrollRestoration;
-      active = false;
-    }, 500));
+    timers.push(window.setTimeout(finish, 180));
     window.addEventListener("pageshow", reset);
+    interruptEvents.forEach((event) => window.addEventListener(event, finish, { passive: true, once: true }));
 
     return () => {
-      active = false;
-      window.cancelAnimationFrame(firstFrame);
-      window.cancelAnimationFrame(secondFrame);
-      timers.forEach((timer) => window.clearTimeout(timer));
-      window.removeEventListener("pageshow", reset);
-      window.history.scrollRestoration = previousRestoration;
-      delete document.documentElement.dataset.reload;
-      delete document.documentElement.dataset.previousScrollRestoration;
+      finish();
     };
   }, []);
 
