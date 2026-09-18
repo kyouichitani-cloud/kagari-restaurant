@@ -2,32 +2,55 @@ import { existsSync, readFileSync } from "node:fs";
 
 const root = new URL("../", import.meta.url);
 const read = (path) => readFileSync(new URL(path, root), "utf8");
-const content = read("content/restaurant.ts");
-const reservationSource = read("content/reservation.ts");
-const menuSource = read("content/menu.ts");
-const courseImages = [...content.matchAll(/image: "([^"]+)"/g)].map((match) => match[1]);
-const origins = [...content.matchAll(/origin: "([^"]+)"/g)].map((match) => match[1]);
-if (courseImages.length !== 10 || new Set(courseImages).size !== 10) throw new Error("Ten unique course records are required.");
-if (origins.length !== 10 || new Set(origins).size !== 10) throw new Error("Ten unique origins are required.");
-for (const image of courseImages) for (const path of [`public/images/course/avif/${image}.avif`, `public/images/course/portrait/${image}.avif`, `public/images/course/square/${image}.avif`]) if (!existsSync(new URL(path, root))) throw new Error(`Missing asset: ${path}`);
-const reservationCourseBlock = reservationSource.match(/reservationCourses[^=]*=\s*\[([\s\S]*?)\];/)?.[1] ?? "";
-const reservationCourseIds = [...reservationCourseBlock.matchAll(/id:\s*"([^"]+)"/g)].map((match) => match[1]);
-if (reservationCourseIds.length !== 5 || new Set(reservationCourseIds).size !== 5) throw new Error("Five unique reservation courses are required.");
-const supplementalMenus = [...menuSource.matchAll(/^  (\w+):\s*\[([\s\S]*?)^  \]\.map/gm)].map((match) => ({ id: match[1], files: [...match[2].matchAll(/\["[^"]+",\s*"([^"]+\.webp)"\]/g)].map((dish) => dish[1]) }));
-if (supplementalMenus.length !== 4 || supplementalMenus.some((course) => course.files.length !== 10)) throw new Error("Four supplemental menus with ten dishes each are required.");
-for (const course of supplementalMenus) for (const file of course.files) {
-  const directory = course.id === "honoo" ? "homura" : course.id;
-  const path = `public/images/courses/${directory}/${file}`;
-  if (!existsSync(new URL(path, root))) throw new Error(`Missing asset: ${path}`);
+const page = read("app/page.tsx");
+const styles = read("app/globals.css");
+const form = read("components/FrenchReservationForm.tsx");
+const navigation = read("components/KineticNavigation.tsx");
+const hero = read("components/ScrollExpansionHero.tsx");
+const content = read("content/french-restaurant.ts");
+const packageJson = JSON.parse(read("package.json"));
+const sources = [page, styles, form, navigation, hero, content].join("\n");
+
+const expectedCourses = [
+  ["季節のフレンチコース", "5000"],
+  ["彩りフレンチコース", "7500"],
+  ["シェフ特選フレンチコース", "10000"],
+];
+for (const [name, price] of expectedCourses) {
+  if (!content.includes(`name: "${name}"`) || !content.includes(`price: ${price}`)) {
+    throw new Error(`Course data is missing or incorrect: ${name}`);
+  }
 }
-const sourcePaths = ["app/page.tsx", "app/globals.css", "content/reservation.ts", "content/site.ts", ...["BackToTop", "Entrance", "GlobalMotion", "KagariHero", "MenuCourses", "Navigation", "ReservationForm"].map((name) => `components/${name}.tsx`)];
-const sources = sourcePaths.map(read).join("\n");
-for (const banned of [/transition:\s*all/, /ease-in\b/, /scale\(0\)/, /Lorem Ipsum/i, /TODO/, /\u672a\u78ba\u5b9a|\u6e96\u5099\u4e2d|\u9078\u5b9a\u4e2d|\u30c7\u30e2/]) if (banned.test(sources + content)) throw new Error(`Banned pattern found: ${banned}`);
-for (const required of ["viewportFit", "application/ld+json", "prefers-reduced-motion: reduce", "aria-current", "aria-modal=\"true\""]) if (!sources.includes(required) && !read("app/layout.tsx").includes(required)) throw new Error(`Required production behavior missing: ${required}`);
-const slotDeclaration = reservationSource.match(/reservationSlots\s*=\s*\[([^\]]+)\]/s)?.[1] ?? "";
-const slots = [...slotDeclaration.matchAll(/"(\d{2}:\d{2})"/g)].map((match) => match[1]);
-if (!slots.length) throw new Error("At least one reservation slot is required.");
-if (new Set(slots).size !== slots.length) throw new Error("Reservation slots must be unique.");
-if (slots.some((slot) => !/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(slot))) throw new Error("Reservation slots must use 24-hour HH:mm format.");
-if (slots.some((slot, index) => index > 0 && slot <= slots[index - 1])) throw new Error("Reservation slots must be in ascending order.");
-console.log("Production verification passed: content, responsive assets, metadata, accessibility and motion guards.");
+
+for (const image of ["hero", "fish", "anniversary", "beef", "wine"]) {
+  const path = `public/images/french/${image}.avif`;
+  if (!existsSync(new URL(path, root))) throw new Error(`Missing optimized image: ${path}`);
+}
+
+for (const dependency of ["next", "typescript", "tailwindcss", "framer-motion", "gsap", "@radix-ui/react-slot"]) {
+  if (!packageJson.dependencies?.[dependency] && !packageJson.devDependencies?.[dependency]) {
+    throw new Error(`Missing dependency: ${dependency}`);
+  }
+}
+
+for (const required of [
+  "prefers-reduced-motion: reduce",
+  "aria-expanded={open}",
+  "aria-controls=\"site-navigation\"",
+  "aria-modal=\"true\"",
+  "event.key === \"Escape\"",
+  "document.body.style.overflow = \"hidden\"",
+  "記念日ケーキをご希望ですか？",
+  "入力内容の確認",
+  "実際の予約は送信されていません",
+  "CustomEase",
+  "ScrollTrigger",
+]) {
+  if (!sources.includes(required)) throw new Error(`Required behavior or copy is missing: ${required}`);
+}
+
+for (const banned of [/transition:\s*all/, /scale\(0\)/, /Lorem Ipsum/i, /TODO/]) {
+  if (banned.test(sources)) throw new Error(`Banned pattern found: ${banned}`);
+}
+
+console.log("Production verification passed: course data, local images, stack, form states, navigation accessibility, and motion guards.");

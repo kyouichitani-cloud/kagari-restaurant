@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  agentRules: false,
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 390, 414, 744, 768, 834, 1024, 1280, 1440, 1920, 2560],
