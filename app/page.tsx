@@ -34,19 +34,27 @@ export default function Home() {
         </section>
 
         <section className="reasons-section" aria-labelledby="reasons-title">
+          <div className="section-shell">
+            <SectionReveal className="reasons-news">
+              <div className="reasons-news-meta"><span>NEWS</span><time dateTime="2026-09-18">2026.09.18</time></div>
+              <Link href="#reservation">ご予約と記念日ケーキについて<span aria-hidden="true">→</span></Link>
+            </SectionReveal>
+          </div>
           <div className="section-shell reasons-layout">
-            <SectionReveal className="reasons-heading">
+            <SectionReveal className="reasons-heading" delay={0.1}>
               <p className="section-kicker">選ばれる理由</p>
               <h2 id="reasons-title">迷う時間も、<br />楽しめるように。</h2>
             </SectionReveal>
             <div className="reasons-list">
               {[
-                ["価格が見える", "コースは5,000円から。三つの違いを、料理写真と一緒に比べられます。"],
-                ["追加を選べる", "ドリンクは単品または飲み放題。記念日ケーキは、どのコースにも追加できます。"],
-                ["気負わず相談できる", "まだ決まっていない内容は予約時に伝えられます。詳細は確認連絡で丁寧にご案内します。"],
+                ["予算から選べる", "5,000円、7,500円、10,000円。料理の内容と写真を見ながら、ふたりに合うコースを選べます。"],
+                ["過ごし方を選べる", "ドリンクは単品または飲み放題。記念日ケーキも、すべてのコースに追加できます。"],
+                ["迷ったままでも相談できる", "ケーキのお名前やメッセージなど、まだ決まっていないことは予約時に相談できます。"],
               ].map(([title, body], index) => (
-                <SectionReveal key={title} className="reason-row" direction={index === 1 ? "right" : "up"} delay={index * 0.08}>
-                  <span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p>
+                <SectionReveal key={title} className="reason-row" direction="up" delay={0.18 + index * 0.1}>
+                  <span className="reason-number">{String(index + 1).padStart(2, "0")}</span>
+                  <div className="reason-copy"><h3>{title}</h3><p>{body}</p></div>
+                  <i className="reason-marker" aria-hidden="true" />
                 </SectionReveal>
               ))}
             </div>
