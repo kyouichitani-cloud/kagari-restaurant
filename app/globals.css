@@ -140,7 +140,8 @@ button.button-ivory:hover,
 /* Concept */
 .concept-section { padding: clamp(6rem, 12vw, 12rem) 0; }
 .concept-grid { display: grid; grid-template-columns: 1.05fr .72fr; gap: clamp(3rem, 8vw, 9rem); align-items: start; }
-.concept-heading h2 { margin: 0; font-size: clamp(2.4rem, 5.2vw, 5.5rem); }
+.concept-heading h2 { max-width: 100%; min-width: 0; margin: 0; font-size: clamp(2.4rem, 5.2vw, 5.5rem); word-break: keep-all; overflow-wrap: normal; }
+.concept-title-line { display: block; white-space: nowrap; }
 .concept-copy { padding-top: clamp(1rem, 7vw, 6rem); }
 .concept-copy p { max-width: 36rem; margin: 0 0 1.6rem; }
 .concept-image { position: relative; grid-column: 1 / -1; width: 78%; aspect-ratio: 16 / 8.4; margin-top: clamp(2rem, 6vw, 6rem); overflow: hidden; border-radius: 14px; }
@@ -441,7 +442,8 @@ button.button-ivory:hover,
   .hero-actions .hero-primary-action { font-size: .875rem; font-weight: 600; }
   .scroll-cue { display: none; }
   .concept-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .concept-heading h2 { font-size: clamp(2.35rem, 12vw, 4rem); }
+  .concept-heading h2 { font-size: clamp(1.5rem, 8.8vw, 3.5rem); }
+  .concept-title-line { white-space: normal; }
   .concept-copy { padding: 0; }
   .concept-image { grid-column: 1; width: 100%; aspect-ratio: 4 / 3; margin-top: 2rem; }
   .concept-aside { margin: 2rem 0 0; writing-mode: horizontal-tb; }

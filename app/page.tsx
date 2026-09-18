@@ -22,7 +22,7 @@ export default function Home() {
           <div className="section-shell concept-grid">
             <SectionReveal className="concept-heading">
               <p className="section-kicker">私たちについて</p>
-              <h2 id="concept-title">おいしい、の先にある<br />ふたりの時間まで。</h2>
+              <h2 id="concept-title"><span className="concept-title-line">おいしい時間の先に、</span><span className="concept-title-line">ふたりの思い出を。</span></h2>
             </SectionReveal>
             <SectionReveal className="concept-copy" direction="right" delay={0.12}>
               <p>少し背筋が伸びるのに、肩肘は張らなくていい。料理を待つ時間も、乾杯の一瞬も、あとから思い出したくなる夜を目指します。</p>
