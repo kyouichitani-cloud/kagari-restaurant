@@ -149,7 +149,7 @@ export function KineticNavigation() {
                 ))}
               </ul>
             </nav>
-            <p className="menu-note">価格も過ごし方も、選びやすく。</p>
+            <div className="menu-note"><p>価格も過ごし方も、選びやすく。</p>{siteContent.details.instagram.url && <a href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>}</div>
           </motion.div>
         )}
       </AnimatePresence>

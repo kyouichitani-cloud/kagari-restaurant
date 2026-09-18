@@ -51,7 +51,6 @@ function validate(values: FormValues) {
   if (values.cake === "yes") {
     if (!values.cakeName.trim()) errors.cakeName = "ケーキに添えるお名前を入力してください。";
     if (!values.cakeMessage.trim()) errors.cakeMessage = "プレートに入れるメッセージを入力してください。";
-    if (!values.occasion.trim()) errors.occasion = "お祝いの種類を入力してください。";
   }
   if (!values.privacy) errors.privacy = "内容を確認し、同意のチェックを入れてください。";
   return errors;
@@ -134,7 +133,7 @@ export function FrenchReservationForm() {
       ["予約希望日", values.date], ["予約希望時間", values.time], ["利用人数", `${values.guests}名`],
       ["代表者名", values.name], ["ふりがな", values.kana], ["電話番号", values.phone], ["メールアドレス", values.email],
       ["希望するコース", courseName], ["ドリンク", drinkName], ["記念日ケーキ", values.cake === "yes" ? "希望する" : "希望しない"],
-      ...(values.cake === "yes" ? [["ケーキに添えるお名前", values.cakeName], ["プレートのメッセージ", values.cakeMessage], ["お祝いの種類", values.occasion], ["ケーキに関するその他の希望", values.cakeOther || "なし"]] : []),
+      ...(values.cake === "yes" ? [["ケーキに添えるお名前", values.cakeName], ["プレートのメッセージ", values.cakeMessage]] : []),
       ["アレルギーや苦手な食材", values.allergies || "なし"], ["その他の要望", values.requests || "なし"],
     ];
     return (
@@ -160,14 +159,15 @@ export function FrenchReservationForm() {
 
   return (
     <div ref={formTopRef}>
-      <div className="demo-notice"><strong>デモフォーム</strong><span>現在、実際の予約システムには接続されていません。</span></div>
       {status === "error" && Object.keys(errors).length > 0 && (
         <div className="form-error-summary" role="alert"><WarningCircle size={22} aria-hidden="true" /><p>入力内容を確認してください。各項目の下に修正方法を表示しています。</p></div>
       )}
       {status === "error" && Object.keys(errors).length === 0 && (
         <div className="form-error-summary" role="alert"><WarningCircle size={22} aria-hidden="true" /><p>デモ送信の確認中にエラーが発生しました。入力内容は残っています。時間をおいて、もう一度お試しください。</p></div>
       )}
+      <div className="reservation-form-layout">
       <form className="reservation-form" noValidate onSubmit={requestReview}>
+        <section className="reservation-group"><div className="reservation-group-title"><span>01</span><h3>日時と人数</h3></div>
         <div className="form-grid form-grid-three">
           <div className="field">
             <label htmlFor="date">予約希望日 <Required /></label>
@@ -182,10 +182,35 @@ export function FrenchReservationForm() {
           <div className="field">
             <label htmlFor="guests">利用人数 <Required /></label>
             <input {...inputProps("guests")} inputMode="numeric" min="1" type="number" placeholder="2" value={values.guests} onChange={(e) => update("guests", e.target.value)} />
-            {errors.guests && <p id="guests-error" className="field-error">{errors.guests}</p>}
+          {errors.guests && <p id="guests-error" className="field-error">{errors.guests}</p>}
           </div>
         </div>
+        </section>
 
+        <section className="reservation-group"><div className="reservation-group-title"><span>02</span><h3>コース</h3></div>
+        <fieldset>
+          <legend>希望するコース <Required /></legend>
+          <div className="choice-list course-choice-list">
+            {siteContent.courses.map((course) => (
+              <label key={course.id} className={values.course === course.id ? "is-selected" : ""}><input {...inputProps("course", `course-${course.id}`)} type="radio" value={course.id} checked={values.course === course.id} onChange={(e) => update("course", e.target.value)} /><span><strong>{course.price.toLocaleString("ja-JP")}円</strong><small>{course.name}</small></span></label>
+            ))}
+          </div>{errors.course && <p id="course-error" className="field-error">{errors.course}</p>}
+        </fieldset>
+        </section>
+
+        <section className="reservation-group"><div className="reservation-group-title"><span>03</span><h3>追加オプション</h3></div>
+        <fieldset>
+          <legend>ドリンク単品または飲み放題 <Required /></legend>
+          <div className="choice-list compact-choice-list">{siteContent.drinks.map((drink) => <label key={drink.id} className={values.drink === drink.id ? "is-selected" : ""}><input {...inputProps("drink", `drink-${drink.id}`)} type="radio" value={drink.id} checked={values.drink === drink.id} onChange={(e) => update("drink", e.target.value)} /><span><strong>{drink.label}</strong><small>{drink.description}</small></span></label>)}</div>{errors.drink && <p id="drink-error" className="field-error">{errors.drink}</p>}
+        </fieldset>
+        <fieldset>
+          <legend>記念日ケーキをご希望ですか？ <Required /></legend>
+          <div className="choice-list compact-choice-list cake-choice-list">{[{ value: "yes", label: "希望する" }, { value: "no", label: "希望しない" }].map((option) => <label key={option.value} className={values.cake === option.value ? "is-selected" : ""}><input {...inputProps("cake", `cake-${option.value}`)} type="radio" value={option.value} checked={values.cake === option.value} onChange={(e) => update("cake", e.target.value as FormValues["cake"])} /><span><strong>{option.label}</strong></span></label>)}</div>{errors.cake && <p id="cake-error" className="field-error">{errors.cake}</p>}
+        </fieldset>
+        <AnimatePresence initial={false}>{values.cake === "yes" && <motion.div className="cake-fields" initial={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,14px,0)" }} animate={{ opacity: 1, transform: "translate3d(0,0,0)" }} exit={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,-8px,0)" }} transition={{ duration: reduceMotion ? 0.18 : 0.26, ease: [0.23, 1, 0.32, 1] }}><p>内容を確認後、店舗よりご案内いたします。</p><div className="form-grid"><div className="field"><label htmlFor="cakeName">ケーキに入れる名前 <Required /></label><input {...inputProps("cakeName")} value={values.cakeName} onChange={(e) => update("cakeName", e.target.value)} />{errors.cakeName && <p id="cakeName-error" className="field-error">{errors.cakeName}</p>}</div><div className="field"><label htmlFor="cakeMessage">プレートメッセージ <Required /></label><input {...inputProps("cakeMessage")} value={values.cakeMessage} onChange={(e) => update("cakeMessage", e.target.value)} />{errors.cakeMessage && <p id="cakeMessage-error" className="field-error">{errors.cakeMessage}</p>}</div></div></motion.div>}</AnimatePresence>
+        </section>
+
+        <section className="reservation-group"><div className="reservation-group-title"><span>04</span><h3>お客様情報</h3></div>
         <div className="form-grid">
           <div className="field">
             <label htmlFor="name">代表者名 <Required /></label>
@@ -209,65 +234,6 @@ export function FrenchReservationForm() {
           </div>
         </div>
 
-        <fieldset>
-          <legend>希望するコース <Required /></legend>
-          <div className="choice-list course-choice-list">
-            {siteContent.courses.map((course) => (
-              <label key={course.id} className={values.course === course.id ? "is-selected" : ""}>
-                <input {...inputProps("course", `course-${course.id}`)} type="radio" value={course.id} checked={values.course === course.id} onChange={(e) => update("course", e.target.value)} />
-                <span><strong>{course.name}</strong><small>お一人様 {course.price.toLocaleString("ja-JP")}円</small></span>
-              </label>
-            ))}
-          </div>
-          {errors.course && <p id="course-error" className="field-error">{errors.course}</p>}
-        </fieldset>
-
-        <fieldset>
-          <legend>ドリンク単品または飲み放題 <Required /></legend>
-          <div className="choice-list compact-choice-list">
-            {siteContent.drinks.map((drink) => (
-              <label key={drink.id} className={values.drink === drink.id ? "is-selected" : ""}>
-                <input {...inputProps("drink", `drink-${drink.id}`)} type="radio" value={drink.id} checked={values.drink === drink.id} onChange={(e) => update("drink", e.target.value)} />
-                <span><strong>{drink.label}</strong><small>{drink.description}</small></span>
-              </label>
-            ))}
-          </div>
-          {errors.drink && <p id="drink-error" className="field-error">{errors.drink}</p>}
-        </fieldset>
-
-        <fieldset>
-          <legend>記念日ケーキをご希望ですか？ <Required /></legend>
-          <div className="choice-list compact-choice-list cake-choice-list">
-            {[{ value: "yes", label: "希望する" }, { value: "no", label: "希望しない" }].map((option) => (
-              <label key={option.value} className={values.cake === option.value ? "is-selected" : ""}>
-                <input {...inputProps("cake", `cake-${option.value}`)} type="radio" value={option.value} checked={values.cake === option.value} onChange={(e) => update("cake", e.target.value as FormValues["cake"])} />
-                <span><strong>{option.label}</strong></span>
-              </label>
-            ))}
-          </div>
-          {errors.cake && <p id="cake-error" className="field-error">{errors.cake}</p>}
-        </fieldset>
-
-        <AnimatePresence initial={false}>
-          {values.cake === "yes" && (
-            <motion.div
-              className="cake-fields"
-              initial={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,14px,0)" }}
-              animate={{ opacity: 1, transform: "translate3d(0,0,0)" }}
-              exit={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,-8px,0)" }}
-              transition={{ duration: reduceMotion ? 0.18 : 0.26, ease: [0.23, 1, 0.32, 1] }}
-            >
-              <p>内容を確認後、店舗よりご案内いたします。</p>
-              <div className="form-grid">
-                <div className="field"><label htmlFor="cakeName">ケーキに添えるお名前 <Required /></label><input {...inputProps("cakeName")} value={values.cakeName} onChange={(e) => update("cakeName", e.target.value)} />{errors.cakeName && <p id="cakeName-error" className="field-error">{errors.cakeName}</p>}</div>
-                <div className="field"><label htmlFor="cakeMessage">プレートに入れるメッセージ <Required /></label><input {...inputProps("cakeMessage")} value={values.cakeMessage} onChange={(e) => update("cakeMessage", e.target.value)} />{errors.cakeMessage && <p id="cakeMessage-error" className="field-error">{errors.cakeMessage}</p>}</div>
-                <div className="field"><label htmlFor="occasion">お祝いの種類 <Required /></label><input {...inputProps("occasion")} placeholder="誕生日、交際記念日など" value={values.occasion} onChange={(e) => update("occasion", e.target.value)} />{errors.occasion && <p id="occasion-error" className="field-error">{errors.occasion}</p>}</div>
-                <div className="field"><label htmlFor="cakeOther">その他の希望 <Optional /></label><input {...inputProps("cakeOther")} value={values.cakeOther} onChange={(e) => update("cakeOther", e.target.value)} /></div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         <div className="field"><label htmlFor="allergies">アレルギーや苦手な食材 <Optional /></label><textarea {...inputProps("allergies")} rows={4} placeholder="ない場合は空欄で構いません" value={values.allergies} onChange={(e) => update("allergies", e.target.value)} /></div>
         <div className="field"><label htmlFor="requests">その他の要望 <Optional /></label><textarea {...inputProps("requests")} rows={4} value={values.requests} onChange={(e) => update("requests", e.target.value)} /></div>
 
@@ -278,7 +244,11 @@ export function FrenchReservationForm() {
         {errors.privacy && <p id="privacy-error" className="field-error">{errors.privacy}</p>}
 
         <div className="form-submit"><Button type="submit" variant="ivory" size="large">入力内容を確認する</Button><p>送信前に、入力内容の確認画面が表示されます。</p></div>
+        </section>
       </form>
+      <aside className="reservation-summary" aria-live="polite"><p>ご予約内容</p><dl><div><dt>日時</dt><dd>{values.date || "未選択"} {values.time || ""}</dd></div><div><dt>人数</dt><dd>{values.guests ? `${values.guests}名` : "未選択"}</dd></div><div><dt>コース</dt><dd>{courseName || "未選択"}</dd></div><div><dt>ドリンク</dt><dd>{drinkName || "未選択"}</dd></div><div><dt>ケーキ</dt><dd>{values.cake === "yes" ? "希望する" : values.cake === "no" ? "希望しない" : "未選択"}</dd></div></dl></aside>
+      </div>
+      <p className="form-demo-foot">現在オンライン予約は準備中です。入力内容は店舗へ送信されません。</p>
     </div>
   );
 }

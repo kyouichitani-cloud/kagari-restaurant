@@ -144,14 +144,18 @@ export default function Home() {
 
         <section id="access" className="access-section section-ivory" aria-labelledby="access-title">
           <div className="section-shell access-grid">
-            <SectionReveal className="access-heading"><p className="section-kicker">店舗情報・アクセス</p><h2 id="access-title">お出かけ前に。</h2><p>店舗名や住所などの正式情報は、確定後にこのデータ欄だけを更新できる構成です。</p></SectionReveal>
+            <SectionReveal className="access-heading"><p className="section-kicker">店舗情報・アクセス</p><h2 id="access-title">お出かけ前に。</h2><p>番地や建物名は、店舗の正式情報が決まり次第このデータ欄だけを更新できます。</p></SectionReveal>
             <SectionReveal className="access-details" direction="right" delay={0.12}>
               <dl>
                 <div><dt>店名</dt><dd>{siteContent.brand.name}</dd></div>
+                <div><dt>業態</dt><dd>{siteContent.brand.descriptor}</dd></div>
                 <div><dt>住所</dt><dd>{siteContent.details.address}<small>{siteContent.details.access}</small></dd></div>
                 <div><dt>営業時間</dt><dd>{siteContent.details.hours}</dd></div>
-                <div><dt>電話番号</dt><dd>{siteContent.details.telephone}</dd></div>
+                <div><dt>最終入店</dt><dd>{siteContent.details.lastEntry}</dd></div>
+                <div><dt>定休日</dt><dd>{siteContent.details.closed}</dd></div>
+                <div><dt>ドレスコード</dt><dd>{siteContent.details.dressCode}</dd></div>
               </dl>
+              <div className="access-links"><a href={siteContent.details.mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>{siteContent.details.instagram.url && <a href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>}</div>
             </SectionReveal>
             <SectionReveal className="map-placeholder" delay={0.2}>
               <span>現在地（仮）</span><p>地図は住所確定後に掲載します</p><i aria-hidden="true" />
@@ -161,7 +165,7 @@ export default function Home() {
 
         <section id="reservation" className="reservation-section" aria-labelledby="reservation-title">
           <div className="section-shell reservation-heading">
-            <SectionReveal><p className="section-kicker">ご予約</p><h2 id="reservation-title">ふたりの予定を、<br />聞かせてください。</h2></SectionReveal>
+            <SectionReveal><p className="section-kicker">ONLINE RESERVATION</p><p className="reservation-duration">所要時間 約3分</p><h2 id="reservation-title">ふたりの予定を、<br />聞かせてください。</h2></SectionReveal>
             <SectionReveal direction="right" delay={0.12}><p>入力内容を確認したあと、デモ送信へ進みます。現在は予約システム未接続のため、実際の予約は成立しません。</p></SectionReveal>
           </div>
           <div className="section-shell"><FrenchReservationForm /></div>

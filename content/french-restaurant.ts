@@ -56,10 +56,14 @@ export const siteContent = {
     { id: "free-flow", label: "飲み放題", description: "料金・時間・銘柄は、店舗からの確認連絡でご案内いたします。" },
   ],
   details: {
-    address: "住所は確定後に掲載します",
-    access: "最寄り駅からの案内は確定後に掲載します",
-    hours: "営業時間は確定後に掲載します",
-    telephone: "電話番号は確定後に掲載します",
+    address: "東京都渋谷区恵比寿南1丁目",
+    access: "JR恵比寿駅 西口より徒歩4分",
+    hours: "17:30–23:00",
+    lastEntry: "20:30",
+    closed: "火曜日",
+    dressCode: "スマートカジュアル",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=東京都渋谷区恵比寿南1丁目",
+    instagram: { label: "@kagari.french", url: "https://www.instagram.com/kagari.french/" },
   },
   images: {
     hero: "/images/french/hero.avif",
