@@ -360,6 +360,10 @@ button.button-ivory:hover,
 .privacy-check { display: flex; gap: .9rem; align-items: flex-start; cursor: pointer; }
 .privacy-check input { flex: 0 0 auto; width: 20px; height: 20px; margin-top: .25rem; accent-color: var(--gold); }
 .privacy-check > span { display: flex; flex-wrap: wrap; gap: .55rem; align-items: center; }
+.privacy-check a { color: var(--ivory); text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: .25em; }
+.privacy-check a:focus-visible { outline-offset: 3px; }
+.consent-stack { display: grid; gap: .7rem; }
+.health-consent { padding-top: .75rem; border-top: 1px solid rgb(243 238 229 / .18); }
 .form-submit { display: flex; align-items: center; gap: 1.5rem; padding-top: 1rem; }
 .form-submit p { margin: 0; color: rgb(243 238 229 / .65); font-size: .76rem; }
 .form-error-summary { display: flex; gap: .75rem; align-items: flex-start; margin-bottom: 1.5rem; padding: 1rem; color: #ffe0df; background: var(--navy-soft); border-radius: 10px; }
@@ -382,6 +386,23 @@ button.button-ivory:hover,
 .reservation-summary dt { color: rgb(243 238 229 / .7); font-size: .7rem; letter-spacing: .08em; }
 .reservation-summary dd { margin: 0; font-size: .88rem; overflow-wrap: anywhere; }
 .form-demo-foot { margin: 2rem 0 0; color: rgb(243 238 229 / .7); font-size: .75rem; line-height: 1.8; }
+
+/* Privacy policy */
+.privacy-page { min-height: 100dvh; background: var(--navy); }
+.privacy-content { width: min(100% - 2rem, 800px); margin-inline: auto; padding: clamp(8rem, 14vw, 11rem) 0 clamp(5rem, 10vw, 9rem); color: var(--ivory); font-size: max(1rem, 16px); line-height: 1.9; overflow-wrap: break-word; }
+.privacy-header { padding-bottom: clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid var(--line-dark); }
+.privacy-header h1 { margin: 0; font-size: clamp(2.1rem, 5vw, 3.8rem); }
+.privacy-header > p:not(.section-kicker):not(.privacy-updated) { max-width: 44rem; margin: 1.5rem 0 0; color: var(--ivory-muted); }
+.privacy-updated { margin: 1rem 0 0; color: var(--gold); font-size: .82rem; }
+.privacy-demo-notice { padding-top: 1.2rem; border-top: 1px solid rgb(243 238 229 / .18); }
+.privacy-content section { padding: clamp(2rem, 4vw, 3.25rem) 0; border-bottom: 1px solid var(--line-dark); }
+.privacy-content h2 { margin: 0 0 1rem; color: var(--ivory); font-family: var(--sans); font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 650; letter-spacing: 0; }
+.privacy-content section p { max-width: 46rem; margin: 0; color: var(--ivory-muted); }
+.privacy-contact-list { margin: 1.5rem 0 0; border-top: 1px solid rgb(243 238 229 / .18); }
+.privacy-contact-list > div { display: grid; grid-template-columns: minmax(9rem, .7fr) 1fr; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid rgb(243 238 229 / .18); }
+.privacy-contact-list dt { color: var(--gold); font-size: .78rem; }
+.privacy-contact-list dd { margin: 0; overflow-wrap: anywhere; }
+.privacy-return-link { display: inline-flex; min-height: 44px; align-items: center; margin-top: 2.5rem; color: var(--ivory); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: .32em; }
 
 /* Footer */
 .site-footer { display: grid; grid-template-columns: 1fr auto auto; gap: 3rem; align-items: end; padding: clamp(4rem, 8vw, 8rem) clamp(1.25rem, 5vw, 5rem) 2.5rem; border-top: 1px solid var(--line-dark); background: var(--navy); }
@@ -502,6 +523,8 @@ button.button-ivory:hover,
   .form-submit { align-items: stretch; flex-direction: column; }
   .form-submit button { width: 100%; }
   .reservation-review dl > div { grid-template-columns: 1fr; gap: .35rem; }
+  .privacy-content { width: min(100% - 2rem, 800px); padding-top: 7rem; }
+  .privacy-contact-list > div { grid-template-columns: 1fr; gap: .25rem; }
   .form-actions { display: grid; }
   .site-footer { grid-template-columns: 1fr; gap: 2rem; }
   .site-footer nav { flex-wrap: wrap; }

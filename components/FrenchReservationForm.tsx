@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle, WarningCircle } from "@phosphor-icons/react";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { isCourseId, siteContent } from "@/content/french-restaurant";
+import { privacySettings } from "@/content/privacy";
 
 type FormState = "idle" | "editing" | "review" | "submitting" | "success" | "error";
 type FormValues = {
@@ -25,12 +26,13 @@ type FormValues = {
   allergies: string;
   requests: string;
   privacy: boolean;
+  healthConsent: boolean;
 };
 
 const initialValues: FormValues = {
   date: "", time: "", guests: "", name: "", kana: "", phone: "", email: "",
   course: "", drink: "", cake: "", cakeName: "", cakeMessage: "", occasion: "",
-  cakeOther: "", allergies: "", requests: "", privacy: false,
+  cakeOther: "", allergies: "", requests: "", privacy: false, healthConsent: false,
 };
 
 function validate(values: FormValues) {
@@ -52,7 +54,8 @@ function validate(values: FormValues) {
     if (!values.cakeName.trim()) errors.cakeName = "ケーキに添えるお名前を入力してください。";
     if (!values.cakeMessage.trim()) errors.cakeMessage = "プレートに入れるメッセージを入力してください。";
   }
-  if (!values.privacy) errors.privacy = "内容を確認し、同意のチェックを入れてください。";
+  if (!values.privacy) errors.privacy = "プライバシーポリシーへの同意が必要です。";
+  if (values.allergies.trim() && !values.healthConsent) errors.healthConsent = "健康に関する情報の取り扱いへの同意が必要です。";
   return errors;
 }
 
@@ -93,7 +96,11 @@ export function FrenchReservationForm() {
     if (Object.keys(nextErrors).length) {
       setStatus("error");
       requestAnimationFrame(() => {
-        const firstInvalid = document.querySelector<HTMLElement>("[aria-invalid='true']");
+        const firstInvalid = nextErrors.privacy
+          ? document.getElementById("privacy-consent")
+          : nextErrors.healthConsent
+            ? document.getElementById("health-consent")
+            : document.querySelector<HTMLElement>("[aria-invalid='true']");
         firstInvalid?.focus();
       });
       return;
@@ -122,7 +129,7 @@ export function FrenchReservationForm() {
       <div ref={formTopRef} className="form-status-panel" tabIndex={-1}>
         <CheckCircle size={34} weight="light" aria-hidden="true" />
         <h3>入力内容の確認が完了しました</h3>
-        <p>これはデモフォームのため、実際の予約は送信されていません。予約システム接続後は、店舗からの受付連絡をもって予約確認となる設計です。</p>
+        <p>{privacySettings.onlineReservationNotice}</p>
         <Button type="button" variant="quiet" onClick={() => { setValues(initialValues); setStatus("idle"); }}>入力画面に戻る</Button>
       </div>
     );
@@ -140,7 +147,7 @@ export function FrenchReservationForm() {
       <div ref={formTopRef} className="reservation-review" tabIndex={-1}>
         <p className="form-step">入力内容の確認</p>
         <h3>この内容でよろしいですか？</h3>
-        <p className="demo-notice">デモのため、確認ボタンを押しても店舗へは送信されません。</p>
+        <p className="form-demo-foot">{privacySettings.onlineReservationNotice}</p>
         <dl>{reviewRows.map(([term, detail]) => <div key={term}><dt>{term}</dt><dd>{detail}</dd></div>)}</dl>
         <div className="form-actions">
           <Button type="button" variant="quiet" disabled={status === "submitting"} onClick={() => { setStatus("editing"); requestAnimationFrame(scrollToFormTop); }}><ArrowLeft size={17} aria-hidden="true" />入力内容を修正する</Button>
@@ -237,18 +244,21 @@ export function FrenchReservationForm() {
         <div className="field"><label htmlFor="allergies">アレルギーや苦手な食材 <Optional /></label><textarea {...inputProps("allergies")} rows={4} placeholder="ない場合は空欄で構いません" value={values.allergies} onChange={(e) => update("allergies", e.target.value)} /></div>
         <div className="field"><label htmlFor="requests">その他の要望 <Optional /></label><textarea {...inputProps("requests")} rows={4} value={values.requests} onChange={(e) => update("requests", e.target.value)} /></div>
 
-        <label className="privacy-check">
-          <input {...inputProps("privacy")} type="checkbox" checked={values.privacy} onChange={(e) => update("privacy", e.target.checked)} />
-          <span>個人情報の取り扱い（仮）を確認し、同意します。 <Required /></span>
-        </label>
-        {errors.privacy && <p id="privacy-error" className="field-error">{errors.privacy}</p>}
+        <div className="consent-stack">
+          <label className="privacy-check" htmlFor="privacy-consent">
+            <input {...inputProps("privacy", "privacy-consent")} type="checkbox" checked={values.privacy} onChange={(e) => update("privacy", e.target.checked)} />
+            <span><a href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>を確認し、予約に必要な個人情報の取り扱いに同意します。 <Required /></span>
+          </label>
+          {errors.privacy && <p id="privacy-error" className="field-error" role="alert">{errors.privacy}</p>}
+          <AnimatePresence initial={false}>{values.allergies.trim() && <motion.div className="health-consent" initial={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,8px,0)" }} animate={{ opacity: 1, transform: "translate3d(0,0,0)" }} exit={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,-6px,0)" }} transition={{ duration: reduceMotion ? 0.18 : 0.22, ease: [0.23, 1, 0.32, 1] }}><label className="privacy-check" htmlFor="health-consent"><input {...inputProps("healthConsent", "health-consent")} type="checkbox" checked={values.healthConsent} onChange={(e) => update("healthConsent", e.target.checked)} /><span>アレルギー等の健康に関する情報を、予約対応と安全な料理提供のために取得・利用することに同意します。 <Required /></span></label>{errors.healthConsent && <p id="healthConsent-error" className="field-error" role="alert">{errors.healthConsent}</p>}</motion.div>}</AnimatePresence>
+        </div>
 
         <div className="form-submit"><Button type="submit" variant="ivory" size="large">入力内容を確認する</Button><p>送信前に、入力内容の確認画面が表示されます。</p></div>
         </section>
       </form>
       <aside className="reservation-summary" aria-live="polite"><p>ご予約内容</p><dl><div><dt>日時</dt><dd>{values.date || "未選択"} {values.time || ""}</dd></div><div><dt>人数</dt><dd>{values.guests ? `${values.guests}名` : "未選択"}</dd></div><div><dt>コース</dt><dd>{courseName || "未選択"}</dd></div><div><dt>ドリンク</dt><dd>{drinkName || "未選択"}</dd></div><div><dt>ケーキ</dt><dd>{values.cake === "yes" ? "希望する" : values.cake === "no" ? "希望しない" : "未選択"}</dd></div></dl></aside>
       </div>
-      <p className="form-demo-foot">現在オンライン予約は準備中です。入力内容は店舗へ送信されません。</p>
+      <p className="form-demo-foot">{privacySettings.onlineReservationNotice}</p>
     </div>
   );
 }
