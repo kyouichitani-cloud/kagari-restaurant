@@ -249,7 +249,7 @@ button.button-ivory:hover,
 .cake-photo img { object-position: center; }
 .cake-shade { z-index: -1; background: rgb(5 10 15 / .62); }
 .cake-content { display: grid; grid-template-columns: minmax(0, 760px) minmax(0, 1fr); }
-.cake-copy { width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; padding: clamp(2rem, 3vw, 3rem); background: #18090F; border-radius: 14px; }
+.cake-copy { width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; padding: clamp(2rem, 3vw, 3rem); background: rgba(14, 5, 9, 0.96); border-radius: 14px; }
 .cake-copy h2 { max-width: 100%; box-sizing: border-box; margin: 0; font-size: clamp(2rem, 3.15vw, 2.875rem); line-height: 1.35; overflow-wrap: normal; word-break: normal; }
 .cake-title-line { display: block; max-width: 100%; white-space: nowrap; }
 .cake-copy > p:not(.section-kicker) { max-width: 100%; overflow-wrap: break-word; }
