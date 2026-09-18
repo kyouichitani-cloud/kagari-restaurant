@@ -113,7 +113,7 @@ export default function Home() {
           <div className="section-shell cake-content">
             <SectionReveal className="cake-copy" direction="left">
               <p className="section-kicker">記念日ケーキ</p>
-              <h2 id="cake-title">「おめでとう」を、<br />食事の余韻に。</h2>
+              <h2 id="cake-title"><span className="cake-title-line">「おめでとう」の気持ちを、</span><span className="cake-title-line">食後のひと皿に。</span></h2>
               <p>三つすべてのコースで、記念日ケーキを希望できます。お名前やプレートのメッセージは、予約フォームからお知らせください。</p>
               <p className="cake-note">料金・サイズ・対応内容は未確定です。内容を確認後、店舗よりご案内いたします。</p>
               <Button asChild variant="ivory"><Link href="#reservation">ケーキを希望して予約する</Link></Button>

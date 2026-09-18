@@ -29,9 +29,12 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, style, ...props }, ref) => {
     const Component = asChild ? Slot : "button";
-    return <Component ref={ref} className={cn(buttonVariants({ variant, size }), className)} {...props} />;
+    const ivoryStyle: React.CSSProperties | undefined = variant === "ivory"
+      ? { ...style, color: "#050A0F", WebkitTextFillColor: "#050A0F", backgroundColor: "#F3EEE5" }
+      : style;
+    return <Component ref={ref} className={cn(buttonVariants({ variant, size }), className)} style={ivoryStyle} {...props} />;
   },
 );
 Button.displayName = "Button";
