@@ -46,6 +46,25 @@ p, dd, label, button, a { line-break: strict; text-wrap: pretty; }
 .section-ivory { background: var(--ivory); color: var(--ink); }
 .section-kicker { margin: 0 0 1.25rem; color: var(--gold); font-size: .72rem; font-weight: 650; letter-spacing: .18em; }
 .section-ivory .section-kicker { color: var(--burgundy); }
+.button-ivory,
+a.button-ivory,
+a.button-ivory:visited,
+button.button-ivory {
+  color: #050A0F;
+  -webkit-text-fill-color: #050A0F;
+  background-color: #F3EEE5;
+}
+.button-ivory:hover,
+a.button-ivory:hover,
+button.button-ivory:hover {
+  color: #050A0F;
+  -webkit-text-fill-color: #050A0F;
+  background-color: #F3EEE5;
+}
+.button-ivory * {
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+}
 
 /* Header and navigation */
 .site-header { position: fixed; z-index: 90; inset: 0 0 auto; display: flex; align-items: center; justify-content: space-between; min-height: 76px; padding: 0 clamp(1.15rem, 4vw, 4.5rem); border-bottom: 1px solid var(--line-dark); color: var(--ivory); background: rgb(5 10 15 / .68); }
@@ -103,7 +122,7 @@ p, dd, label, button, a { line-break: strict; text-wrap: pretty; }
 .hero-description { grid-column: 2; grid-row: 3; margin: 0 0 5.3rem; max-width: 33rem; color: rgb(243 238 229 / .88); font-size: clamp(.9rem, 1.1vw, 1.05rem); }
 .hero-actions { grid-column: 2; grid-row: 3; display: flex; flex-wrap: wrap; gap: .75rem; align-self: end; }
 .hero-primary-action { background-color: #F3EEE5; color: #050A0F; font-size: .875rem; font-weight: 600; }
-.hero-primary-action:hover { background-color: #fff; color: #050A0F; }
+.hero-primary-action:hover { background-color: #F3EEE5; color: #050A0F; }
 .scroll-cue { position: absolute; z-index: 4; right: 1.5rem; bottom: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .65rem; }
 .scroll-cue span { font-size: .58rem; letter-spacing: .16em; writing-mode: vertical-rl; }
 .scroll-cue i { display: block; width: 1px; height: 28px; background: var(--gold); transform-origin: top; animation: scroll-cue 1.8s var(--ease-out) infinite; }
