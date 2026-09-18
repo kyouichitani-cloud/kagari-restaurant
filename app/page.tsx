@@ -45,17 +45,17 @@ export default function Home() {
           <div className="section-shell reasons-layout">
             <SectionReveal className="reasons-heading" delay={0.1}>
               <p className="section-kicker">選ばれる理由</p>
-              <h2 id="reasons-title">迷う時間も、<br />楽しめるように。</h2>
+              <h2 id="reasons-title"><span className="reasons-title-line">ふたりに合う夜を、</span><span className="reasons-title-line">選びやすく。</span></h2>
             </SectionReveal>
             <div className="reasons-list">
               {[
-                ["予算から選べる", "5,000円、7,500円、10,000円。料理の内容と写真を見ながら、ふたりに合うコースを選べます。"],
-                ["過ごし方を選べる", "ドリンクは単品または飲み放題。記念日ケーキも、すべてのコースに追加できます。"],
-                ["迷ったままでも相談できる", "ケーキのお名前やメッセージなど、まだ決まっていないことは予約時に相談できます。"],
-              ].map(([title, body], index) => (
-                <SectionReveal key={title} className="reason-row" direction="up" delay={0.18 + index * 0.1}>
+                { title: ["予算から選べる"], body: [["5,000円、7,500円、10,000円。"], ["料理の内容と写真を見ながら、"], ["ふたりに合う", "コースを選べます。"]] },
+                { title: ["過ごし方を選べる"], body: [["ドリンクは単品または飲み放題。"], ["記念日ケーキも、", "すべてのコースに追加できます。"]] },
+                { title: ["迷ったままでも", "相談できる"], body: [["ケーキのお名前やメッセージなど、"], ["まだ決まっていないことは", "予約時に相談できます。"]] },
+              ].map(({ title, body }, index) => (
+                <SectionReveal key={title.join("")} className="reason-row" direction="up" delay={0.18 + index * 0.1}>
                   <span className="reason-number">{String(index + 1).padStart(2, "0")}</span>
-                  <div className="reason-copy"><h3>{title}</h3><p>{body}</p></div>
+                  <div className="reason-copy"><h3>{title.map((part) => <span className="reason-title-part" key={part}>{part}</span>)}</h3><p>{body.map((line) => <span className="reason-body-line" key={line.join("")}>{line.map((part) => <span className="reason-phrase" key={part}>{part}</span>)}</span>)}</p></div>
                   <i className="reason-marker" aria-hidden="true" />
                 </SectionReveal>
               ))}

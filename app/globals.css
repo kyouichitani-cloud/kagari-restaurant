@@ -149,23 +149,26 @@ button.button-ivory:hover,
 .concept-aside { grid-column: 1 / -1; max-width: 36rem; margin: 2rem 0 0; color: var(--burgundy); font-family: var(--serif); font-size: clamp(1.15rem, 2.1vw, 2rem); line-height: 1.65; writing-mode: horizontal-tb; }
 
 /* Reasons */
-.reasons-section { padding: clamp(5rem, 10vw, 10rem) 0 clamp(7rem, 13vw, 13rem); background: #0E0509; }
+.reasons-section { scroll-margin-top: 7rem; padding: clamp(6.5rem, 11vw, 11rem) 0 clamp(7rem, 13vw, 13rem); background: #0E0509; }
 .reasons-news { display: grid; grid-template-columns: minmax(220px, .48fr) minmax(0, 1fr); gap: clamp(1rem, 4vw, 5rem); align-items: center; padding: 1rem 0; border-top: 1px solid rgba(243, 238, 229, .22); border-bottom: 1px solid rgba(243, 238, 229, .22); }
 .reasons-news-meta { display: flex; align-items: baseline; gap: clamp(1rem, 2.5vw, 2.5rem); color: #D8B46F; font-size: .68rem; font-weight: 650; letter-spacing: .12em; }
 .reasons-news time { color: #F3EEE5; font-weight: 500; font-variant-numeric: tabular-nums; }
 .reasons-news a { display: flex; min-width: 0; justify-content: space-between; align-items: center; gap: 1.5rem; color: #F3EEE5; font-size: clamp(.82rem, 1.1vw, .96rem); }
 .reasons-news a span { flex: 0 0 auto; color: #D8B46F; font-size: 1.15rem; font-weight: 300; line-height: 1; transition: transform 180ms var(--ease-out); }
 .reasons-layout { display: grid; grid-template-columns: minmax(260px, .68fr) minmax(0, 1.32fr); gap: clamp(3.5rem, 10vw, 12rem); margin-top: clamp(4.5rem, 9vw, 9rem); }
-.reasons-heading { position: sticky; top: 9rem; align-self: start; }
+.reasons-heading { position: sticky; top: calc(76px + clamp(1.5rem, 3vw, 3rem)); align-self: start; }
 .reasons-section .section-kicker { color: #D8B46F; }
-.reasons-heading h2 { max-width: 11ch; margin: 0; color: #F3EEE5; font-size: clamp(2.4rem, 4.6vw, 4.8rem); line-height: 1.2; }
+.reasons-heading h2 { max-width: 100%; margin: 0; color: #F3EEE5; font-size: clamp(2.4rem, 4.6vw, 4.8rem); line-height: 1.2; word-break: keep-all; overflow-wrap: normal; text-wrap: pretty; }
+.reasons-title-line { display: block; white-space: nowrap; }
 .reasons-list { min-width: 0; }
 .reason-row { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; gap: clamp(1.25rem, 3vw, 3.5rem); align-items: start; padding: clamp(2.8rem, 5.5vw, 5.5rem) 0; border-top: 1px solid rgba(243, 238, 229, .22); }
 .reason-row:last-child { border-bottom: 1px solid rgba(243, 238, 229, .22); }
 .reason-number { color: #D8B46F; font-size: .68rem; font-weight: 650; letter-spacing: .14em; }
 .reason-copy { min-width: 0; max-width: 41rem; }
-.reason-copy h3 { margin: 0; color: #F3EEE5; font-size: clamp(1.8rem, 3vw, 3.25rem); line-height: 1.24; }
-.reason-copy p { max-width: 38rem; margin: 1.2rem 0 0; color: #F0E5D8; font-size: clamp(1rem, 1.2vw, 1.08rem); line-height: 1.8; }
+.reason-copy h3 { margin: 0; color: #F3EEE5; font-size: clamp(1.8rem, 3vw, 3.25rem); line-height: 1.24; word-break: keep-all; overflow-wrap: normal; text-wrap: pretty; }
+.reason-title-part, .reason-phrase { display: inline-block; white-space: nowrap; }
+.reason-copy p { max-width: 38rem; margin: 1.2rem 0 0; color: #F0E5D8; font-size: clamp(1rem, 1.2vw, 1.08rem); line-height: 1.8; word-break: keep-all; overflow-wrap: normal; text-wrap: pretty; }
+.reason-body-line { display: block; }
 .reason-marker { display: block; width: clamp(1.8rem, 4vw, 3.5rem); margin-top: .72rem; border-top: 1px solid #D8B46F; }
 
 /* Courses */
@@ -447,14 +450,15 @@ button.button-ivory:hover,
   .concept-copy { padding: 0; }
   .concept-image { grid-column: 1; width: 100%; aspect-ratio: 4 / 3; margin-top: 2rem; }
   .concept-aside { margin: 2rem 0 0; writing-mode: horizontal-tb; }
-  .reasons-section { padding: 5rem 0 7rem; }
+  .reasons-section { padding: 5.5rem 0 7rem; }
   .reasons-news { grid-template-columns: 1fr; gap: .65rem; padding: .9rem 0; }
   .reasons-news-meta { gap: 1rem; font-size: .62rem; }
   .reasons-news a { justify-content: space-between; gap: 1rem; font-size: .86rem; }
   .reasons-layout { gap: 3rem; margin-top: 4rem; }
-  .reasons-heading h2 { max-width: 10ch; font-size: clamp(2.3rem, 11vw, 3.7rem); }
+  .reasons-heading h2 { font-size: clamp(2rem, 9.5vw, 3.7rem); }
+  .reasons-title-line { white-space: normal; }
   .reason-row { grid-template-columns: 2rem minmax(0, 1fr); gap: .8rem 1rem; padding: 2.5rem 0; }
-  .reason-copy h3 { font-size: clamp(1.65rem, 8vw, 2.45rem); }
+  .reason-copy h3 { font-size: clamp(1.45rem, 7.2vw, 2.45rem); }
   .reason-copy p { margin-top: .9rem; font-size: 1rem; }
   .reason-marker { display: none; }
   .courses-intro { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 5rem; }
