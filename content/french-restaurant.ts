@@ -11,6 +11,7 @@ export const siteContent = {
     { label: "ギャラリー", href: "/#gallery" },
     { label: "店舗情報・アクセス", href: "/#access" },
     { label: "ご予約", href: "/#reservation" },
+    { label: "お問い合わせ", href: "/contact" },
   ],
   hero: {
     title: "いつものふたりに、\n少しだけ特別な夜を。",

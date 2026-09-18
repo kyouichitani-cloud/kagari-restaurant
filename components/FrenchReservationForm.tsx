@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, CheckCircle, WarningCircle } from "@phosphor-icons/react";
+import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { isCourseId, siteContent } from "@/content/french-restaurant";
@@ -259,6 +260,7 @@ export function FrenchReservationForm() {
       <aside className="reservation-summary" aria-live="polite"><p>ご予約内容</p><dl><div><dt>日時</dt><dd>{values.date || "未選択"} {values.time || ""}</dd></div><div><dt>人数</dt><dd>{values.guests ? `${values.guests}名` : "未選択"}</dd></div><div><dt>コース</dt><dd>{courseName || "未選択"}</dd></div><div><dt>ドリンク</dt><dd>{drinkName || "未選択"}</dd></div><div><dt>ケーキ</dt><dd>{values.cake === "yes" ? "希望する" : values.cake === "no" ? "希望しない" : "未選択"}</dd></div></dl></aside>
       </div>
       <p className="form-demo-foot">{privacySettings.onlineReservationNotice}</p>
+      <Link className="reservation-contact-link" href="/contact">お問い合わせ</Link>
     </div>
   );
 }

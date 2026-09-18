@@ -33,7 +33,7 @@ export default function PrivacyPage() {
         <section><h2>保存期間と削除</h2><p>現在の予約フォームは入力内容を送信・保存しません。オンライン予約開始後は、予約対応と法令上の必要性に応じた保存期間を定め、目的を終えた情報は安全な方法で削除または利用できない状態にします。</p></section>
         <section><h2>開示・訂正・削除等の請求</h2><p>オンライン予約開始後は、ご自身の情報について、開示、訂正、削除、利用停止などを希望される場合の受付窓口を設けます。現在はお問い合わせ先の正式情報を準備中のため、公開後にこのページへ掲載します。</p></section>
         <section><h2>Cookie・アクセス解析</h2><p>現在、広告目的のCookieおよびアクセス解析ツールは使用していません。</p></section>
-        <section><h2>お問い合わせ窓口</h2><p>個人情報に関するお問い合わせ先は、正式な運営情報の確定後に掲載します。現在の設定状況は以下のとおりです。</p><dl className="privacy-contact-list"><div><dt>運営者名</dt><dd>{privacySettings.operatorName ?? "公開準備中"}</dd></div><div><dt>問い合わせ用メールアドレス</dt><dd>{privacySettings.contactEmail ?? "公開準備中"}</dd></div><div><dt>問い合わせ用電話番号</dt><dd>{privacySettings.contactPhone ?? "公開準備中"}</dd></div></dl></section>
+        <section><h2>お問い合わせ窓口</h2><p>個人情報に関するお問い合わせ先は、正式な運営情報の確定後に掲載します。現在の設定状況は以下のとおりです。</p><dl className="privacy-contact-list"><div><dt>運営者名</dt><dd>{privacySettings.operatorName ?? "公開準備中"}</dd></div><div><dt>問い合わせ用メールアドレス</dt><dd>{privacySettings.contactEmail ?? "公開準備中"}</dd></div><div><dt>問い合わせ用電話番号</dt><dd>{privacySettings.contactPhone ?? "公開準備中"}</dd></div></dl><Link className="privacy-contact-link" href="/contact">お問い合わせ</Link></section>
         <section><h2>ポリシーの変更</h2><p>この方針は、サービスの開始や内容の変更、法令の改正などに合わせて見直すことがあります。重要な変更がある場合は、このページの更新日と内容を変更してお知らせします。</p></section>
         <Link className="privacy-return-link" href="/#reservation">予約フォームへ戻る</Link>
       </article>
