@@ -1,7 +1,7 @@
 export const siteContent = {
   brand: {
-    name: "店名（仮）",
-    descriptor: "フレンチコースレストラン",
+    name: "KAGARI",
+    descriptor: "フレンチダイニング",
   },
   navigation: [
     { label: "トップ", href: "/" },

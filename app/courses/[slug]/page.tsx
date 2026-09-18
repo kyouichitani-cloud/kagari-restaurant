@@ -17,9 +17,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
   const { slug } = await params;
   const course = getCourse(slug);
-  if (!course) return { title: "コースが見つかりません" };
+  if (!course) return { title: "KAGARI｜コースが見つかりません" };
   return {
-    title: `${course.name}｜店名（仮）`,
+    title: `KAGARI｜${course.name}`,
     description: `${course.name}。お一人様・税込 ${course.price.toLocaleString("ja-JP")}円。${course.scene}`,
     alternates: { canonical: getCourseHref(course.id) },
   };

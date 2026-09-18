@@ -87,8 +87,8 @@ export function ScrollExpansionHero() {
           </h1>
           <p className="hero-description">{siteContent.hero.body}</p>
           <div className="hero-actions">
-            <Button asChild variant="ivory" size="large"><Link href="#courses">コースを見る</Link></Button>
-            <Button asChild variant="outline" size="large"><Link href="#reservation">席を予約する</Link></Button>
+            <Button asChild variant="ivory" size="large"><Link className="hero-primary-action" href="/courses">コースを見る</Link></Button>
+            <Button asChild variant="outline" size="large"><Link href="/#reservation">席を予約する</Link></Button>
           </div>
         </div>
 

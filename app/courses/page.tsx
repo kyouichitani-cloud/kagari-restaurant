@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { getCourseHref, getCourseReservationHref, siteContent } from "@/content/french-restaurant";
 
 export const metadata: Metadata = {
-  title: "コース料理｜店名（仮）",
+  title: "KAGARI｜コース料理",
   description: "季節のフレンチコース、彩りフレンチコース、シェフ特選フレンチコースの内容と価格をご案内します。",
   alternates: { canonical: "/courses" },
 };

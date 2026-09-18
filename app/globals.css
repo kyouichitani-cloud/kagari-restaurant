@@ -48,7 +48,9 @@ p, dd, label, button, a { line-break: strict; text-wrap: pretty; }
 
 /* Header and navigation */
 .site-header { position: fixed; z-index: 90; inset: 0 0 auto; display: flex; align-items: center; justify-content: space-between; min-height: 76px; padding: 0 clamp(1.15rem, 4vw, 4.5rem); border-bottom: 1px solid var(--line-dark); color: var(--ivory); background: rgb(8 26 43 / .68); }
-.site-wordmark { font-family: var(--serif); font-size: clamp(1rem, 1.5vw, 1.25rem); letter-spacing: .09em; }
+.site-wordmark { display: grid; gap: .22rem; font-family: var(--serif); letter-spacing: .09em; }
+.site-wordmark > span { font-size: clamp(1rem, 1.5vw, 1.25rem); }
+.site-wordmark small { color: var(--ivory-muted); font: 600 .56rem/1 var(--sans); letter-spacing: .12em; }
 .menu-trigger { display: inline-flex; align-items: center; gap: 1rem; min-width: 94px; min-height: 48px; border: 0; color: inherit; background: transparent; cursor: pointer; }
 .menu-trigger span { font-size: .68rem; letter-spacing: .2em; }
 .menu-trigger i { position: relative; display: block; width: 22px; height: 22px; transition: transform 220ms var(--ease-out); }
@@ -99,6 +101,8 @@ p, dd, label, button, a { line-break: strict; text-wrap: pretty; }
 .hero-copy h1 span { display: block; }
 .hero-description { grid-column: 2; grid-row: 3; margin: 0 0 5.3rem; max-width: 33rem; color: rgb(243 238 229 / .88); font-size: clamp(.9rem, 1.1vw, 1.05rem); }
 .hero-actions { grid-column: 2; grid-row: 3; display: flex; flex-wrap: wrap; gap: .75rem; align-self: end; }
+.hero-primary-action { background-color: #F3EEE5; color: #081A2B; font-size: .875rem; font-weight: 600; }
+.hero-primary-action:hover { background-color: #fff; color: #081A2B; }
 .scroll-cue { position: absolute; z-index: 4; right: 1.5rem; bottom: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .65rem; }
 .scroll-cue span { font-size: .58rem; letter-spacing: .16em; writing-mode: vertical-rl; }
 .scroll-cue i { display: block; width: 1px; height: 28px; background: var(--gold); transform-origin: top; animation: scroll-cue 1.8s var(--ease-out) infinite; }
@@ -367,6 +371,7 @@ p, dd, label, button, a { line-break: strict; text-wrap: pretty; }
   .hero-description { max-width: 30rem; margin: 0; font-size: .86rem; }
   .hero-actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; justify-self: auto; }
   .hero-actions a { min-width: 0; padding-inline: .8rem; font-size: .78rem; }
+  .hero-actions .hero-primary-action { font-size: .875rem; font-weight: 600; }
   .scroll-cue { display: none; }
   .concept-grid { grid-template-columns: 1fr; gap: 2rem; }
   .concept-heading h2 { font-size: clamp(2.35rem, 12vw, 4rem); }

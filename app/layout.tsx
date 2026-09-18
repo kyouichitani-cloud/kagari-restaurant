@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: "店名（仮）｜記念日に楽しむフレンチコース",
-  description: "若いカップルや夫婦が、記念日や少し特別な日に気負わず楽しめるフレンチコースレストランのデモサイトです。",
+  title: "KAGARI｜記念日に楽しむフレンチコース",
+  description: "KAGARIは、若いカップルや夫婦が記念日や少し特別な日に気負わず楽しめるフレンチダイニングです。",
   robots: { index: false, follow: false },
 };
 
