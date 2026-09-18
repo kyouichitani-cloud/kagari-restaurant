@@ -104,7 +104,7 @@ p, dd, label, button, a { line-break: strict; text-wrap: pretty; }
 .concept-copy p { max-width: 36rem; margin: 0 0 1.6rem; }
 .concept-image { position: relative; grid-column: 1 / -1; width: 78%; aspect-ratio: 16 / 8.4; margin-top: clamp(2rem, 6vw, 6rem); overflow: hidden; border-radius: 14px; }
 .concept-image img { object-position: center 56%; }
-.concept-aside { align-self: end; margin: -10rem 0 2rem auto; color: var(--burgundy); font-family: var(--serif); font-size: clamp(1.15rem, 2.1vw, 2rem); line-height: 1.65; writing-mode: vertical-rl; }
+.concept-aside { grid-column: 1 / -1; max-width: 36rem; margin: 2rem 0 0; color: var(--burgundy); font-family: var(--serif); font-size: clamp(1.15rem, 2.1vw, 2rem); line-height: 1.65; writing-mode: horizontal-tb; }
 
 /* Reasons */
 .reasons-section { padding: clamp(6rem, 12vw, 11rem) 0; background: var(--burgundy); }
@@ -300,7 +300,7 @@ p, dd, label, button, a { line-break: strict; text-wrap: pretty; }
   .concept-heading h2 { font-size: clamp(2.35rem, 12vw, 4rem); }
   .concept-copy { padding: 0; }
   .concept-image { grid-column: 1; width: 100%; aspect-ratio: 4 / 3; margin-top: 2rem; }
-  .concept-aside { margin: 0 0 0 auto; writing-mode: horizontal-tb; }
+  .concept-aside { margin: 2rem 0 0; writing-mode: horizontal-tb; }
   .reasons-heading h2 { font-size: clamp(2.3rem, 11vw, 3.7rem); }
   .reason-row { grid-template-columns: 2rem 1fr; gap: .8rem 1rem; }
   .reason-row p { grid-column: 2; }

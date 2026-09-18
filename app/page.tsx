@@ -28,7 +28,7 @@ export default function Home() {
             <SectionReveal className="concept-image" delay={0.2}>
               <Image src={siteContent.images.fish} alt="シェフが白身魚の一皿にソースを添える様子" fill sizes="(max-width: 767px) calc(100vw - 2rem), 58vw" />
             </SectionReveal>
-            <p className="concept-aside">特別な日を、<br />特別扱いしすぎない。</p>
+            <p className="concept-aside">特別な日を、特別扱いしすぎない。</p>
           </div>
         </section>
 
