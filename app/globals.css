@@ -38,6 +38,8 @@ img { object-fit: cover; }
 h1, h2, h3, p { margin-block-start: 0; }
 h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.025em; line-height: 1.35; text-wrap: balance; }
 p, dd, label, button, a { line-break: strict; text-wrap: pretty; }
+.course-name { max-width: 100%; word-break: keep-all; overflow-wrap: normal; text-wrap: balance; }
+.course-name-prefix, .course-name-suffix { display: inline-block; max-width: 100%; white-space: nowrap; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 5px; }
 
 .skip-link { position: fixed; z-index: 120; inset: 1rem auto auto 1rem; min-height: 44px; padding: .65rem 1rem; color: var(--navy); background: var(--ivory); transform: translateY(calc(-100% - 2rem)); transition: transform 180ms var(--ease-out); }

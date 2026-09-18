@@ -3,6 +3,7 @@ import Link from "next/link";
 import { InstagramLogo } from "@phosphor-icons/react/ssr";
 import { FrenchReservationForm } from "@/components/FrenchReservationForm";
 import { KineticNavigation } from "@/components/KineticNavigation";
+import { CourseName } from "@/components/CourseName";
 import { RestaurantFooter } from "@/components/RestaurantFooter";
 import { ScrollExpansionHero } from "@/components/ScrollExpansionHero";
 import { SectionReveal } from "@/components/SectionReveal";
@@ -83,7 +84,7 @@ export default function Home() {
                 </SectionReveal>
                 <SectionReveal className="course-copy" delay={0.12}>
                   <p className="course-scene">{course.scene}</p>
-                  <h3>{course.name}</h3>
+                  <h3><CourseName name={course.name} /></h3>
                   <p className="course-price"><span>お一人様</span>{course.price.toLocaleString("ja-JP")}<small>円</small></p>
                   <p className="course-description">{course.description}</p>
                   <dl><dt>構成例</dt><dd>{course.composition.join(" ／ ")}</dd></dl>

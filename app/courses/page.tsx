@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { KineticNavigation } from "@/components/KineticNavigation";
+import { CourseName } from "@/components/CourseName";
 import { RestaurantFooter } from "@/components/RestaurantFooter";
 import { SectionReveal } from "@/components/SectionReveal";
 import { Button } from "@/components/ui/button";
@@ -36,7 +37,7 @@ export default function CoursesPage() {
             </SectionReveal>
             <SectionReveal className="course-index-copy" delay={0.12}>
               <p className="course-index-number">0{index + 1}</p>
-              <h2>{course.name}</h2>
+              <h2><CourseName name={course.name} /></h2>
               <p className="course-index-price"><span>お一人様・税込</span>{course.price.toLocaleString("ja-JP")}円</p>
               <p>{course.description}</p>
               <p className="course-index-scene">{course.scene}</p>

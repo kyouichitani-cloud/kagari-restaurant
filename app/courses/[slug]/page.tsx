@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { KineticNavigation } from "@/components/KineticNavigation";
+import { CourseName } from "@/components/CourseName";
 import { RestaurantFooter } from "@/components/RestaurantFooter";
 import { SectionReveal } from "@/components/SectionReveal";
 import { Button } from "@/components/ui/button";
@@ -45,7 +46,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
           <SectionReveal>
             <Link className="back-link" href="/courses">コース一覧へ戻る</Link>
             <p className="section-kicker">コース料理</p>
-            <h1 id="course-detail-title">{course.name}</h1>
+            <h1 id="course-detail-title"><CourseName name={course.name} /></h1>
             <p className="course-detail-price"><span>お一人様・税込</span>{course.price.toLocaleString("ja-JP")}円</p>
           </SectionReveal>
         </div>
