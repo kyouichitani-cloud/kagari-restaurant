@@ -4,14 +4,13 @@ export const siteContent = {
     descriptor: "フレンチコースレストラン",
   },
   navigation: [
-    { label: "トップ", href: "#top" },
-    { label: "私たちについて", href: "#concept" },
-    { label: "コース料理", href: "#courses" },
-    { label: "ドリンク", href: "#drinks" },
-    { label: "記念日ケーキ", href: "#cake" },
-    { label: "ギャラリー", href: "#gallery" },
-    { label: "店舗情報・アクセス", href: "#access" },
-    { label: "ご予約", href: "#reservation" },
+    { label: "トップ", href: "/" },
+    { label: "私たちについて", href: "/#concept" },
+    { label: "ドリンク", href: "/#drinks" },
+    { label: "記念日ケーキ", href: "/#cake" },
+    { label: "ギャラリー", href: "/#gallery" },
+    { label: "店舗情報・アクセス", href: "/#access" },
+    { label: "ご予約", href: "/#reservation" },
   ],
   hero: {
     title: "いつものふたりに、\n少しだけ特別な夜を。",
@@ -73,3 +72,20 @@ export const siteContent = {
 } as const;
 
 export type CourseId = (typeof siteContent.courses)[number]["id"];
+export type Course = (typeof siteContent.courses)[number];
+
+export function isCourseId(value: string | null | undefined): value is CourseId {
+  return siteContent.courses.some((course) => course.id === value);
+}
+
+export function getCourse(id: string): Course | undefined {
+  return siteContent.courses.find((course) => course.id === id);
+}
+
+export function getCourseHref(id: CourseId) {
+  return `/courses/${id}`;
+}
+
+export function getCourseReservationHref(id: CourseId) {
+  return `/?course=${id}#reservation`;
+}

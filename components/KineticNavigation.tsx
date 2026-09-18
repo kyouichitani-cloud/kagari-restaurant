@@ -2,14 +2,16 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { siteContent } from "@/content/french-restaurant";
+import { getCourseHref, siteContent } from "@/content/french-restaurant";
 
 const focusableSelector = "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])";
 
 export function KineticNavigation() {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -56,7 +58,7 @@ export function KineticNavigation() {
   return (
     <>
       <header className="site-header">
-        <Link className="site-wordmark" href="#top" aria-label="トップへ">{siteContent.brand.name}</Link>
+        <Link className="site-wordmark" href="/" aria-label="トップへ">{siteContent.brand.name}</Link>
         <button
           ref={buttonRef}
           className="menu-trigger"
@@ -96,8 +98,8 @@ export function KineticNavigation() {
             />
             <div className="menu-decoration" data-active={activeIndex} aria-hidden="true"><span /><span /></div>
             <nav aria-label="メインナビゲーション">
-              <ul>
-                {siteContent.navigation.map((item, index) => (
+              <ul className="menu-primary-list">
+                {siteContent.navigation.slice(0, 2).map((item, index) => (
                   <motion.li
                     key={item.href}
                     variants={{ closed: { opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
@@ -105,11 +107,43 @@ export function KineticNavigation() {
                   >
                     <Link
                       href={item.href}
+                      aria-current={pathname === item.href ? "page" : undefined}
                       onMouseEnter={() => setActiveIndex(index)}
                       onFocus={() => setActiveIndex(index)}
                       onClick={closeMenu}
                     >
                       <span>{String(index + 1).padStart(2, "0")}</span>{item.label}
+                    </Link>
+                  </motion.li>
+                ))}
+                <motion.li
+                  className="menu-course-group"
+                  variants={{ closed: { opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
+                  transition={{ duration: reduceMotion ? 0.18 : 0.42, delay: reduceMotion ? 0 : 0.27, ease: [0.23, 1, 0.32, 1] }}
+                >
+                  <p><span>03</span>コース料理</p>
+                  <ul>
+                    <li><Link href="/courses" aria-current={pathname === "/courses" ? "page" : undefined} onMouseEnter={() => setActiveIndex(2)} onFocus={() => setActiveIndex(2)} onClick={closeMenu}>コース一覧</Link></li>
+                    {siteContent.courses.map((course) => {
+                      const href = getCourseHref(course.id);
+                      return <li key={course.id}><Link href={href} aria-current={pathname === href ? "page" : undefined} onMouseEnter={() => setActiveIndex(2)} onFocus={() => setActiveIndex(2)} onClick={closeMenu}>{course.name}<small>お一人様 {course.price.toLocaleString("ja-JP")}円</small></Link></li>;
+                    })}
+                  </ul>
+                </motion.li>
+                {siteContent.navigation.slice(2).map((item, index) => (
+                  <motion.li
+                    key={item.href}
+                    variants={{ closed: { opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
+                    transition={{ duration: reduceMotion ? 0.18 : 0.42, delay: reduceMotion ? 0 : 0.34 + index * 0.045, ease: [0.23, 1, 0.32, 1] }}
+                  >
+                    <Link
+                      href={item.href}
+                      aria-current={pathname === item.href ? "page" : undefined}
+                      onMouseEnter={() => setActiveIndex(index + 3)}
+                      onFocus={() => setActiveIndex(index + 3)}
+                      onClick={closeMenu}
+                    >
+                      <span>{String(index + 4).padStart(2, "0")}</span>{item.label}
                     </Link>
                   </motion.li>
                 ))}

@@ -7,9 +7,11 @@ const styles = read("app/globals.css");
 const form = read("components/FrenchReservationForm.tsx");
 const navigation = read("components/KineticNavigation.tsx");
 const hero = read("components/ScrollExpansionHero.tsx");
+const coursesPage = read("app/courses/page.tsx");
+const courseDetailPage = read("app/courses/[slug]/page.tsx");
 const content = read("content/french-restaurant.ts");
 const packageJson = JSON.parse(read("package.json"));
-const sources = [page, styles, form, navigation, hero, content].join("\n");
+const sources = [page, styles, form, navigation, hero, coursesPage, courseDetailPage, content].join("\n");
 
 const expectedCourses = [
   ["季節のフレンチコース", "5000"],
@@ -45,6 +47,10 @@ for (const required of [
   "実際の予約は送信されていません",
   "CustomEase",
   "ScrollTrigger",
+  "getCourseReservationHref",
+  "generateStaticParams",
+  "notFound()",
+  "お一人様・税込",
 ]) {
   if (!sources.includes(required)) throw new Error(`Required behavior or copy is missing: ${required}`);
 }

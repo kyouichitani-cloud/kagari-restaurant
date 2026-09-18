@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FrenchReservationForm } from "@/components/FrenchReservationForm";
 import { KineticNavigation } from "@/components/KineticNavigation";
+import { RestaurantFooter } from "@/components/RestaurantFooter";
 import { ScrollExpansionHero } from "@/components/ScrollExpansionHero";
 import { SectionReveal } from "@/components/SectionReveal";
 import { Button } from "@/components/ui/button";
-import { siteContent } from "@/content/french-restaurant";
+import { getCourseHref, siteContent } from "@/content/french-restaurant";
 
 export default function Home() {
   return (
@@ -60,6 +61,7 @@ export default function Home() {
             </SectionReveal>
             <SectionReveal className="courses-intro-copy" direction="right" delay={0.12}>
               <p>すべてお一人様の価格です。掲載している料理構成は仮データのため、正式な内容に合わせて差し替えられます。</p>
+              <Button asChild variant="quiet"><Link href="/courses">コース一覧を見る</Link></Button>
             </SectionReveal>
           </div>
 
@@ -77,7 +79,10 @@ export default function Home() {
                   <p className="course-description">{course.description}</p>
                   <dl><dt>構成例</dt><dd>{course.composition.join(" ／ ")}</dd></dl>
                   <p className="course-note">{course.note}</p>
-                  <Button asChild variant="quiet"><Link href="#reservation">このコースで予約する</Link></Button>
+                  <div className="course-actions">
+                    <Button asChild variant="quiet"><Link href={getCourseHref(course.id)}>詳しく見る</Link></Button>
+                    <Button asChild variant="quiet"><Link href="#reservation">このコースで予約する</Link></Button>
+                  </div>
                 </SectionReveal>
               </article>
             ))}
@@ -155,11 +160,7 @@ export default function Home() {
         </section>
       </div>
 
-      <footer className="site-footer">
-        <div className="footer-main"><p>{siteContent.brand.name}</p><span>{siteContent.brand.descriptor}</span></div>
-        <nav aria-label="フッターナビゲーション"><Link href="#courses">コース料理</Link><Link href="#access">店舗情報</Link><Link href="#reservation">ご予約</Link></nav>
-        <p className="footer-note">掲載情報はデモ用の仮データです。<br />© {new Date().getFullYear()} {siteContent.brand.name}</p>
-      </footer>
+      <RestaurantFooter />
     </main>
   );
 }

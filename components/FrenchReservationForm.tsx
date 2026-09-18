@@ -2,9 +2,9 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, CheckCircle, WarningCircle } from "@phosphor-icons/react";
-import { FormEvent, useMemo, useRef, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { siteContent } from "@/content/french-restaurant";
+import { isCourseId, siteContent } from "@/content/french-restaurant";
 
 type FormState = "idle" | "editing" | "review" | "submitting" | "success" | "error";
 type FormValues = {
@@ -66,6 +66,15 @@ export function FrenchReservationForm() {
   const [status, setStatus] = useState<FormState>("idle");
   const reduceMotion = useReducedMotion();
   const formTopRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const requestedCourse = new URLSearchParams(window.location.search).get("course");
+    if (!isCourseId(requestedCourse)) return;
+    const frame = window.requestAnimationFrame(() => {
+      setValues((current) => current.course ? current : { ...current, course: requestedCourse });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   const courseName = useMemo(() => siteContent.courses.find((course) => course.id === values.course)?.name ?? "", [values.course]);
   const drinkName = useMemo(() => siteContent.drinks.find((drink) => drink.id === values.drink)?.label ?? "", [values.drink]);
