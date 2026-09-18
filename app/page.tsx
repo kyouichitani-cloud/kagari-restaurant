@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { InstagramLogo } from "@phosphor-icons/react/ssr";
 import { FrenchReservationForm } from "@/components/FrenchReservationForm";
 import { KineticNavigation } from "@/components/KineticNavigation";
 import { RestaurantFooter } from "@/components/RestaurantFooter";
@@ -155,7 +156,7 @@ export default function Home() {
                 <div><dt>定休日</dt><dd>{siteContent.details.closed}</dd></div>
                 <div><dt>ドレスコード</dt><dd>{siteContent.details.dressCode}</dd></div>
               </dl>
-              <div className="access-links"><a href={siteContent.details.mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>{siteContent.details.instagram.url && <a href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>}</div>
+              <div className="access-links"><a href={siteContent.details.mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>{siteContent.details.instagram.url && <a className="instagram-access-button" href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer" aria-label={`Instagram ${siteContent.details.instagram.label} を新しいタブで開く`}><InstagramLogo size={23} weight="thin" aria-hidden="true" /><span className="instagram-access-identity"><strong>Instagram</strong><small>{siteContent.details.instagram.label}</small></span><span className="instagram-access-cta">最新情報を見る <span className="instagram-arrow" aria-hidden="true">↗</span></span></a>}</div>
             </SectionReveal>
             <SectionReveal className="map-placeholder" delay={0.2}>
               <span>現在地（仮）</span><p>地図は住所確定後に掲載します</p><i aria-hidden="true" />
