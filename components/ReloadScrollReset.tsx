@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 function isReloadNavigation() {
   const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
@@ -9,7 +9,7 @@ function isReloadNavigation() {
 }
 
 export function ReloadScrollReset() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isReloadNavigation()) return;
 
     const previousRestoration = window.history.scrollRestoration;
@@ -28,8 +28,9 @@ export function ReloadScrollReset() {
         reset();
         secondFrame = window.requestAnimationFrame(reset);
       });
-      timers.push(window.setTimeout(reset, 80));
-      timers.push(window.setTimeout(reset, 260));
+      timers.push(window.setTimeout(reset, 0));
+      timers.push(window.setTimeout(reset, 100));
+      timers.push(window.setTimeout(reset, 320));
     };
 
     const finish = () => {
@@ -39,6 +40,7 @@ export function ReloadScrollReset() {
       timers.forEach((timer) => window.clearTimeout(timer));
       window.removeEventListener("load", resetAfterRestore);
       window.removeEventListener("pageshow", resetAfterRestore);
+      window.removeEventListener("pagehide", finish);
       window.history.scrollRestoration = previousRestoration;
     };
 
@@ -48,7 +50,7 @@ export function ReloadScrollReset() {
     resetAfterRestore();
     window.addEventListener("load", resetAfterRestore, { once: true });
     window.addEventListener("pageshow", resetAfterRestore);
-    timers.push(window.setTimeout(finish, 520));
+    window.addEventListener("pagehide", finish, { once: true });
 
     return finish;
   }, []);
