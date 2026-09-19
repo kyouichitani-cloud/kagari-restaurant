@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, CheckCircle, WarningCircle } from "@phosphor-icons/react";
+import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { privacySettings } from "@/content/privacy";
@@ -122,7 +123,7 @@ export function DemoContactForm() {
         <div className="contact-field"><label htmlFor="contact-phone">電話番号 <span className="optional-badge">任意</span></label><input id="contact-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={40} value={values.phone} aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? "contact-phone-error" : undefined} onChange={(event) => update("phone", event.target.value)} />{errors.phone && <p id="contact-phone-error" className="field-error" role="alert">{errors.phone}</p>}</div>
         <div className="contact-field"><label htmlFor="contact-message">お問い合わせ内容 <span className="required-badge">必須</span></label><textarea id="contact-message" name="message" rows={8} maxLength={2000} value={values.message} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "contact-message-error" : undefined} onChange={(event) => update("message", event.target.value)} />{errors.message && <p id="contact-message-error" className="field-error" role="alert">{errors.message}</p>}</div>
         <div className="contact-consent">
-          <label className="privacy-check" htmlFor="contact-privacy"><input id="contact-privacy" name="privacy" type="checkbox" checked={values.privacy} aria-invalid={Boolean(errors.privacy)} aria-describedby={errors.privacy ? "contact-privacy-error" : undefined} onChange={(event) => update("privacy", event.target.checked)} /><span><a href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>を確認し、お問い合わせに必要な個人情報の取り扱いに同意します。 <span className="required-badge">必須</span></span></label>
+          <label className="privacy-check" htmlFor="contact-privacy"><input id="contact-privacy" name="privacy" type="checkbox" checked={values.privacy} aria-invalid={Boolean(errors.privacy)} aria-describedby={errors.privacy ? "contact-privacy-error" : undefined} onChange={(event) => update("privacy", event.target.checked)} /><span><Link href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</Link>を確認し、お問い合わせに必要な個人情報の取り扱いに同意します。 <span className="required-badge">必須</span></span></label>
           {errors.privacy && <p id="contact-privacy-error" className="field-error" role="alert">{errors.privacy}</p>}
         </div>
         <div className="contact-submit"><Button type="submit" variant="ivory" size="large">入力内容を確認する</Button></div>

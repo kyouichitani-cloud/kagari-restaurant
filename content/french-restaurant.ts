@@ -1,3 +1,5 @@
+import { withBasePath } from "@/content/paths";
+
 export const siteContent = {
   brand: {
     name: "KAGARI",
@@ -25,7 +27,7 @@ export const siteContent = {
       scene: "初めてのコース料理や、いつものデートを少し特別にしたい日に。",
       description: "季節の味わいを気軽に楽しめる、軽やかな構成を想定したコースです。",
       composition: ["前菜", "メイン料理", "デザート など"],
-      image: "/images/french/hero.avif",
+      image: withBasePath("/images/french/hero.avif"),
       alt: "落ち着いた店内でテーブルに置かれたフレンチ料理",
       note: "料理構成は差し替え用の仮データです。",
     },
@@ -36,7 +38,7 @@ export const siteContent = {
       scene: "誕生日や交際記念日など、食事の時間そのものをゆっくり楽しみたい日に。",
       description: "前菜からデザートまで、一皿ごとの変化を楽しめる構成を想定しています。",
       composition: ["前菜", "魚料理", "肉料理", "デザート など"],
-      image: "/images/french/fish.avif",
+      image: withBasePath("/images/french/fish.avif"),
       alt: "白身魚にソースを仕上げるフレンチの一皿",
       note: "料理構成は差し替え用の仮データです。",
     },
@@ -47,7 +49,7 @@ export const siteContent = {
       scene: "節目の記念日や、料理を主役にした特別な夜に。",
       description: "よりゆっくりと皿数を重ねる、充実した構成を想定したコースです。",
       composition: ["アミューズ", "前菜", "魚料理", "肉料理", "デザート など"],
-      image: "/images/french/beef.avif",
+      image: withBasePath("/images/french/beef.avif"),
       alt: "牛肉と季節の野菜を盛り付けたフレンチの一皿",
       note: "料理構成は差し替え用の仮データです。",
     },
@@ -67,12 +69,12 @@ export const siteContent = {
     instagram: { label: "@kagari.french", url: "https://www.instagram.com/kagari.french/" },
   },
   images: {
-    hero: "/images/french/hero.avif",
-    background: "/images/french/anniversary.avif",
-    fish: "/images/french/fish.avif",
-    beef: "/images/french/beef.avif",
-    wine: "/images/french/wine.avif",
-    anniversary: "/images/french/anniversary.avif",
+    hero: withBasePath("/images/french/hero.avif"),
+    background: withBasePath("/images/french/anniversary.avif"),
+    fish: withBasePath("/images/french/fish.avif"),
+    beef: withBasePath("/images/french/beef.avif"),
+    wine: withBasePath("/images/french/wine.avif"),
+    anniversary: withBasePath("/images/french/anniversary.avif"),
   },
 } as const;
 

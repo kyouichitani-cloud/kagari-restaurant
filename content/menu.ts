@@ -1,4 +1,5 @@
 import type { Course } from "@/content/restaurant";
+import { withBasePath } from "@/content/paths";
 import { reservationCourses, type ReservationCourse } from "@/content/reservation";
 
 export type MenuDish = Pick<Course, "chapter" | "title" | "description" | "origin" | "details"> & {
@@ -10,7 +11,7 @@ export type CompleteMenuCourse = ReservationCourse & { dishes: MenuDish[] };
 export const courseSlug = (id: string) => id === "honoo" ? "homura" : id;
 
 const chapters = ["先付", "前菜", "椀", "向付", "焼物", "温物", "肉", "食事", "甘味", "余韻"];
-const dish = (title: string, file: string, index: number): MenuDish => ({ chapter: chapters[index], title, description: "", origin: "", details: [], imageSrc: file, alt: `${title}を盛り付けた一皿` });
+const dish = (title: string, file: string, index: number): MenuDish => ({ chapter: chapters[index], title, description: "", origin: "", details: [], imageSrc: withBasePath(file), alt: `${title}を盛り付けた一皿` });
 
 const newMenus: Record<string, MenuDish[]> = {
   yoi: [
@@ -30,6 +31,6 @@ const newMenus: Record<string, MenuDish[]> = {
 export function getCompleteMenu(existing: Course[]): CompleteMenuCourse[] {
   return reservationCourses.map((course) => ({
     ...course,
-    dishes: course.id === "kagari" ? existing.map((item) => ({ ...item, imageSrc: `/images/course/avif/${item.image}.avif`, alt: item.photo?.alt ?? `${item.chapter}「${item.title}」` })) : newMenus[course.id],
+    dishes: course.id === "kagari" ? existing.map((item) => ({ ...item, imageSrc: withBasePath(`/images/course/avif/${item.image}.avif`), alt: item.photo?.alt ?? `${item.chapter}「${item.title}」` })) : newMenus[course.id],
   }));
 }

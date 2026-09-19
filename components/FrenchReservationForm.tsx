@@ -248,7 +248,7 @@ export function FrenchReservationForm() {
         <div className="consent-stack">
           <label className="privacy-check" htmlFor="privacy-consent">
             <input {...inputProps("privacy", "privacy-consent")} type="checkbox" checked={values.privacy} onChange={(e) => update("privacy", e.target.checked)} />
-            <span><a href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>を確認し、予約に必要な個人情報の取り扱いに同意します。 <Required /></span>
+            <span><Link href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</Link>を確認し、予約に必要な個人情報の取り扱いに同意します。 <Required /></span>
           </label>
           {errors.privacy && <p id="privacy-error" className="field-error" role="alert">{errors.privacy}</p>}
           <AnimatePresence initial={false}>{values.allergies.trim() && <motion.div className="health-consent" initial={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,8px,0)" }} animate={{ opacity: 1, transform: "translate3d(0,0,0)" }} exit={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,-6px,0)" }} transition={{ duration: reduceMotion ? 0.18 : 0.22, ease: [0.23, 1, 0.32, 1] }}><label className="privacy-check" htmlFor="health-consent"><input {...inputProps("healthConsent", "health-consent")} type="checkbox" checked={values.healthConsent} onChange={(e) => update("healthConsent", e.target.checked)} /><span>アレルギー等の健康に関する情報を、予約対応と安全な料理提供のために取得・利用することに同意します。 <Required /></span></label>{errors.healthConsent && <p id="healthConsent-error" className="field-error" role="alert">{errors.healthConsent}</p>}</motion.div>}</AnimatePresence>

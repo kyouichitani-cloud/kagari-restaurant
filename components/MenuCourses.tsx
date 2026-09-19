@@ -142,7 +142,7 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
 }
 
 function CoursePicture({ dish, priority }: { dish: MenuDish; priority: boolean }) {
-  const existing = dish.imageSrc.startsWith("/images/course/");
+  const existing = dish.imageSrc.includes("/images/course/");
   return (
     <picture className="dish-panel-image">
       <Image

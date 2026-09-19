@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLayoutEffect, useState } from "react";
+import { withBasePath } from "@/content/paths";
 import type { RestaurantContent } from "@/content/restaurant";
 
 export function KagariHero({ hero, brand }: Pick<RestaurantContent, "hero" | "brand">) {
@@ -27,10 +28,10 @@ export function KagariHero({ hero, brand }: Pick<RestaurantContent, "hero" | "br
   return (
     <section className="hero" aria-labelledby="hero-title" data-revealed={revealed}>
       <picture className="hero-media">
-        <source media="(max-width: 767px)" srcSet="/images/responsive/portrait/hero.avif" type="image/avif" />
-        <source media="(max-width: 1023px)" srcSet="/images/responsive/square/hero.avif" type="image/avif" />
+        <source media="(max-width: 767px)" srcSet={withBasePath("/images/responsive/portrait/hero.avif")} type="image/avif" />
+        <source media="(max-width: 1023px)" srcSet={withBasePath("/images/responsive/square/hero.avif")} type="image/avif" />
         <Image
-          src="/images/responsive/wide/hero.avif"
+          src={withBasePath("/images/responsive/wide/hero.avif")}
           alt="白磁の器に盛り付けた季節の一皿"
           width={3200}
           height={1800}

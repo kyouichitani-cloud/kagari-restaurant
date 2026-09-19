@@ -1,13 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Kagari Sans";
-  src: url("/fonts/kagari-sans.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 100 900;
-}
-
 :root {
   --navy: #050A0F;
   --navy-soft: #0A141D;
@@ -20,7 +12,7 @@
   --ink: #132333;
   --line-dark: rgb(243 238 229 / 0.18);
   --line-light: rgb(5 10 15 / 0.16);
-  --sans: "Kagari Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --sans: var(--font-kagari-sans), "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
   --serif: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
@@ -29,7 +21,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--navy); color-scheme: dark; scrollbar-color: var(--burgundy) var(--navy); }
 body { margin: 0; overflow-x: clip; background: var(--navy); color: var(--ivory); font: 400 16px/1.8 var(--sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-body::before { content: ""; position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .032; background-image: url("/images/texture/ink-grain.png"); background-size: 220px; }
+body::before { content: ""; position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .032; background-image: var(--kagari-grain-image); background-size: 220px; }
 ::selection { background: var(--burgundy); color: var(--ivory); }
 a { color: inherit; text-decoration: none; text-underline-offset: .25em; }
 button, input, select, textarea { font: inherit; }

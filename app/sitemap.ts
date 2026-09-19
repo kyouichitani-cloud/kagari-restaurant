@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { siteContent } from "@/content/french-restaurant";
 import { publicationReady, siteUrl } from "@/content/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!publicationReady) return [];
   const pages = ["", "/courses", "/contact", "/privacy", "/legal"];
