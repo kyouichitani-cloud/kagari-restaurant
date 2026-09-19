@@ -453,6 +453,11 @@ button.button-ivory:hover,
   .instagram-access-button:hover .instagram-arrow { transform: translate3d(2px, -2px, 0); }
 }
 
+@media (pointer: coarse), (max-width: 1023px) {
+  body::before { display: none; }
+  .site-header { transform: translateZ(0); backface-visibility: hidden; }
+}
+
 @media (max-width: 1023px) {
   .hero-copy { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; }
   .hero-copy h1 { grid-column: 1; grid-row: 3; }
