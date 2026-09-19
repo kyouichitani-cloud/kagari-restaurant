@@ -181,6 +181,7 @@ button.button-ivory:hover,
 .course-copy h3 { max-width: 12ch; margin: 0; font-size: clamp(2rem, 4vw, 4rem); }
 .course-price { display: flex; align-items: baseline; gap: .35rem; margin: 1.5rem 0; font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 5rem); line-height: 1; font-variant-numeric: tabular-nums; }
 .course-price span { margin-right: .55rem; color: var(--ivory-muted); font: 500 .74rem var(--sans); }
+.course-price strong { font-weight: 400; }
 .course-price small { font-size: 1rem; }
 .course-description { max-width: 35rem; color: var(--ivory-muted); }
 .course-copy dl { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; margin: 1.8rem 0 .7rem; padding-top: 1.1rem; border-top: 1px solid var(--line-dark); }
@@ -461,6 +462,10 @@ button.button-ivory:hover,
   .reasons-layout { grid-template-columns: 1fr; }
   .reasons-heading { position: static; }
   .course-story, .course-story-2, .course-story-3 { gap: 3rem; }
+  .course-price { display: grid; grid-template-columns: auto auto; justify-content: start; align-items: baseline; gap: .35rem .45rem; }
+  .course-price span { grid-column: 1 / -1; margin: 0; color: var(--gold); font-size: .72rem; letter-spacing: .09em; line-height: 1.4; white-space: nowrap; }
+  .course-price strong { grid-column: 1; white-space: nowrap; }
+  .course-price small { grid-column: 2; font-size: .9rem; }
   .drinks-content { padding: 5rem 3rem; }
   .reservation-heading { grid-template-columns: 1fr .8fr; }
   .course-index-row, .course-index-row:nth-child(even) { width: min(100% - 3rem, 780px); grid-template-columns: 1fr; gap: 2.5rem; }
@@ -521,7 +526,7 @@ button.button-ivory:hover,
   .course-story-2 .course-photo { grid-row: 1; }
   .course-story-2 .course-copy { grid-row: 2; }
   .course-copy h3 { max-width: none; font-size: clamp(2rem, 9vw, 3.2rem); }
-  .course-price { font-size: clamp(2.7rem, 14vw, 4rem); }
+  .course-price { margin-block: 1.4rem 1.6rem; font-size: clamp(2.7rem, 14vw, 4rem); }
   .drinks-section { grid-template-columns: 1fr; }
   .drinks-photo { min-height: 68svh; }
   .drinks-content { padding: 5rem 1rem; }

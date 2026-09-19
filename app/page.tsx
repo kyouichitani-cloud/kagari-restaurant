@@ -85,7 +85,11 @@ export default function Home() {
                 <SectionReveal className="course-copy" delay={0.12}>
                   <p className="course-scene">{course.scene}</p>
                   <h3><CourseName name={course.name} /></h3>
-                  <p className="course-price"><span>お一人様</span>{course.price.toLocaleString("ja-JP")}<small>円</small></p>
+                  <p className="course-price">
+                    <span>お一人様・税込</span>
+                    <strong>{course.price.toLocaleString("ja-JP")}</strong>
+                    <small>円</small>
+                  </p>
                   <p className="course-description">{course.description}</p>
                   <dl><dt>構成例</dt><dd>{course.composition.join(" ／ ")}</dd></dl>
                   <p className="course-note">{course.note}</p>
