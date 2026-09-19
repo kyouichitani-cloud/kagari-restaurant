@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { ReloadScrollReset } from "@/components/ReloadScrollReset";
+import { VerticalScrollGuard } from "@/components/VerticalScrollGuard";
 import { withBasePath } from "@/content/paths";
 
 const kagariSans = localFont({
@@ -23,5 +24,5 @@ export const viewport: Viewport = { themeColor: "#050A0F", colorScheme: "dark", 
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const style = { "--kagari-grain-image": `url("${withBasePath("/images/texture/ink-grain.png")}")` } as CSSProperties;
-  return <html lang="ja"><body className={kagariSans.variable} style={style}><ReloadScrollReset />{children}</body></html>;
+  return <html lang="ja"><body className={kagariSans.variable} style={style}><ReloadScrollReset /><VerticalScrollGuard />{children}</body></html>;
 }
