@@ -476,7 +476,7 @@ button.button-ivory:hover,
   .instagram-access-button:hover .instagram-arrow { transform: translate3d(2px, -2px, 0); }
 }
 
-@media (pointer: coarse), (max-width: 1023px) {
+@media (max-width: 1023px) {
   html, body, body * { touch-action: pan-y pinch-zoom; }
   body::before { display: none; }
   .hero { height: 100svh; }

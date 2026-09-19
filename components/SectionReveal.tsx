@@ -17,7 +17,7 @@ export function SectionReveal({ children, className, direction = "up", delay = 0
   const revealClassName = ["section-reveal", className].filter(Boolean).join(" ");
 
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 1023px), (pointer: coarse)");
+    const media = window.matchMedia("(max-width: 1023px)");
     const update = () => setUseLightweightMotion(media.matches);
     update();
     media.addEventListener("change", update);
