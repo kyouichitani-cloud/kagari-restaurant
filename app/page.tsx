@@ -10,6 +10,13 @@ import { SectionReveal } from "@/components/SectionReveal";
 import { Button } from "@/components/ui/button";
 import { getCourseHref, siteContent } from "@/content/french-restaurant";
 
+function MobileBreakText({ text, breakBefore }: { text: string; breakBefore?: string }) {
+  if (!breakBefore || !text.includes(breakBefore)) return text;
+
+  const [before, after] = text.split(breakBefore);
+  return <>{before}<br className="mobile-copy-break" />{breakBefore}{after}</>;
+}
+
 export default function Home() {
   return (
     <main id="top">
@@ -83,14 +90,18 @@ export default function Home() {
                   <span className="course-index" aria-hidden="true">0{index + 1}</span>
                 </SectionReveal>
                 <SectionReveal className="course-copy" delay={0.12}>
-                  <p className="course-scene">{course.scene}</p>
+                  <p className="course-scene">
+                    <MobileBreakText text={course.scene} breakBefore={course.id === "colorful" ? "ゆっくり楽しみたい" : undefined} />
+                  </p>
                   <h3><CourseName name={course.name} /></h3>
                   <p className="course-price">
                     <span>お一人様・税込</span>
                     <strong>{course.price.toLocaleString("ja-JP")}</strong>
                     <small>円</small>
                   </p>
-                  <p className="course-description">{course.description}</p>
+                  <p className="course-description">
+                    <MobileBreakText text={course.description} breakBefore={course.id === "seasonal" ? "軽やかな" : undefined} />
+                  </p>
                   <dl><dt>構成例</dt><dd>{course.composition.join(" ／ ")}</dd></dl>
                   <p className="course-note">{course.note}</p>
                   <div className="course-actions">
