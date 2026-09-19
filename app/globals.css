@@ -340,6 +340,7 @@ button.button-ivory:hover,
 .demo-notice strong { color: var(--gold); white-space: nowrap; }
 .reservation-form-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .43fr); gap: clamp(3rem, 7vw, 8rem); align-items: start; }
 .reservation-form { display: grid; gap: 0; min-width: 0; }
+.mobile-reservation-progress, .mobile-step-actions, .mobile-form-back { display: none; }
 .reservation-group { padding: clamp(2.5rem, 5vw, 4.5rem) 0; border-top: 1px solid rgb(243 238 229 / .18); }
 .reservation-group:last-child { border-bottom: 1px solid rgb(243 238 229 / .18); }
 .reservation-group-title { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; }
@@ -581,15 +582,29 @@ button.button-ivory:hover,
   .instagram-access-button { width: 100%; min-height: 60px; }
   .map-placeholder { grid-column: 1; min-height: 260px; margin-top: 1rem; text-align: center; }
   .reservation-heading { grid-template-columns: 1fr; gap: 1.5rem; }
-  .reservation-form-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .reservation-form-layout { grid-template-columns: 1fr; gap: 0; }
   .reservation-form { order: 1; }
-  .reservation-summary { position: static; order: 2; }
-  .reservation-group { padding: 2rem 0; }
+  .reservation-summary { display: none; }
+  .mobile-reservation-progress { display: grid; gap: .85rem; margin-bottom: 1.25rem; padding: 1rem 0 1.25rem; border-bottom: 1px solid rgb(243 238 229 / .18); }
+  .mobile-reservation-progress > div:first-child { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .mobile-reservation-progress span { color: var(--gold); font-size: .68rem; font-weight: 700; letter-spacing: .12em; }
+  .mobile-reservation-progress strong { color: var(--ivory); font-size: .88rem; font-weight: 650; }
+  .mobile-reservation-progress-track { height: 2px; overflow: hidden; background: rgb(243 238 229 / .16); }
+  .mobile-reservation-progress-track i { display: block; width: 100%; height: 100%; background: var(--gold); transform-origin: left center; transition: transform 180ms var(--ease-out); }
+  .reservation-group { padding: 1.5rem 0 2rem; }
+  .reservation-group[data-mobile-active="false"] { display: none; }
+  .reservation-group-title { margin-bottom: 1.5rem; }
+  .mobile-step-actions { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .65rem; margin-top: 2rem; }
+  .mobile-step-actions-next { grid-template-columns: 1fr; }
+  .mobile-step-actions .button-ivory, .mobile-step-actions .button-quiet { width: 100%; min-height: 52px; }
+  .mobile-step-actions .button-quiet { padding-inline: 1rem; }
   .form-grid, .form-grid-three { grid-template-columns: 1fr; }
   .course-choice-list, .compact-choice-list { grid-template-columns: 1fr; }
   .choice-list label { min-height: 86px; }
-  .form-submit { align-items: stretch; flex-direction: column; }
+  .form-submit { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: stretch; gap: .65rem; }
+  .mobile-form-back { display: inline-flex; min-height: 52px; padding-inline: 1rem; }
   .form-submit button { width: 100%; }
+  .form-submit p { grid-column: 1 / -1; }
   .reservation-review dl > div { grid-template-columns: 1fr; gap: .35rem; }
   .privacy-content { width: min(100% - 2rem, 800px); padding-top: 7rem; }
   .privacy-contact-list > div { grid-template-columns: 1fr; gap: .25rem; }
