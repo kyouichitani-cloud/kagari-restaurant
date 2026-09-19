@@ -29,6 +29,9 @@ export function ScrollExpansionHero() {
     gsap.registerPlugin(ScrollTrigger, CustomEase);
     CustomEase.create("restaurant-expand", "0.23,1,0.32,1");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const useNativeMobileScroll = window.matchMedia("(max-width: 1023px), (pointer: coarse)").matches;
+    if (useNativeMobileScroll) return;
+
     const context = gsap.context(() => {
       if (!reduceMotion) {
         gsap.fromTo(
