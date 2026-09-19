@@ -528,8 +528,8 @@ button.button-ivory:hover,
   .reason-marker { display: none; }
   .courses-intro { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 5rem; }
   .courses-intro h2 { font-size: clamp(2.5rem, 12vw, 4.2rem); }
-  .course-stories { gap: 7rem; }
-  .course-story, .course-story-2, .course-story-3 { width: calc(100% - 2rem); grid-template-columns: 1fr; gap: 2rem; }
+  .course-stories { gap: 2.5rem; }
+  .course-story, .course-story-2, .course-story-3 { width: calc(100% - 2rem); grid-template-columns: 1fr; gap: 1.5rem; }
   .course-story-2 .course-photo, .course-story-2 .course-copy { grid-column: 1; }
   .course-story-2 .course-photo { grid-row: 1; }
   .course-story-2 .course-copy { grid-row: 2; }
