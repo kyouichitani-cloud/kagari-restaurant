@@ -47,7 +47,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
             <Link className="back-link" href="/courses">コース一覧へ戻る</Link>
             <p className="section-kicker">コース料理</p>
             <h1 id="course-detail-title"><CourseName name={course.name} /></h1>
-            <p className="course-detail-price"><span>お一人様・税込</span>{course.price.toLocaleString("ja-JP")}円</p>
+            <p className="course-detail-price"><span>お一人様・税込</span><strong>{course.price.toLocaleString("ja-JP")}</strong><small>円</small></p>
           </SectionReveal>
         </div>
       </section>

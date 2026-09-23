@@ -66,7 +66,7 @@ export default function Home() {
               <h2 id="courses-title">3つのコース</h2>
             </SectionReveal>
             <SectionReveal className="courses-intro-copy" direction="right" delay={0.12}>
-              <p>料金はすべてお一人様・税込です。料理構成は仮データです。</p>
+              <p>料金はお一人様・税込です。</p>
               <Button asChild variant="quiet"><Link href="/courses">コース一覧を見る</Link></Button>
             </SectionReveal>
           </div>
@@ -91,7 +91,7 @@ export default function Home() {
                   <p className="course-note">{course.note}</p>
                   <div className="course-actions">
                     <Button asChild variant="quiet"><Link href={getCourseHref(course.id)}>詳しく見る</Link></Button>
-                    <Button asChild variant="quiet"><Link href="#reservation">このコースで予約する</Link></Button>
+                    <Button asChild variant="ivory"><Link href="#reservation">このコースで予約する</Link></Button>
                   </div>
                 </SectionReveal>
               </article>

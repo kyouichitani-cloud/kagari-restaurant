@@ -24,7 +24,7 @@ export default function CoursesPage() {
           <SectionReveal>
             <p className="section-kicker">コース料理</p>
             <h1 id="courses-page-title">3つのコース</h1>
-            <p>料金はすべてお一人様・税込です。料理構成は仮データです。</p>
+            <p>料金はお一人様・税込です。</p>
           </SectionReveal>
         </div>
       </section>
@@ -38,12 +38,12 @@ export default function CoursesPage() {
             <SectionReveal className="course-index-copy" delay={0.12}>
               <p className="course-index-number">0{index + 1}</p>
               <h2><CourseName name={course.name} /></h2>
-              <p className="course-index-price"><span>お一人様・税込</span>{course.price.toLocaleString("ja-JP")}円</p>
+              <p className="course-index-price"><span>お一人様・税込</span><strong>{course.price.toLocaleString("ja-JP")}</strong><small>円</small></p>
               <p>{course.description}</p>
               <p className="course-index-scene">{course.scene}</p>
               <div className="course-actions">
                 <Button asChild variant="quiet"><Link href={getCourseHref(course.id)}>詳しく見る</Link></Button>
-                <Button asChild variant="outline"><Link href={getCourseReservationHref(course.id)}>このコースで予約する</Link></Button>
+                <Button asChild variant="ivory"><Link href={getCourseReservationHref(course.id)}>このコースで予約する</Link></Button>
               </div>
             </SectionReveal>
           </article>

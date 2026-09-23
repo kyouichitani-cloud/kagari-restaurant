@@ -24,12 +24,12 @@ export const siteContent = {
       id: "seasonal",
       name: "季節のフレンチコース",
       price: 5000,
-      scene: "初めてのコース料理や、気軽なデートに。",
+      scene: "初めてのコース料理にも、気軽なデートにも。",
       description: "前菜、メイン料理、デザートを組み合わせたコースです。",
       composition: ["前菜", "メイン料理", "デザート など"],
       image: withBasePath("/images/french/hero.avif"),
       alt: "落ち着いた店内でテーブルに置かれたフレンチ料理",
-      note: "料理構成は差し替え用の仮データです。",
+      note: "料理内容は決まり次第ご案内します。",
     },
     {
       id: "colorful",
@@ -40,7 +40,7 @@ export const siteContent = {
       composition: ["前菜", "魚料理", "肉料理", "デザート など"],
       image: withBasePath("/images/french/fish.avif"),
       alt: "白身魚にソースを仕上げるフレンチの一皿",
-      note: "料理構成は差し替え用の仮データです。",
+      note: "料理内容は決まり次第ご案内します。",
     },
     {
       id: "chef",
@@ -51,7 +51,7 @@ export const siteContent = {
       composition: ["アミューズ", "前菜", "魚料理", "肉料理", "デザート など"],
       image: withBasePath("/images/french/beef.avif"),
       alt: "牛肉と季節の野菜を盛り付けたフレンチの一皿",
-      note: "料理構成は差し替え用の仮データです。",
+      note: "料理内容は決まり次第ご案内します。",
     },
   ],
   drinks: [
