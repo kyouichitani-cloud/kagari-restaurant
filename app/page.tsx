@@ -24,9 +24,6 @@ export default function Home() {
               <p className="section-kicker">私たちについて</p>
               <h2 id="concept-title">コース料理を、もっと気軽に。</h2>
             </SectionReveal>
-            <SectionReveal className="concept-copy" direction="right" delay={0.12}>
-              <p>初めての方にも分かりやすいよう、料金と内容をまとめています。</p>
-            </SectionReveal>
             <SectionReveal className="concept-image" delay={0.2}>
               <Image src={siteContent.images.fish} alt="シェフが白身魚の一皿にソースを添える様子" fill sizes="(max-width: 767px) calc(100vw - 2rem), 58vw" />
             </SectionReveal>
