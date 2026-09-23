@@ -55,7 +55,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
       <section id="course-detail-content" className="course-detail-content" aria-label={`${course.name}の詳細`}>
         <div className="section-shell course-detail-grid">
           <SectionReveal className="course-detail-intro">
-            <p className="section-kicker">おすすめの日</p>
+            <p className="section-kicker">おすすめの利用シーン</p>
             <h2>{course.scene}</h2>
             <p>{course.description}</p>
           </SectionReveal>
@@ -70,18 +70,18 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
 
         <div className="section-shell course-detail-options">
           <SectionReveal>
-            <p className="section-kicker">ご予約時に選べること</p>
-            <h2>食事の前に、<br />選べること。</h2>
+            <p className="section-kicker">追加オプション</p>
+            <h2>予約フォームで選べます。</h2>
           </SectionReveal>
           <div>
-            <SectionReveal className="course-option" delay={0.1}><h3>ドリンク</h3><p>ドリンクは「単品」または「飲み放題」から選べます。飲み放題の詳細は、店舗からの確認連絡でご案内します。</p></SectionReveal>
-            <SectionReveal className="course-option" delay={0.18}><h3>記念日ケーキ</h3><p>記念日ケーキを追加できます。ケーキに添えるお名前とプレートメッセージは、ご予約時に入力できます。</p></SectionReveal>
+            <SectionReveal className="course-option" delay={0.1}><h3>ドリンク</h3><p>「単品」または「飲み放題」から選べます。</p></SectionReveal>
+            <SectionReveal className="course-option" delay={0.18}><h3>記念日ケーキ</h3><p>お名前とプレートメッセージを入力できます。</p></SectionReveal>
           </div>
         </div>
 
         <div className="section-shell course-detail-reservation">
           <SectionReveal>
-            <p>選択内容は、予約フォーム上で後から変更できます。</p>
+            <p>選択内容は、確認画面まで変更できます。</p>
             <Button asChild variant="ivory" size="large"><Link href={getCourseReservationHref(course.id)}>このコースで予約する</Link></Button>
           </SectionReveal>
         </div>

@@ -112,7 +112,7 @@ export function ScrollExpansionHero() {
           </div>
         </div>
 
-        <div className="scroll-cue" aria-hidden="true"><span>SCROLL</span><i /></div>
+        <div className="scroll-cue" aria-hidden="true"><span>下へ</span><i /></div>
       </div>
     </section>
   );

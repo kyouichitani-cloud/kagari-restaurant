@@ -68,7 +68,7 @@ export function KineticNavigation() {
           aria-label={open ? "メニューを閉じる" : "メニューを開く"}
           onClick={() => setOpen((value) => !value)}
         >
-          <span>MENU</span>
+          <span>メニュー</span>
           <i className={open ? "is-open" : ""} aria-hidden="true" />
         </button>
       </header>
@@ -149,7 +149,7 @@ export function KineticNavigation() {
                 ))}
               </ul>
             </nav>
-            <div className="menu-note"><p>価格も過ごし方も、選びやすく。</p>{siteContent.details.instagram.url && <a href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer">Instagram <span className="instagram-handle">{siteContent.details.instagram.label}</span> <span className="instagram-arrow" aria-hidden="true">↗</span></a>}</div>
+            <div className="menu-note"><p>3つのコースから選べます。</p>{siteContent.details.instagram.url && <a href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer">公式インスタグラム <span className="instagram-handle">{siteContent.details.instagram.label}</span> <span className="instagram-arrow" aria-hidden="true">↗</span></a>}</div>
           </motion.div>
         )}
       </AnimatePresence>

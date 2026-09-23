@@ -16,7 +16,7 @@ const kagariSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: "KAGARI｜記念日に楽しむフレンチコース",
-  description: "KAGARIは、若いカップルや夫婦が記念日や少し特別な日に気負わず楽しめるフレンチダイニングです。",
+  description: "KAGARIは、3つのコースから選べるフレンチダイニングです。",
   robots: { index: false, follow: false },
 };
 

@@ -24,16 +24,12 @@ export function SectionReveal({ children, className, direction = "up", delay = 0
     return () => media.removeEventListener("change", update);
   }, []);
 
-  if (useLightweightMotion) {
-    return <div className={revealClassName}>{children}</div>;
-  }
-
-  const simplifyMotion = Boolean(reduceMotion) || useLightweightMotion;
-  const offset = simplifyMotion ? "translate3d(0,0,0)" : direction === "left"
-    ? "translate3d(-28px,0,0)"
+  const distance = useLightweightMotion ? 12 : 28;
+  const offset = reduceMotion ? "translate3d(0,0,0)" : direction === "left"
+    ? `translate3d(-${distance}px,0,0)`
     : direction === "right"
-      ? "translate3d(28px,0,0)"
-      : "translate3d(0,26px,0)";
+      ? `translate3d(${distance}px,0,0)`
+      : `translate3d(0,${useLightweightMotion ? 10 : 26}px,0)`;
 
   return (
     <motion.div
@@ -42,8 +38,8 @@ export function SectionReveal({ children, className, direction = "up", delay = 0
       whileInView={{ opacity: 1, transform: "translate3d(0,0,0)" }}
       viewport={{ once: true, amount: 0.18 }}
       transition={{
-        duration: reduceMotion ? 0.2 : useLightweightMotion ? 0.24 : 0.7,
-        delay: simplifyMotion ? 0 : delay,
+        duration: reduceMotion ? 0.2 : useLightweightMotion ? 0.42 : 0.7,
+        delay: reduceMotion ? 0 : useLightweightMotion ? Math.min(delay, 0.08) : delay,
         ease: [0.23, 1, 0.32, 1],
       }}
     >

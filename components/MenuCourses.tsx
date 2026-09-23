@@ -98,7 +98,7 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
           return (
             <section className="menu-axis-course" id={courseSlug(course.id)} data-course-index={courseIndex} aria-labelledby={`${course.id}-title`} key={course.id}>
               <header className="menu-axis-course-header">
-                <p>COURSE {pad(courseIndex + 1)} / 05</p>
+                <p>コース {pad(courseIndex + 1)} / 05</p>
                 <div className="menu-axis-title-mask"><h2 id={`${course.id}-title`}>{course.name}</h2></div>
                 <p>{course.description}</p>
                 <div><span>全10皿</span><strong>{course.price.toLocaleString("ja-JP")}円</strong></div>

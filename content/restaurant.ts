@@ -76,14 +76,14 @@ export const restaurant: RestaurantContent = {
     { chapter: "余韻", title: "薄茶、栗きんとん", description: "食事を閉じるのは、京都の薄茶と蒸した栗の小さな菓子。お急ぎでなければ、もう一服お点てします。", origin: "京都・宇治白川　辻喜代治さんの碾茶", details: [{ label: "栗", value: "岐阜・恵那　恵那川上屋の超特選恵那栗" }, { label: "菓子器", value: "赤木明登　黒漆小皿" }, { label: "一服", value: "七十五度、四十秒" }], image: "10-yoin" },
   ],
   courseSection: {
-    eyebrow: "SEPTEMBER / TEN COURSES",
+    eyebrow: "九月／十皿",
     title: "十皿、",
     titleAccent: "今夜の火加減。",
     intro: "九月の献立より。浜と畑の状態に合わせ、毎朝仕立てを決めます。",
   },
   chef: {
     name: "髙瀬 直人",
-    nameEn: "NAOTO TAKASE",
+    nameEn: "髙瀬 直人",
     title: "料理長",
     quote: "鮎の青い香りが残る、わずかな旬を逃さない。炭との距離を見極め、皮は香ばしく、身はしっとりと焼き上げます。",
     bio: "1981年、山形県鶴岡市生まれ。京都・祇園の料亭で十二年、金沢の日本料理店で料理長を務める。2022年に銀座「篝」を開店。浜と畑へ足を運び、仕入れた日の状態から献立を組み立てる。",

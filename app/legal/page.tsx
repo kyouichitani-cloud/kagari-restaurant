@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "特定商取引法に基づく表記
 export default function Legal() {
   return (
     <main className="policy-page">
-      <p className="section-label">LEGAL NOTICE</p>
+      <p className="section-label">法的表示</p>
       <h1>特定商取引法に基づく表記</h1>
       <dl>
         <div><dt>販売事業者</dt><dd>株式会社 篝</dd></div>

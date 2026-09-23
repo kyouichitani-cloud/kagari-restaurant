@@ -23,8 +23,8 @@ export default function CoursesPage() {
         <div className="section-shell">
           <SectionReveal>
             <p className="section-kicker">コース料理</p>
-            <h1 id="courses-page-title">今夜のために、<br />選べる三つのコース。</h1>
-            <p>どのコースも、お一人様・税込の価格を分かりやすく掲載しています。料理構成は現在登録されている仮データです。</p>
+            <h1 id="courses-page-title">3つのコース</h1>
+            <p>料金はすべてお一人様・税込です。料理構成は仮データです。</p>
           </SectionReveal>
         </div>
       </section>
@@ -54,8 +54,8 @@ export default function CoursesPage() {
         <div className="section-shell">
           <SectionReveal>
             <p className="section-kicker">ご予約</p>
-            <h2 id="course-cta-title">コースを選んで、<br />ふたりの予定を決める。</h2>
-            <p>ご予約フォームでは、コースのほか、ドリンクと記念日ケーキの希望も選択できます。</p>
+            <h2 id="course-cta-title">ご予約へ進む</h2>
+            <p>ドリンクと記念日ケーキは、予約フォームで選べます。</p>
             <Button asChild variant="ivory" size="large"><Link href="/#reservation">コースを選んで予約する</Link></Button>
           </SectionReveal>
         </div>
