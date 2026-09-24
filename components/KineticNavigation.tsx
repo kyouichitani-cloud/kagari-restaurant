@@ -7,6 +7,12 @@ import { type MouseEvent, useEffect, useRef, useState } from "react";
 import { getCourseHref, siteContent } from "@/content/french-restaurant";
 
 const focusableSelector = "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])";
+const menuIndicatorLabels = [
+  siteContent.navigation[0].label,
+  siteContent.navigation[1].label,
+  "コース料理",
+  ...siteContent.navigation.slice(2).map((item) => item.label),
+];
 
 function scrollToSection(targetId: string) {
   const previousScrollBehavior = document.documentElement.style.scrollBehavior;
@@ -169,7 +175,7 @@ export function KineticNavigation() {
             <div className="menu-decoration" data-active={activeIndex} aria-hidden="true">
               <span />
               <span />
-              <b>{String(activeIndex + 1).padStart(2, "0")} / 09</b>
+              <b>{menuIndicatorLabels[activeIndex]}</b>
             </div>
             <nav aria-label="メインナビゲーション">
               <ul className="menu-primary-list">
