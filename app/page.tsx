@@ -17,7 +17,7 @@ export default function Home() {
       <KineticNavigation />
       <ScrollExpansionHero />
 
-      <div id="main-content">
+      <div id="main-content" tabIndex={-1}>
         <section id="concept" className="concept-section section-ivory" aria-labelledby="concept-title">
           <div className="section-shell concept-grid">
             <SectionReveal className="concept-heading">
