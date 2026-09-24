@@ -10,6 +10,7 @@ export function ReloadScrollReset() {
     const timers: number[] = [];
     const frames: number[] = [];
     let active = true;
+    let interval: number | undefined;
 
     const reset = () => {
       if (active && !window.location.hash) {
@@ -20,6 +21,10 @@ export function ReloadScrollReset() {
     const clearScheduledResets = () => {
       frames.splice(0).forEach((frame) => window.cancelAnimationFrame(frame));
       timers.splice(0).forEach((timer) => window.clearTimeout(timer));
+      if (interval !== undefined) {
+        window.clearInterval(interval);
+        interval = undefined;
+      }
     };
 
     const resetAfterRestore = () => {
@@ -35,6 +40,15 @@ export function ReloadScrollReset() {
       timers.push(window.setTimeout(reset, 400));
       timers.push(window.setTimeout(reset, 900));
       timers.push(window.setTimeout(reset, 1600));
+      timers.push(window.setTimeout(reset, 3000));
+      timers.push(window.setTimeout(reset, 5000));
+      interval = window.setInterval(reset, 250);
+      timers.push(window.setTimeout(() => {
+        if (interval !== undefined) {
+          window.clearInterval(interval);
+          interval = undefined;
+        }
+      }, 5200));
     };
 
     const stopResetting = () => {
@@ -56,16 +70,31 @@ export function ReloadScrollReset() {
       }
     };
 
+    const stopForScrollKey = (event: KeyboardEvent) => {
+      if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) {
+        stopResetting();
+      }
+    };
+
+    const handleHistoryChange = () => {
+      if (window.location.hash) {
+        stopResetting();
+      } else {
+        resetAfterRestore();
+      }
+    };
+
     const finish = () => {
       stopResetting();
       window.removeEventListener("load", resetAfterRestore);
       window.removeEventListener("pageshow", resetAfterRestore);
       window.removeEventListener("pagehide", resetBeforeCache);
+      window.removeEventListener("popstate", handleHistoryChange);
+      window.removeEventListener("hashchange", handleHistoryChange);
       document.removeEventListener("visibilitychange", resetWhenVisibilityChanges);
-      window.removeEventListener("touchstart", stopResetting);
-      window.removeEventListener("pointerdown", stopResetting);
+      window.removeEventListener("touchmove", stopResetting);
       window.removeEventListener("wheel", stopResetting);
-      window.removeEventListener("keydown", stopResetting);
+      window.removeEventListener("keydown", stopForScrollKey);
       window.history.scrollRestoration = previousRestoration;
     };
 
@@ -74,11 +103,12 @@ export function ReloadScrollReset() {
     window.addEventListener("load", resetAfterRestore, { once: true });
     window.addEventListener("pageshow", resetAfterRestore);
     window.addEventListener("pagehide", resetBeforeCache);
+    window.addEventListener("popstate", handleHistoryChange);
+    window.addEventListener("hashchange", handleHistoryChange);
     document.addEventListener("visibilitychange", resetWhenVisibilityChanges);
-    window.addEventListener("touchstart", stopResetting, { passive: true, once: true });
-    window.addEventListener("pointerdown", stopResetting, { passive: true, once: true });
+    window.addEventListener("touchmove", stopResetting, { passive: true, once: true });
     window.addEventListener("wheel", stopResetting, { passive: true, once: true });
-    window.addEventListener("keydown", stopResetting, { once: true });
+    window.addEventListener("keydown", stopForScrollKey);
 
     return finish;
   }, []);

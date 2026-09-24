@@ -97,6 +97,14 @@ export function KineticNavigation() {
   const getNavigationHref = (href: string) => pathname === "/" && href.startsWith("/#") ? href.slice(1) : href;
   const handleMenuLink = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     const isModifiedClick = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    if (href === "/" && pathname === "/" && !isModifiedClick) {
+      event.preventDefault();
+      pendingScrollTargetRef.current = "top";
+      closeMenu();
+      window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}`);
+      return;
+    }
+
     const targetId = href.startsWith("/#") ? href.slice(2) : "";
     if (!targetId || !document.getElementById(targetId) || isModifiedClick) {
       closeMenu();
@@ -109,10 +117,18 @@ export function KineticNavigation() {
     window.history.pushState(null, "", `#${targetId}`);
   };
 
+  const handleWordmarkClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    const isModifiedClick = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    if (pathname !== "/" || isModifiedClick) return;
+    event.preventDefault();
+    window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}`);
+    scrollToSection("top");
+  };
+
   return (
     <>
       <header className="site-header">
-        <Link className="site-wordmark" href="/" aria-label="KAGARI トップへ"><span>{siteContent.brand.name}</span><small>{siteContent.brand.descriptor}</small></Link>
+        <Link className="site-wordmark" href="/" aria-label="KAGARI トップへ" onClick={handleWordmarkClick}><span>{siteContent.brand.name}</span><small>{siteContent.brand.descriptor}</small></Link>
         <button
           ref={buttonRef}
           className="menu-trigger"
