@@ -166,7 +166,11 @@ export function KineticNavigation() {
               variants={{ closed: { transform: disableMotion ? "none" : "translate3d(100%,0,0)" }, open: { transform: "translate3d(0,0,0)" } }}
               transition={{ duration: disableMotion ? 0 : 0.5, delay: disableMotion ? 0 : 0.07, ease: [0.77, 0, 0.175, 1] }}
             />
-            <div className="menu-decoration" data-active={activeIndex} aria-hidden="true"><span /><span /></div>
+            <div className="menu-decoration" data-active={activeIndex} aria-hidden="true">
+              <span />
+              <span />
+              <b>{String(activeIndex + 1).padStart(2, "0")} / 09</b>
+            </div>
             <nav aria-label="メインナビゲーション">
               <ul className="menu-primary-list">
                 {siteContent.navigation.slice(0, 2).map((item, index) => (

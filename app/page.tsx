@@ -24,6 +24,9 @@ export default function Home() {
               <p className="section-kicker">KAGARIについて</p>
               <h2 id="concept-title">コース料理を、もっと気軽に。</h2>
             </SectionReveal>
+            <SectionReveal className="concept-intro" direction="right" delay={0.1}>
+              <p>旬の食材を生かした料理と、落ち着いて過ごせる空間。かしこまりすぎず、二人の時間をゆっくり楽しめる店です。</p>
+            </SectionReveal>
             <SectionReveal className="concept-image" delay={0.2}>
               <Image src={siteContent.images.fish} alt="シェフが白身魚の一皿にソースを添える様子" fill sizes="(max-width: 767px) calc(100vw - 2rem), 58vw" />
             </SectionReveal>
@@ -35,7 +38,7 @@ export default function Home() {
           <div className="section-shell">
             <SectionReveal className="news-strip-inner">
               <div className="reasons-news-meta"><span>お知らせ</span><time dateTime="2026-09-18">2026.09.18</time></div>
-              <Link href="#reservation">ご予約と記念日ケーキについて<span aria-hidden="true">→</span></Link>
+              <p className="news-title">ご予約と記念日ケーキについて</p>
             </SectionReveal>
           </div>
         </aside>
@@ -103,7 +106,7 @@ export default function Home() {
             <SectionReveal className="cake-copy" direction="left">
               <p className="section-kicker">記念日ケーキ</p>
               <h2 id="cake-title">記念日ケーキ</h2>
-              <p>お名前とプレートメッセージは、予約フォームに入力できます。</p>
+              <p>お食事の締めくくりに、メッセージ付きのケーキをご用意します。お名前とプレートの言葉は、予約フォームにご入力ください。</p>
               <p className="cake-note">料金とサイズは、予約確認時にご案内します。</p>
               <Button asChild variant="ivory"><Link href="#reservation">予約フォームへ</Link></Button>
             </SectionReveal>

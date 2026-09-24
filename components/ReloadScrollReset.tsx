@@ -4,51 +4,28 @@ import { useLayoutEffect } from "react";
 
 export function ReloadScrollReset() {
   useLayoutEffect(() => {
-    if (window.location.hash) return;
-
+    const navigationEntry = window.performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    const isReload = navigationEntry?.type === "reload";
     const previousRestoration = window.history.scrollRestoration;
     const timers: number[] = [];
     const frames: number[] = [];
-    let active = true;
-    let interval: number | undefined;
+    let active = isReload || !window.location.hash;
+
+    const removeHash = () => {
+      if (!window.location.hash) return;
+      window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}`);
+    };
+
+    if (isReload) removeHash();
 
     const reset = () => {
-      if (active && !window.location.hash) {
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-      }
+      if (!active || window.location.hash) return;
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     };
 
     const clearScheduledResets = () => {
       frames.splice(0).forEach((frame) => window.cancelAnimationFrame(frame));
       timers.splice(0).forEach((timer) => window.clearTimeout(timer));
-      if (interval !== undefined) {
-        window.clearInterval(interval);
-        interval = undefined;
-      }
-    };
-
-    const resetAfterRestore = () => {
-      clearScheduledResets();
-      active = true;
-      reset();
-      frames.push(window.requestAnimationFrame(() => {
-        reset();
-        frames.push(window.requestAnimationFrame(reset));
-      }));
-      timers.push(window.setTimeout(reset, 0));
-      timers.push(window.setTimeout(reset, 120));
-      timers.push(window.setTimeout(reset, 400));
-      timers.push(window.setTimeout(reset, 900));
-      timers.push(window.setTimeout(reset, 1600));
-      timers.push(window.setTimeout(reset, 3000));
-      timers.push(window.setTimeout(reset, 5000));
-      interval = window.setInterval(reset, 250);
-      timers.push(window.setTimeout(() => {
-        if (interval !== undefined) {
-          window.clearInterval(interval);
-          interval = undefined;
-        }
-      }, 5200));
     };
 
     const stopResetting = () => {
@@ -56,65 +33,63 @@ export function ReloadScrollReset() {
       clearScheduledResets();
     };
 
-    const resetBeforeCache = () => {
-      if (!window.location.hash) {
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-      }
+    const scheduleReset = () => {
+      if (!active) return;
+      reset();
+      frames.push(window.requestAnimationFrame(() => {
+        reset();
+        frames.push(window.requestAnimationFrame(reset));
+      }));
+      [100, 400, 900, 1600, 3000].forEach((delay) => timers.push(window.setTimeout(reset, delay)));
+      timers.push(window.setTimeout(stopResetting, 3200));
     };
 
-    const resetWhenVisibilityChanges = () => {
-      if (document.visibilityState === "visible") {
-        resetAfterRestore();
-      } else {
-        resetBeforeCache();
+    const prepareForReload = () => {
+      try {
+        window.sessionStorage.setItem("kagari-force-top", "1");
+      } catch {
+        // Safariのプライベートブラウズなど、保存できない環境でもスクロールだけは戻す。
       }
+      window.history.scrollRestoration = "manual";
+      removeHash();
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     };
 
     const stopForScrollKey = (event: KeyboardEvent) => {
-      if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) {
-        stopResetting();
-      }
+      if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) stopResetting();
     };
 
-    const handleHistoryChange = () => {
-      if (window.location.hash) {
-        stopResetting();
-      } else {
-        resetAfterRestore();
-      }
-    };
-
-    const finish = () => {
-      stopResetting();
-      window.removeEventListener("load", resetAfterRestore);
-      window.removeEventListener("pageshow", resetAfterRestore);
-      window.removeEventListener("pagehide", resetBeforeCache);
-      window.removeEventListener("popstate", handleHistoryChange);
-      window.removeEventListener("hashchange", handleHistoryChange);
-      document.removeEventListener("visibilitychange", resetWhenVisibilityChanges);
-      window.removeEventListener("touchstart", stopResetting);
-      window.removeEventListener("pointerdown", stopResetting);
-      window.removeEventListener("touchmove", stopResetting);
-      window.removeEventListener("wheel", stopResetting);
-      window.removeEventListener("keydown", stopForScrollKey);
-      window.history.scrollRestoration = previousRestoration;
+    const stopForAnchorClick = (event: MouseEvent) => {
+      const source = event.target;
+      if (!(source instanceof Element)) return;
+      const anchor = source.closest<HTMLAnchorElement>('a[href*="#"]');
+      if (anchor?.hash) stopResetting();
     };
 
     window.history.scrollRestoration = "manual";
-    resetAfterRestore();
-    window.addEventListener("load", resetAfterRestore, { once: true });
-    window.addEventListener("pageshow", resetAfterRestore);
-    window.addEventListener("pagehide", resetBeforeCache);
-    window.addEventListener("popstate", handleHistoryChange);
-    window.addEventListener("hashchange", handleHistoryChange);
-    document.addEventListener("visibilitychange", resetWhenVisibilityChanges);
+    scheduleReset();
+
+    window.addEventListener("beforeunload", prepareForReload);
+    window.addEventListener("pagehide", prepareForReload);
     window.addEventListener("touchstart", stopResetting, { passive: true, once: true });
     window.addEventListener("pointerdown", stopResetting, { passive: true, once: true });
     window.addEventListener("touchmove", stopResetting, { passive: true, once: true });
     window.addEventListener("wheel", stopResetting, { passive: true, once: true });
     window.addEventListener("keydown", stopForScrollKey);
+    document.addEventListener("click", stopForAnchorClick, true);
 
-    return finish;
+    return () => {
+      stopResetting();
+      window.removeEventListener("beforeunload", prepareForReload);
+      window.removeEventListener("pagehide", prepareForReload);
+      window.removeEventListener("touchstart", stopResetting);
+      window.removeEventListener("pointerdown", stopResetting);
+      window.removeEventListener("touchmove", stopResetting);
+      window.removeEventListener("wheel", stopResetting);
+      window.removeEventListener("keydown", stopForScrollKey);
+      document.removeEventListener("click", stopForAnchorClick, true);
+      window.history.scrollRestoration = previousRestoration;
+    };
   }, []);
 
   return null;
