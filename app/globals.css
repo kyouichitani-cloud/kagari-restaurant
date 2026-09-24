@@ -260,9 +260,8 @@ button.button-ivory:hover,
 .drinks-photo img { object-position: center 48%; }
 .drinks-content { display: flex; flex-direction: column; justify-content: center; padding: clamp(5rem, 9vw, 10rem); }
 .drinks-content h2 { margin: 0; font-size: clamp(2.5rem, 4.8vw, 5rem); }
-.drink-option { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.8rem 0; border-top: 1px solid var(--line-light); }
+.drink-option { padding: 1.8rem 0; border-top: 1px solid var(--line-light); }
 .drink-option:last-child { border-bottom: 1px solid var(--line-light); }
-.drink-option > span { color: var(--burgundy); font-size: .7rem; }
 .drink-option h3 { margin: 0 0 .5rem; color: var(--ink); font-size: clamp(1.35rem, 2.4vw, 2rem); }
 .drink-option p { margin: 0; color: rgb(19 35 51 / .72); }
 .cake-section { position: relative; min-height: 100dvh; display: grid; align-items: center; overflow: hidden; isolation: isolate; }

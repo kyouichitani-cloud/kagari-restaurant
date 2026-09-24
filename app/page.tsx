@@ -89,7 +89,7 @@ export default function Home() {
             <div className="drink-options">
               {siteContent.drinks.map((drink, index) => (
                 <SectionReveal key={drink.id} className="drink-option" delay={0.12 + index * 0.08}>
-                  <span aria-hidden="true">0{index + 1}</span><div><h3>{drink.label}</h3><p>{drink.description}</p></div>
+                  <div><h3>{drink.label}</h3><p>{drink.description}</p></div>
                 </SectionReveal>
               ))}
             </div>
