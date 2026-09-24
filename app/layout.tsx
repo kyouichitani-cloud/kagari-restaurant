@@ -12,10 +12,28 @@ const kagariSans = localFont({
   weight: "100 900",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kagari-restaurant.vercel.app";
+const shareImagePath = "/share/kagari-course-v2.png";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://kagari-restaurant.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: "KAGARI｜記念日に楽しむフレンチコース",
   description: "KAGARIは、3つのコースから選べるフレンチダイニングです。",
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: "/",
+    siteName: "KAGARI",
+    title: "KAGARI｜記念日に楽しむフレンチコース",
+    description: "KAGARIは、3つのコースから選べるフレンチダイニングです。",
+    images: [{ url: shareImagePath, width: 1200, height: 630, alt: "KAGARIの料理と落ち着いた店内" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KAGARI｜記念日に楽しむフレンチコース",
+    description: "KAGARIは、3つのコースから選べるフレンチダイニングです。",
+    images: [shareImagePath],
+  },
   robots: { index: false, follow: false },
 };
 
