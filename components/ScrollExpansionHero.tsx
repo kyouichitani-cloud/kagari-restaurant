@@ -26,7 +26,7 @@ export function ScrollExpansionHero() {
     const actions = actionsRef.current;
     if (!section || !frame || !brand || !title || !description || !actions) return;
 
-    const useNativeMobileScroll = window.matchMedia("(max-width: 1023px)").matches;
+    const useNativeMobileScroll = window.matchMedia("(max-width: 1023px), (hover: none), (pointer: coarse)").matches;
     if (useNativeMobileScroll) return;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

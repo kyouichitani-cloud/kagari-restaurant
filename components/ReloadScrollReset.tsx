@@ -92,6 +92,8 @@ export function ReloadScrollReset() {
       window.removeEventListener("popstate", handleHistoryChange);
       window.removeEventListener("hashchange", handleHistoryChange);
       document.removeEventListener("visibilitychange", resetWhenVisibilityChanges);
+      window.removeEventListener("touchstart", stopResetting);
+      window.removeEventListener("pointerdown", stopResetting);
       window.removeEventListener("touchmove", stopResetting);
       window.removeEventListener("wheel", stopResetting);
       window.removeEventListener("keydown", stopForScrollKey);
@@ -106,6 +108,8 @@ export function ReloadScrollReset() {
     window.addEventListener("popstate", handleHistoryChange);
     window.addEventListener("hashchange", handleHistoryChange);
     document.addEventListener("visibilitychange", resetWhenVisibilityChanges);
+    window.addEventListener("touchstart", stopResetting, { passive: true, once: true });
+    window.addEventListener("pointerdown", stopResetting, { passive: true, once: true });
     window.addEventListener("touchmove", stopResetting, { passive: true, once: true });
     window.addEventListener("wheel", stopResetting, { passive: true, once: true });
     window.addEventListener("keydown", stopForScrollKey);

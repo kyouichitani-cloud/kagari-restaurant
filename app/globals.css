@@ -292,8 +292,10 @@ button.button-ivory:hover,
 
 /* Access */
 .access-section { padding: clamp(7rem, 13vw, 13rem) 0; }
-.access-grid { display: grid; grid-template-columns: .76fr 1fr; gap: clamp(3rem, 8vw, 9rem); }
+.access-grid { display: grid; grid-template-columns: minmax(16rem, .7fr) minmax(0, 1.3fr); grid-template-areas: "heading details" "map details"; column-gap: clamp(3rem, 7vw, 7rem); row-gap: clamp(2rem, 3vw, 3rem); align-items: start; }
+.access-heading { grid-area: heading; }
 .access-heading h2 { margin: 0; font-size: clamp(2.8rem, 5vw, 5.2rem); }
+.access-details { grid-area: details; }
 .access-details dl { margin: 0; }
 .access-details dl > div { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding: 1.4rem 0; border-top: 1px solid var(--line-light); }
 .access-details dl > div:last-child { border-bottom: 1px solid var(--line-light); }
@@ -311,7 +313,7 @@ button.button-ivory:hover,
 .instagram-access-cta { justify-self: end; white-space: nowrap; font-size: .72rem; font-weight: 600; }
 .instagram-arrow { display: inline-block; color: var(--gold); transition: transform 180ms ease; }
 .instagram-access-button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
-.map-placeholder { position: relative; grid-column: 1 / -1; min-height: 330px; display: grid; place-items: center; margin-top: clamp(2rem, 6vw, 6rem); overflow: hidden; border: 1px solid rgb(109 31 54 / .32); background: var(--navy); color: var(--ivory); border-radius: 14px; }
+.map-placeholder { position: relative; grid-area: map; min-height: 300px; display: grid; place-items: center; margin-top: 0; overflow: hidden; border: 1px solid rgb(109 31 54 / .32); background: var(--navy); color: var(--ivory); border-radius: 14px; }
 .map-placeholder span { position: absolute; left: 1.5rem; top: 1.2rem; color: var(--gold); font-size: .66rem; letter-spacing: .2em; }
 .map-placeholder p { position: relative; z-index: 2; margin: 0; font-family: var(--serif); font-size: clamp(1.2rem, 2vw, 1.75rem); }
 .map-placeholder i { position: absolute; width: 180px; aspect-ratio: 1; border: 1px solid rgb(216 180 111 / .35); border-radius: 50%; }
@@ -347,6 +349,23 @@ button.button-ivory:hover,
 .field input:focus, .field textarea:focus { border-color: #f0cf8a; background: #071018; outline: none; }
 .field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #f3c7c7; }
 .field-error { margin: .45rem 0 0; color: #ffe0df; font-size: .76rem; }
+.desktop-date-picker { position: relative; }
+.date-picker-trigger { width: 100%; min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border: 1px solid rgb(216 180 111 / .42); border-radius: 4px; padding: .85rem 1rem; color: var(--ivory); background: #071018; cursor: pointer; font-size: 1.08rem; text-align: left; transition: border-color 150ms ease, background-color 150ms ease; }
+.date-picker-trigger:hover, .date-picker-trigger[aria-expanded="true"] { border-color: #f0cf8a; background: #0b161f; }
+.date-picker-trigger[data-invalid="true"] { border-color: #f3c7c7; }
+.date-picker-trigger .is-placeholder { color: rgb(243 238 229 / .46); }
+.date-picker-panel { position: absolute; z-index: 30; inset: calc(100% + .6rem) auto auto 0; width: min(32rem, calc(100vw - 4rem)); padding: 1.25rem; border: 1px solid rgb(216 180 111 / .55); border-radius: 14px; color: var(--ivory); background: #071018; box-shadow: 0 18px 48px rgb(0 0 0 / .42); }
+.date-picker-header { display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; gap: .5rem; margin-bottom: 1rem; }
+.date-picker-header strong { text-align: center; font-size: 1.08rem; font-weight: 650; }
+.date-picker-header button { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid rgb(243 238 229 / .18); border-radius: 50%; color: var(--ivory); background: transparent; cursor: pointer; }
+.date-picker-weekdays, .date-picker-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .35rem; }
+.date-picker-weekdays { margin-bottom: .35rem; color: var(--gold); font-size: .72rem; font-weight: 650; text-align: center; }
+.date-picker-weekdays span { padding-block: .35rem; }
+.date-picker-days button, .date-picker-days > span { min-width: 0; aspect-ratio: 1; }
+.date-picker-days button { display: grid; place-items: center; border: 1px solid transparent; border-radius: 50%; color: var(--ivory); background: transparent; cursor: pointer; font-size: .9rem; }
+.date-picker-days button:hover { border-color: rgb(216 180 111 / .58); background: rgb(216 180 111 / .1); }
+.date-picker-days button.is-today { border-color: rgb(243 238 229 / .34); }
+.date-picker-days button.is-selected { border-color: var(--gold); color: var(--navy); background: var(--gold); font-weight: 750; }
 .choice-list { display: grid; gap: 2px; }
 .course-choice-list { grid-template-columns: repeat(3, 1fr); }
 .compact-choice-list { grid-template-columns: repeat(2, 1fr); }
@@ -468,7 +487,7 @@ button.button-ivory:hover,
   .field input[type="date"]::-webkit-calendar-picker-indicator { width: 24px; height: 24px; cursor: pointer; transform: scale(1.18); transform-origin: center; }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
   html { scroll-behavior: auto; }
   html, body, body * { touch-action: pan-y pinch-zoom; }
   *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: 0s !important; }
@@ -508,6 +527,8 @@ button.button-ivory:hover,
   .course-story-2 .course-photo { grid-row: 1; }
   .course-story-2 .course-copy { grid-row: 2; }
   .course-copy h3 { max-width: 16ch; }
+  .access-grid { grid-template-columns: 1fr; grid-template-areas: "heading" "details" "map"; gap: 2.5rem; }
+  .map-placeholder { min-height: 260px; }
 }
 
 @media (max-width: 767px) {
@@ -571,11 +592,11 @@ button.button-ivory:hover,
   .gallery-tall { grid-column: 2; grid-row: span 3; }
   .gallery-square { grid-column: 1; grid-row: span 2; }
   .gallery-landscape { grid-column: 1 / 3; grid-row: span 2; }
-  .access-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .access-grid { gap: 2.5rem; }
   .access-details dl > div { grid-template-columns: 5.5rem 1fr; }
   .access-links { align-items: stretch; }
   .instagram-access-button { width: 100%; min-height: 60px; }
-  .map-placeholder { grid-column: 1; min-height: 260px; margin-top: 1rem; text-align: center; }
+  .map-placeholder { min-height: 260px; text-align: center; }
   .reservation-heading { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.75rem; }
   .reservation-form-layout { grid-template-columns: 1fr; gap: 0; }
   .reservation-form { order: 1; }

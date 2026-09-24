@@ -30,7 +30,7 @@ export function KineticNavigation() {
   const pendingScrollTargetRef = useRef<string | null>(null);
 
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 1023px)");
+    const media = window.matchMedia("(max-width: 1023px), (hover: none), (pointer: coarse)");
     const update = () => setCompactScreen(media.matches);
     update();
     media.addEventListener("change", update);

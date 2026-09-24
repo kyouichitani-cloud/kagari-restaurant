@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, CheckCircle, WarningCircle } from "@phosphor-ico
 import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { DesktopDatePicker } from "@/components/DesktopDatePicker";
 import { isCourseId, siteContent } from "@/content/french-restaurant";
 import { privacySettings } from "@/content/privacy";
 
@@ -79,12 +80,21 @@ export function FrenchReservationForm() {
   const [mobileStep, setMobileStep] = useState<MobileStep>(1);
   const reduceMotion = useReducedMotion();
   const [compactScreen, setCompactScreen] = useState(false);
-  const disableMotion = Boolean(reduceMotion) || compactScreen;
+  const [touchScreen, setTouchScreen] = useState(false);
+  const disableMotion = Boolean(reduceMotion) || compactScreen || touchScreen;
   const formTopRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 1023px)");
     const update = () => setCompactScreen(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(hover: none), (pointer: coarse)");
+    const update = () => setTouchScreen(media.matches);
     update();
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
@@ -244,7 +254,11 @@ export function FrenchReservationForm() {
         <div className="form-grid form-grid-three">
           <div className="field">
             <label htmlFor="date">予約希望日 <Required /></label>
-            <input {...inputProps("date")} type="date" value={values.date} onChange={(e) => update("date", e.target.value)} />
+            {compactScreen ? (
+              <input {...inputProps("date")} type="date" value={values.date} onChange={(e) => update("date", e.target.value)} />
+            ) : (
+              <DesktopDatePicker value={values.date} onChange={(value) => update("date", value)} invalid={Boolean(errors.date)} describedBy={errors.date ? "date-error" : undefined} />
+            )}
             {errors.date && <p id="date-error" className="field-error">{errors.date}</p>}
           </div>
           <div className="field">
