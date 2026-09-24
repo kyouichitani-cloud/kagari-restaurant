@@ -163,7 +163,7 @@ button.button-ivory:hover,
 .concept-heading h2 { max-width: 17ch; min-width: 0; margin: 0; font-size: clamp(2.4rem, 5.2vw, 5.5rem); }
 .concept-image { position: relative; grid-column: 1 / -1; width: 78%; aspect-ratio: 16 / 8.4; margin-top: clamp(2rem, 6vw, 6rem); overflow: hidden; border-radius: 14px; }
 .concept-image img { object-position: center 56%; }
-.concept-aside { grid-column: 1 / -1; max-width: 36rem; margin: 2rem 0 0; color: var(--burgundy); font-family: var(--serif); font-size: clamp(1.15rem, 2.1vw, 2rem); line-height: 1.65; writing-mode: horizontal-tb; }
+.concept-aside { grid-column: 1 / -1; max-width: 40rem; margin: 2rem 0 0; color: var(--burgundy); font-family: var(--serif); font-size: clamp(1.4rem, 2.6vw, 2.75rem); line-height: 1.55; writing-mode: horizontal-tb; }
 
 /* News */
 .news-strip { background: #0E0509; }
@@ -175,7 +175,7 @@ button.button-ivory:hover,
 
 /* Courses */
 .courses-section { padding: clamp(7rem, 13vw, 13rem) 0; }
-.courses-intro { display: grid; grid-template-columns: 1fr .52fr; gap: 4rem; align-items: end; margin-bottom: clamp(6rem, 12vw, 12rem); }
+.courses-intro { display: grid; grid-template-columns: 1fr .52fr; gap: 4rem; align-items: end; margin-bottom: clamp(3.5rem, 7vw, 7rem); }
 .courses-intro h2 { margin: 0; font-size: clamp(2.6rem, 5.6vw, 5.8rem); }
 .courses-intro-copy p { max-width: 34rem; margin: 0; color: var(--ivory-muted); }
 .course-stories { display: grid; gap: clamp(8rem, 16vw, 16rem); }
