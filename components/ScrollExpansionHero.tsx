@@ -26,11 +26,12 @@ export function ScrollExpansionHero() {
     const actions = actionsRef.current;
     if (!section || !frame || !brand || !title || !description || !actions) return;
 
-    gsap.registerPlugin(ScrollTrigger, CustomEase);
-    CustomEase.create("restaurant-expand", "0.23,1,0.32,1");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const useNativeMobileScroll = window.matchMedia("(max-width: 1023px)").matches;
     if (useNativeMobileScroll) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    gsap.registerPlugin(ScrollTrigger, CustomEase);
+    CustomEase.create("restaurant-expand", "0.23,1,0.32,1");
 
     const context = gsap.context(() => {
       if (!reduceMotion) {

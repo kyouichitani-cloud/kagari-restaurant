@@ -22,10 +22,20 @@ export function KineticNavigation() {
   const [activeIndex, setActiveIndex] = useState(0);
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
+  const [compactScreen, setCompactScreen] = useState(false);
+  const disableMotion = Boolean(reduceMotion) || compactScreen;
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const restoreTriggerFocusRef = useRef(true);
   const pendingScrollTargetRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const update = () => setCompactScreen(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -35,7 +45,7 @@ export function KineticNavigation() {
     document.body.style.overflow = "hidden";
     document.documentElement.dataset.menu = "open";
     const firstLink = dialogRef.current?.querySelector<HTMLElement>(focusableSelector);
-    window.setTimeout(() => firstLink?.focus(), reduceMotion ? 0 : 220);
+    window.setTimeout(() => firstLink?.focus(), disableMotion ? 0 : 220);
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -63,7 +73,7 @@ export function KineticNavigation() {
       document.removeEventListener("keydown", onKeyDown);
       if (restoreTriggerFocusRef.current) trigger?.focus({ preventScroll: true });
     };
-  }, [open, reduceMotion]);
+  }, [disableMotion, open]);
 
   useEffect(() => {
     if (pathname !== "/" || !window.location.hash) return;
@@ -132,13 +142,13 @@ export function KineticNavigation() {
           >
             <motion.div
               className="menu-panel menu-panel-navy"
-              variants={{ closed: { transform: reduceMotion ? "none" : "translate3d(100%,0,0)" }, open: { transform: "translate3d(0,0,0)" } }}
-              transition={{ duration: reduceMotion ? 0.18 : 0.46, ease: [0.77, 0, 0.175, 1] }}
+              variants={{ closed: { transform: disableMotion ? "none" : "translate3d(100%,0,0)" }, open: { transform: "translate3d(0,0,0)" } }}
+              transition={{ duration: disableMotion ? 0 : 0.46, ease: [0.77, 0, 0.175, 1] }}
             />
             <motion.div
               className="menu-panel menu-panel-burgundy"
-              variants={{ closed: { transform: reduceMotion ? "none" : "translate3d(100%,0,0)" }, open: { transform: "translate3d(0,0,0)" } }}
-              transition={{ duration: reduceMotion ? 0.18 : 0.5, delay: reduceMotion ? 0 : 0.07, ease: [0.77, 0, 0.175, 1] }}
+              variants={{ closed: { transform: disableMotion ? "none" : "translate3d(100%,0,0)" }, open: { transform: "translate3d(0,0,0)" } }}
+              transition={{ duration: disableMotion ? 0 : 0.5, delay: disableMotion ? 0 : 0.07, ease: [0.77, 0, 0.175, 1] }}
             />
             <div className="menu-decoration" data-active={activeIndex} aria-hidden="true"><span /><span /></div>
             <nav aria-label="メインナビゲーション">
@@ -146,8 +156,8 @@ export function KineticNavigation() {
                 {siteContent.navigation.slice(0, 2).map((item, index) => (
                   <motion.li
                     key={item.href}
-                    variants={{ closed: { opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
-                    transition={{ duration: reduceMotion ? 0.18 : 0.42, delay: reduceMotion ? 0 : 0.18 + index * 0.045, ease: [0.23, 1, 0.32, 1] }}
+                    variants={{ closed: { opacity: 0, transform: disableMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
+                    transition={{ duration: disableMotion ? 0 : 0.42, delay: disableMotion ? 0 : 0.18 + index * 0.045, ease: [0.23, 1, 0.32, 1] }}
                   >
                     <Link
                       href={getNavigationHref(item.href)}
@@ -162,8 +172,8 @@ export function KineticNavigation() {
                 ))}
                 <motion.li
                   className="menu-course-group"
-                  variants={{ closed: { opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
-                  transition={{ duration: reduceMotion ? 0.18 : 0.42, delay: reduceMotion ? 0 : 0.27, ease: [0.23, 1, 0.32, 1] }}
+                  variants={{ closed: { opacity: 0, transform: disableMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
+                  transition={{ duration: disableMotion ? 0 : 0.42, delay: disableMotion ? 0 : 0.27, ease: [0.23, 1, 0.32, 1] }}
                 >
                   <p><span>03</span>コース料理</p>
                   <ul>
@@ -177,8 +187,8 @@ export function KineticNavigation() {
                 {siteContent.navigation.slice(2).map((item, index) => (
                   <motion.li
                     key={item.href}
-                    variants={{ closed: { opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
-                    transition={{ duration: reduceMotion ? 0.18 : 0.42, delay: reduceMotion ? 0 : 0.34 + index * 0.045, ease: [0.23, 1, 0.32, 1] }}
+                    variants={{ closed: { opacity: 0, transform: disableMotion ? "none" : "translate3d(0,20px,0)" }, open: { opacity: 1, transform: "translate3d(0,0,0)" } }}
+                    transition={{ duration: disableMotion ? 0 : 0.42, delay: disableMotion ? 0 : 0.34 + index * 0.045, ease: [0.23, 1, 0.32, 1] }}
                   >
                     <Link
                       href={getNavigationHref(item.href)}

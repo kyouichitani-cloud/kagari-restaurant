@@ -78,7 +78,17 @@ export function FrenchReservationForm() {
   const [status, setStatus] = useState<FormState>("idle");
   const [mobileStep, setMobileStep] = useState<MobileStep>(1);
   const reduceMotion = useReducedMotion();
+  const [compactScreen, setCompactScreen] = useState(false);
+  const disableMotion = Boolean(reduceMotion) || compactScreen;
   const formTopRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const update = () => setCompactScreen(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const requestedCourse = new URLSearchParams(window.location.search).get("course");
@@ -98,7 +108,7 @@ export function FrenchReservationForm() {
     setStatus("editing");
   };
 
-  const scrollToFormTop = () => formTopRef.current?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  const scrollToFormTop = () => formTopRef.current?.scrollIntoView({ behavior: disableMotion ? "auto" : "smooth", block: "start" });
 
   const focusFirstError = (stepErrors: Partial<Record<keyof FormValues, string>>) => {
     const firstField = Object.keys(stepErrors)[0] as keyof FormValues | undefined;
@@ -272,7 +282,7 @@ export function FrenchReservationForm() {
           <legend>記念日ケーキ <Required /></legend>
           <div className="choice-list compact-choice-list cake-choice-list">{[{ value: "yes", label: "希望する" }, { value: "no", label: "希望しない" }].map((option) => <label key={option.value} className={values.cake === option.value ? "is-selected" : ""}><input {...inputProps("cake", `cake-${option.value}`)} type="radio" value={option.value} checked={values.cake === option.value} onChange={(e) => update("cake", e.target.value as FormValues["cake"])} /><span><strong>{option.label}</strong></span></label>)}</div>{errors.cake && <p id="cake-error" className="field-error">{errors.cake}</p>}
         </fieldset>
-        <AnimatePresence initial={false}>{values.cake === "yes" && <motion.div className="cake-fields" initial={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,14px,0)" }} animate={{ opacity: 1, transform: "translate3d(0,0,0)" }} exit={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,-8px,0)" }} transition={{ duration: reduceMotion ? 0.18 : 0.26, ease: [0.23, 1, 0.32, 1] }}><p>料金・サイズは確認時にご案内します。</p><div className="form-grid"><div className="field"><label htmlFor="cakeName">ケーキに入れる名前 <Required /></label><input {...inputProps("cakeName")} value={values.cakeName} onChange={(e) => update("cakeName", e.target.value)} />{errors.cakeName && <p id="cakeName-error" className="field-error">{errors.cakeName}</p>}</div><div className="field"><label htmlFor="cakeMessage">プレートメッセージ <Required /></label><input {...inputProps("cakeMessage")} value={values.cakeMessage} onChange={(e) => update("cakeMessage", e.target.value)} />{errors.cakeMessage && <p id="cakeMessage-error" className="field-error">{errors.cakeMessage}</p>}</div></div></motion.div>}</AnimatePresence>
+        <AnimatePresence initial={false}>{values.cake === "yes" && <motion.div className="cake-fields" initial={{ opacity: disableMotion ? 1 : 0, transform: disableMotion ? "none" : "translate3d(0,14px,0)" }} animate={{ opacity: 1, transform: "translate3d(0,0,0)" }} exit={{ opacity: disableMotion ? 1 : 0, transform: disableMotion ? "none" : "translate3d(0,-8px,0)" }} transition={{ duration: disableMotion ? 0 : 0.26, ease: [0.23, 1, 0.32, 1] }}><p>料金・サイズは確認時にご案内します。</p><div className="form-grid"><div className="field"><label htmlFor="cakeName">ケーキに入れる名前 <Required /></label><input {...inputProps("cakeName")} value={values.cakeName} onChange={(e) => update("cakeName", e.target.value)} />{errors.cakeName && <p id="cakeName-error" className="field-error">{errors.cakeName}</p>}</div><div className="field"><label htmlFor="cakeMessage">プレートメッセージ <Required /></label><input {...inputProps("cakeMessage")} value={values.cakeMessage} onChange={(e) => update("cakeMessage", e.target.value)} />{errors.cakeMessage && <p id="cakeMessage-error" className="field-error">{errors.cakeMessage}</p>}</div></div></motion.div>}</AnimatePresence>
         <div className="mobile-step-actions"><Button type="button" variant="quiet" onClick={() => goToMobileStep(2)}><ArrowLeft size={17} aria-hidden="true" />戻る</Button><Button type="button" variant="ivory" onClick={() => advanceMobileStep(3, 4)}>次へ：お客様情報へ<ArrowRight size={17} aria-hidden="true" /></Button></div>
         </section>
 
@@ -309,7 +319,7 @@ export function FrenchReservationForm() {
             <span><Link href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</Link>を確認し、予約に必要な個人情報の取り扱いに同意します。 <Required /></span>
           </label>
           {errors.privacy && <p id="privacy-error" className="field-error" role="alert">{errors.privacy}</p>}
-          <AnimatePresence initial={false}>{values.allergies.trim() && <motion.div className="health-consent" initial={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,8px,0)" }} animate={{ opacity: 1, transform: "translate3d(0,0,0)" }} exit={{ opacity: 0, transform: reduceMotion ? "none" : "translate3d(0,-6px,0)" }} transition={{ duration: reduceMotion ? 0.18 : 0.22, ease: [0.23, 1, 0.32, 1] }}><label className="privacy-check" htmlFor="health-consent"><input {...inputProps("healthConsent", "health-consent")} type="checkbox" checked={values.healthConsent} onChange={(e) => update("healthConsent", e.target.checked)} /><span>アレルギー等の健康に関する情報を、予約対応と安全な料理提供のために取得・利用することに同意します。 <Required /></span></label>{errors.healthConsent && <p id="healthConsent-error" className="field-error" role="alert">{errors.healthConsent}</p>}</motion.div>}</AnimatePresence>
+          <AnimatePresence initial={false}>{values.allergies.trim() && <motion.div className="health-consent" initial={{ opacity: disableMotion ? 1 : 0, transform: disableMotion ? "none" : "translate3d(0,8px,0)" }} animate={{ opacity: 1, transform: "translate3d(0,0,0)" }} exit={{ opacity: disableMotion ? 1 : 0, transform: disableMotion ? "none" : "translate3d(0,-6px,0)" }} transition={{ duration: disableMotion ? 0 : 0.22, ease: [0.23, 1, 0.32, 1] }}><label className="privacy-check" htmlFor="health-consent"><input {...inputProps("healthConsent", "health-consent")} type="checkbox" checked={values.healthConsent} onChange={(e) => update("healthConsent", e.target.checked)} /><span>アレルギー等の健康に関する情報を、予約対応と安全な料理提供のために取得・利用することに同意します。 <Required /></span></label>{errors.healthConsent && <p id="healthConsent-error" className="field-error" role="alert">{errors.healthConsent}</p>}</motion.div>}</AnimatePresence>
         </div>
 
         <div className="form-submit"><Button className="mobile-form-back" type="button" variant="quiet" onClick={() => goToMobileStep(3)}><ArrowLeft size={17} aria-hidden="true" />戻る</Button><Button type="submit" variant="ivory" size="large">入力内容を確認する</Button></div>

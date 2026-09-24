@@ -474,7 +474,7 @@ button.button-ivory:hover,
   *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: 0s !important; }
   body::before { display: none; }
   .hero { height: 100svh; }
-  .hero-sticky { min-height: 100svh; }
+  .hero-sticky { position: relative; top: auto; min-height: 100svh; }
   .scroll-cue { display: none; }
   .site-header { transform: translateZ(0); backface-visibility: hidden; }
   .section-reveal { opacity: 1 !important; transform: none !important; }

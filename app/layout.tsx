@@ -21,7 +21,14 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#050A0F", colorScheme: "dark", viewportFit: "cover" };
 
+const initialScrollReset = `
+  if (!window.location.hash) {
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }
+`;
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const style = { "--kagari-grain-image": `url("${withBasePath("/images/texture/ink-grain.png")}")` } as CSSProperties;
-  return <html lang="ja"><body className={kagariSans.variable} style={style}><ReloadScrollReset />{children}</body></html>;
+  return <html lang="ja"><head><script dangerouslySetInnerHTML={{ __html: initialScrollReset }} /></head><body className={kagariSans.variable} style={style}><ReloadScrollReset />{children}</body></html>;
 }

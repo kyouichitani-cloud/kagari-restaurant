@@ -4,8 +4,7 @@ import { useLayoutEffect } from "react";
 
 export function ReloadScrollReset() {
   useLayoutEffect(() => {
-    const compactScreen = window.matchMedia("(max-width: 1023px)");
-    if (!compactScreen.matches || window.location.hash) return;
+    if (window.location.hash) return;
 
     const previousRestoration = window.history.scrollRestoration;
     const timers: number[] = [];
@@ -34,6 +33,8 @@ export function ReloadScrollReset() {
       timers.push(window.setTimeout(reset, 0));
       timers.push(window.setTimeout(reset, 120));
       timers.push(window.setTimeout(reset, 400));
+      timers.push(window.setTimeout(reset, 900));
+      timers.push(window.setTimeout(reset, 1600));
     };
 
     const stopResetting = () => {
@@ -41,15 +42,26 @@ export function ReloadScrollReset() {
       clearScheduledResets();
     };
 
-    const resetWhenVisible = () => {
-      if (document.visibilityState === "visible") resetAfterRestore();
+    const resetBeforeCache = () => {
+      if (!window.location.hash) {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      }
+    };
+
+    const resetWhenVisibilityChanges = () => {
+      if (document.visibilityState === "visible") {
+        resetAfterRestore();
+      } else {
+        resetBeforeCache();
+      }
     };
 
     const finish = () => {
       stopResetting();
       window.removeEventListener("load", resetAfterRestore);
       window.removeEventListener("pageshow", resetAfterRestore);
-      document.removeEventListener("visibilitychange", resetWhenVisible);
+      window.removeEventListener("pagehide", resetBeforeCache);
+      document.removeEventListener("visibilitychange", resetWhenVisibilityChanges);
       window.removeEventListener("touchstart", stopResetting);
       window.removeEventListener("pointerdown", stopResetting);
       window.removeEventListener("wheel", stopResetting);
@@ -61,7 +73,8 @@ export function ReloadScrollReset() {
     resetAfterRestore();
     window.addEventListener("load", resetAfterRestore, { once: true });
     window.addEventListener("pageshow", resetAfterRestore);
-    document.addEventListener("visibilitychange", resetWhenVisible);
+    window.addEventListener("pagehide", resetBeforeCache);
+    document.addEventListener("visibilitychange", resetWhenVisibilityChanges);
     window.addEventListener("touchstart", stopResetting, { passive: true, once: true });
     window.addEventListener("pointerdown", stopResetting, { passive: true, once: true });
     window.addEventListener("wheel", stopResetting, { passive: true, once: true });
