@@ -13,7 +13,7 @@ const kagariSans = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://kagari-restaurant.vercel.app"),
   title: "KAGARI｜記念日に楽しむフレンチコース",
   description: "KAGARIは、3つのコースから選べるフレンチダイニングです。",
   robots: { index: false, follow: false },
