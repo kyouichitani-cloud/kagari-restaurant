@@ -21,7 +21,7 @@ export default function Home() {
         <section id="concept" className="concept-section section-ivory" aria-labelledby="concept-title">
           <div className="section-shell concept-grid">
             <SectionReveal className="concept-heading">
-              <p className="section-kicker">私たちについて</p>
+              <p className="section-kicker">KAGARIについて</p>
               <h2 id="concept-title">コース料理を、もっと気軽に。</h2>
             </SectionReveal>
             <SectionReveal className="concept-image" delay={0.2}>

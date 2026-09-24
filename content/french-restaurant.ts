@@ -7,7 +7,7 @@ export const siteContent = {
   },
   navigation: [
     { label: "トップ", href: "/" },
-    { label: "私たちについて", href: "/#concept" },
+    { label: "KAGARIについて", href: "/#concept" },
     { label: "ドリンク", href: "/#drinks" },
     { label: "記念日ケーキ", href: "/#cake" },
     { label: "料理・店内写真", href: "/#gallery" },
