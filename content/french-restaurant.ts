@@ -63,7 +63,7 @@ export const siteContent = {
     closed: "火曜日",
     dressCode: "スマートカジュアル",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=東京都渋谷区恵比寿南1丁目",
-    instagram: { label: "@kagari.french", url: "https://www.instagram.com/kagari.french/" },
+    instagram: { label: "@○○○○○○○○", url: "https://www.instagram.com/kagari.french/" },
   },
   images: {
     hero: withBasePath("/images/french/hero.avif"),

@@ -28,34 +28,29 @@ export function ScrollExpansionHero() {
     CustomEase.create("restaurant-expand", "0.23,1,0.32,1");
 
     const context = gsap.context(() => {
-      if (!reduceMotion) {
-        gsap.fromTo(
-          frame,
-          { scale: 1 },
-          {
-            scale: () => (window.innerWidth < 768 ? 1.36 : 2.08),
-            ease: "none",
-            scrollTrigger: {
-              trigger: section,
-              start: "top top",
-              end: "bottom bottom",
-              scrub: 0.55,
-              invalidateOnRefresh: true,
-            },
-          },
-        );
-      }
-      gsap.to(copy, {
-        opacity: 0.16,
-        transform: reduceMotion ? "none" : "translate3d(0,-12px,0)",
-        ease: "restaurant-expand",
+      if (reduceMotion) return;
+
+      const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "45% top",
-          scrub: 0.4,
+          end: () => `+=${Math.round(window.innerHeight * 0.52)}`,
+          pin: section,
+          pinSpacing: true,
+          scrub: 0.55,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
+
+      timeline
+        .fromTo(frame, { scale: 1 }, { scale: 2.08, ease: "none", duration: 1 }, 0)
+        .to(copy, {
+          autoAlpha: 0,
+          transform: "translate3d(0,-12px,0)",
+          ease: "restaurant-expand",
+          duration: 0.58,
+        }, 0);
     }, section);
 
     return () => context.revert();

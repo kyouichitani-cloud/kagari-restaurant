@@ -139,8 +139,8 @@ button.button-ivory:hover,
 .menu-note a .instagram-arrow, .site-footer nav a .instagram-arrow { color: var(--gold); }
 
 /* Scroll expansion hero */
-.hero { position: relative; height: 152svh; background: var(--navy); }
-.hero-sticky { position: sticky; top: 0; min-height: 100dvh; overflow: hidden; isolation: isolate; }
+.hero { position: relative; height: 100svh; background: var(--navy); }
+.hero-sticky { position: relative; min-height: 100dvh; overflow: hidden; isolation: isolate; }
 .hero-background { z-index: -3; filter: saturate(.72) brightness(.58); object-position: center 55%; }
 .hero-shade { position: absolute; z-index: -2; inset: 0; background: rgb(5 10 15 / .38); }
 .hero-frame { position: absolute; z-index: -1; inset: 50% auto auto 50%; width: clamp(320px, 46vw, 700px); aspect-ratio: 16 / 9; overflow: hidden; border-radius: 14px; transform: translate(-50%, -50%); transform-origin: center; box-shadow: 0 30px 90px rgb(0 0 0 / .38); }
