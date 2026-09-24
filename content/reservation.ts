@@ -25,7 +25,7 @@ export const reservationCourses: ReservationCourse[] = [
   { id: "special", name: "特別仕立て", price: 55_000, description: "旬の食材と器を個別に組み立てるコース" },
 ];
 
-export const reservationSlots = ["17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "20:45", "21:00"];
+export const reservationSlots = ["17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"];
 
 export const reservationPolicy: ReservationPolicy = {
   timeZone: "Asia/Tokyo",

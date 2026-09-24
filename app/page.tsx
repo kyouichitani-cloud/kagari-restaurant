@@ -145,7 +145,6 @@ export default function Home() {
                 <div><dt>営業時間</dt><dd>{siteContent.details.hours}</dd></div>
                 <div><dt>最終入店</dt><dd>{siteContent.details.lastEntry}</dd></div>
                 <div><dt>定休日</dt><dd>{siteContent.details.closed}</dd></div>
-                <div><dt>ドレスコード</dt><dd>{siteContent.details.dressCode}</dd></div>
               </dl>
               <div className="access-links"><a href={siteContent.details.mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>{siteContent.details.instagram.url && <a className="instagram-access-button" href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer" aria-label={`公式インスタグラム ${siteContent.details.instagram.label} を新しいタブで開く`}><InstagramLogo size={23} weight="thin" aria-hidden="true" /><span className="instagram-access-identity"><strong>公式インスタグラム</strong><small>{siteContent.details.instagram.label}</small></span><span className="instagram-access-cta">最新情報を見る <span className="instagram-arrow" aria-hidden="true">↗</span></span></a>}</div>
             </SectionReveal>

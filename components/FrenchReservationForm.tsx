@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { DesktopDatePicker } from "@/components/DesktopDatePicker";
 import { isCourseId, siteContent } from "@/content/french-restaurant";
 import { privacySettings } from "@/content/privacy";
+import { reservationSlots } from "@/content/reservation";
 
 type FormState = "idle" | "editing" | "review" | "submitting" | "success" | "error";
 type MobileStep = 1 | 2 | 3 | 4;
@@ -49,7 +50,8 @@ const mobileStepFields: Record<MobileStep, (keyof FormValues)[]> = {
 function validate(values: FormValues) {
   const errors: Partial<Record<keyof FormValues, string>> = {};
   if (!values.date) errors.date = "予約希望日を選択してください。";
-  if (!values.time) errors.time = "予約希望時間を入力してください。";
+  if (!values.time) errors.time = "予約希望時間を選択してください。";
+  else if (!reservationSlots.includes(values.time)) errors.time = "17:30〜20:30の予約枠から選択してください。";
   if (!values.guests || Number(values.guests) < 1) errors.guests = "利用人数を1名以上で入力してください。";
   if (!values.name.trim()) errors.name = "代表者名を入力してください。";
   if (!values.kana.trim()) errors.kana = "ふりがなを入力してください。";
@@ -263,7 +265,10 @@ export function FrenchReservationForm() {
           </div>
           <div className="field">
             <label htmlFor="time">予約希望時間 <Required /></label>
-            <input {...inputProps("time")} type="time" value={values.time} onChange={(e) => update("time", e.target.value)} />
+            <select {...inputProps("time")} value={values.time} onChange={(e) => update("time", e.target.value)}>
+              <option value="">時間を選ぶ</option>
+              {reservationSlots.map((slot) => <option key={slot} value={slot}>{slot}</option>)}
+            </select>
             {errors.time && <p id="time-error" className="field-error">{errors.time}</p>}
           </div>
           <div className="field">

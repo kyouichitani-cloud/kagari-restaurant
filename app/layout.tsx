@@ -3,7 +3,6 @@ import type { CSSProperties } from "react";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { GlobalMotion } from "@/components/GlobalMotion";
-import { ReloadScrollReset } from "@/components/ReloadScrollReset";
 import { withBasePath } from "@/content/paths";
 
 const kagariSans = localFont({
@@ -24,7 +23,8 @@ export const viewport: Viewport = { themeColor: "#050A0F", colorScheme: "dark", 
 
 const initialScrollReset = `
   var navigationEntry = performance.getEntriesByType("navigation")[0];
-  var isReload = navigationEntry && navigationEntry.type === "reload";
+  var isReload = (navigationEntry && navigationEntry.type === "reload") ||
+    (performance.navigation && performance.navigation.type === 1);
   var forceTop = false;
   try {
     forceTop = sessionStorage.getItem("kagari-force-top") === "1";
@@ -41,5 +41,5 @@ const initialScrollReset = `
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const style = { "--kagari-grain-image": `url("${withBasePath("/images/texture/ink-grain.png")}")` } as CSSProperties;
-  return <html lang="ja"><head><script dangerouslySetInnerHTML={{ __html: initialScrollReset }} /></head><body className={kagariSans.variable} style={style}><ReloadScrollReset /><GlobalMotion />{children}</body></html>;
+  return <html lang="ja"><head><script dangerouslySetInnerHTML={{ __html: initialScrollReset }} /></head><body className={kagariSans.variable} style={style}><GlobalMotion />{children}</body></html>;
 }

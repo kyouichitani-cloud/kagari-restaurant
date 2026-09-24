@@ -351,11 +351,11 @@ button.button-ivory:hover,
 .required-badge, .optional-badge { display: inline-flex; align-items: center; min-height: 20px; padding: .05rem .45rem; border-radius: 999px; font-size: .62rem; font-weight: 700; letter-spacing: .06em; }
 .required-badge { color: var(--navy); background: var(--gold); }
 .optional-badge { color: var(--ivory-muted); border: 1px solid rgb(243 238 229 / .3); }
-.field input, .field textarea { width: 100%; min-height: 48px; border: 1px solid rgb(216 180 111 / .42); border-radius: 4px; padding: .68rem .85rem; color: var(--ivory); background: #071018; transition: border-color 150ms ease, background-color 150ms ease; }
+.field input, .field select, .field textarea { width: 100%; min-height: 48px; border: 1px solid rgb(216 180 111 / .42); border-radius: 4px; padding: .68rem .85rem; color: var(--ivory); background: #071018; transition: border-color 150ms ease, background-color 150ms ease; }
 .field textarea { min-height: 92px; resize: vertical; }
 .field input::placeholder, .field textarea::placeholder { color: rgb(243 238 229 / .46); }
-.field input:focus, .field textarea:focus { border-color: #f0cf8a; background: #071018; outline: none; }
-.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #f3c7c7; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #f0cf8a; background: #071018; outline: none; }
+.field input[aria-invalid="true"], .field select[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #f3c7c7; }
 .field-error { margin: .45rem 0 0; color: #ffe0df; font-size: .76rem; }
 .desktop-date-picker { position: relative; }
 .date-picker-trigger { width: 100%; min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border: 1px solid rgb(216 180 111 / .42); border-radius: 4px; padding: .85rem 1rem; color: var(--ivory); background: #071018; cursor: pointer; font-size: 1.08rem; text-align: left; transition: border-color 150ms ease, background-color 150ms ease; }
@@ -489,7 +489,7 @@ button.button-ivory:hover,
 }
 
 @media (min-width: 1024px) {
-  .form-grid-three .field input { min-height: 64px; padding: .85rem 1rem; font-size: 1.08rem; }
+  .form-grid-three .field input, .form-grid-three .field select { min-height: 64px; padding: .85rem 1rem; font-size: 1.08rem; }
   .field input[type="date"] { cursor: pointer; }
   .field input[type="date"]::-webkit-calendar-picker-indicator { width: 24px; height: 24px; cursor: pointer; transform: scale(1.18); transform-origin: center; }
 }
@@ -502,16 +502,17 @@ button.button-ivory:hover,
 }
 
 @media (max-width: 1023px), (hover: none) and (pointer: coarse) {
-  html, body { overscroll-behavior-y: none; scroll-behavior: auto; }
-  html, body, main { overflow-x: clip; touch-action: pan-y pinch-zoom; }
+  html, body { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: 0s !important; }
   body::before { display: none; }
   .hero { height: 100svh; }
   .hero-sticky { position: relative; top: auto; min-height: 100svh; }
   .scroll-cue { display: none; }
-  .site-header { transform: none; backface-visibility: visible; will-change: auto; }
+  .site-header { background: #050A0F; transform: none; backface-visibility: visible; will-change: auto; }
   .section-reveal { opacity: 1 !important; transform: none !important; }
-  .hero-frame { transform: translate(-50%, -50%) !important; }
+  .hero-background { filter: none; }
+  .hero-shade { background: rgb(5 10 15 / .54); }
+  .hero-frame { box-shadow: none; transform: translate(-50%, -50%) !important; }
   .drinks-section { min-height: 0; }
   .drinks-photo { min-height: clamp(360px, 50svh, 520px); }
   .cake-section { min-height: clamp(560px, 68svh, 680px); }
@@ -582,7 +583,8 @@ button.button-ivory:hover,
   .news-strip-inner { grid-template-columns: 1fr; gap: .65rem; padding: .9rem 0; }
   .reasons-news-meta { gap: 1rem; font-size: .62rem; }
   .news-title { font-size: .86rem; }
-  .courses-intro { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 5rem; }
+  .courses-section { padding: 5rem 0; }
+  .courses-intro { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.25rem; }
   .courses-intro h2 { font-size: clamp(2.5rem, 12vw, 4.2rem); }
   .course-stories { gap: 2.5rem; }
   .course-story, .course-story-2, .course-story-3 { width: calc(100% - 2rem); grid-template-columns: 1fr; gap: 1.5rem; }
