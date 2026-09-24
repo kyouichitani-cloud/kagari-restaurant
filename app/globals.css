@@ -502,14 +502,14 @@ button.button-ivory:hover,
 }
 
 @media (max-width: 1023px), (hover: none) and (pointer: coarse) {
-  html { scroll-behavior: auto; }
-  html, body, body * { touch-action: pan-y pinch-zoom; }
+  html, body { overscroll-behavior-y: none; scroll-behavior: auto; }
+  html, body, main { overflow-x: clip; touch-action: pan-y pinch-zoom; }
   *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: 0s !important; }
   body::before { display: none; }
   .hero { height: 100svh; }
   .hero-sticky { position: relative; top: auto; min-height: 100svh; }
   .scroll-cue { display: none; }
-  .site-header { transform: translateZ(0); backface-visibility: hidden; }
+  .site-header { transform: none; backface-visibility: visible; will-change: auto; }
   .section-reveal { opacity: 1 !important; transform: none !important; }
   .hero-frame { transform: translate(-50%, -50%) !important; }
   .drinks-section { min-height: 0; }
