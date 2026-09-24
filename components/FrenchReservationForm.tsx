@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DesktopDatePicker } from "@/components/DesktopDatePicker";
+import { PrivacyPolicyDialog } from "@/components/PrivacyPolicyDialog";
 import { isCourseId, siteContent } from "@/content/french-restaurant";
 import { privacySettings } from "@/content/privacy";
 import { reservationSlots } from "@/content/reservation";
@@ -83,8 +84,10 @@ export function FrenchReservationForm() {
   const reduceMotion = useReducedMotion();
   const [compactScreen, setCompactScreen] = useState(false);
   const [touchScreen, setTouchScreen] = useState(false);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
   const disableMotion = Boolean(reduceMotion) || compactScreen || touchScreen;
   const formTopRef = useRef<HTMLDivElement>(null);
+  const privacyTriggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 1023px)");
@@ -121,6 +124,11 @@ export function FrenchReservationForm() {
   };
 
   const scrollToFormTop = () => formTopRef.current?.scrollIntoView({ behavior: disableMotion ? "auto" : "smooth", block: "start" });
+
+  const closePrivacy = () => {
+    setPrivacyOpen(false);
+    window.requestAnimationFrame(() => privacyTriggerRef.current?.focus());
+  };
 
   const focusFirstError = (stepErrors: Partial<Record<keyof FormValues, string>>) => {
     const firstField = Object.keys(stepErrors)[0] as keyof FormValues | undefined;
@@ -333,10 +341,10 @@ export function FrenchReservationForm() {
         <div className="field"><label htmlFor="requests">その他の要望 <Optional /></label><textarea {...inputProps("requests")} rows={3} value={values.requests} onChange={(e) => update("requests", e.target.value)} /></div>
 
         <div className="consent-stack">
-          <label className="privacy-check" htmlFor="privacy-consent">
+          <div className="privacy-check">
             <input {...inputProps("privacy", "privacy-consent")} type="checkbox" checked={values.privacy} onChange={(e) => update("privacy", e.target.checked)} />
-            <span><Link href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</Link>を確認し、予約に必要な個人情報の取り扱いに同意します。 <Required /></span>
-          </label>
+            <span><button ref={privacyTriggerRef} className="privacy-policy-trigger" type="button" onClick={() => setPrivacyOpen(true)}>プライバシーポリシー</button><label htmlFor="privacy-consent">を確認し、予約に必要な個人情報の取り扱いに同意します。</label> <Required /></span>
+          </div>
           {errors.privacy && <p id="privacy-error" className="field-error" role="alert">{errors.privacy}</p>}
           <AnimatePresence initial={false}>{values.allergies.trim() && <motion.div className="health-consent" initial={{ opacity: disableMotion ? 1 : 0, transform: disableMotion ? "none" : "translate3d(0,8px,0)" }} animate={{ opacity: 1, transform: "translate3d(0,0,0)" }} exit={{ opacity: disableMotion ? 1 : 0, transform: disableMotion ? "none" : "translate3d(0,-6px,0)" }} transition={{ duration: disableMotion ? 0 : 0.22, ease: [0.23, 1, 0.32, 1] }}><label className="privacy-check" htmlFor="health-consent"><input {...inputProps("healthConsent", "health-consent")} type="checkbox" checked={values.healthConsent} onChange={(e) => update("healthConsent", e.target.checked)} /><span>アレルギー等の健康に関する情報を、予約対応と安全な料理提供のために取得・利用することに同意します。 <Required /></span></label>{errors.healthConsent && <p id="healthConsent-error" className="field-error" role="alert">{errors.healthConsent}</p>}</motion.div>}</AnimatePresence>
         </div>
@@ -347,6 +355,7 @@ export function FrenchReservationForm() {
       <aside className="reservation-summary" aria-live="polite"><p>ご予約内容</p><dl><div><dt>日時</dt><dd>{values.date || "未選択"} {values.time || ""}</dd></div><div><dt>人数</dt><dd>{values.guests ? `${values.guests}名` : "未選択"}</dd></div><div><dt>コース</dt><dd>{courseName || "未選択"}</dd></div><div><dt>ドリンク</dt><dd>{drinkName || "未選択"}</dd></div><div><dt>ケーキ</dt><dd>{values.cake === "yes" ? "希望する" : values.cake === "no" ? "希望しない" : "未選択"}</dd></div></dl></aside>
       </div>
       <Link className="reservation-contact-link" href="/contact">お問い合わせ</Link>
+      <PrivacyPolicyDialog open={privacyOpen} onClose={closePrivacy} />
     </div>
   );
 }

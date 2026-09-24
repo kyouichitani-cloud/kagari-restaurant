@@ -389,8 +389,9 @@ button.button-ivory:hover,
 .privacy-check { display: flex; gap: .9rem; align-items: flex-start; cursor: pointer; }
 .privacy-check input { flex: 0 0 auto; width: 20px; height: 20px; margin-top: .25rem; accent-color: var(--gold); }
 .privacy-check > span { display: flex; flex-wrap: wrap; gap: .55rem; align-items: center; }
-.privacy-check a { color: var(--ivory); text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: .25em; }
-.privacy-check a:focus-visible { outline-offset: 3px; }
+.privacy-check a, .privacy-policy-trigger { color: var(--ivory); text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: .25em; }
+.privacy-policy-trigger { min-height: 44px; margin-block: -.55rem; padding: .55rem 0; border: 0; background: transparent; cursor: pointer; }
+.privacy-check a:focus-visible, .privacy-policy-trigger:focus-visible { outline-offset: 3px; }
 .consent-stack { display: grid; gap: .7rem; }
 .health-consent { padding-top: .75rem; border-top: 1px solid rgb(243 238 229 / .18); }
 .form-submit { display: flex; align-items: center; gap: 1rem; padding-top: .25rem; }
@@ -416,6 +417,20 @@ button.button-ivory:hover,
 .reservation-summary dd { margin: 0; font-size: .88rem; overflow-wrap: anywhere; }
 .form-demo-foot { margin: 1rem 0 0; color: rgb(243 238 229 / .7); font-size: .75rem; line-height: 1.7; }
 .reservation-contact-link, .privacy-contact-link { display: inline-flex; min-height: 44px; align-items: center; margin-top: .65rem; color: var(--ivory); font-size: .84rem; text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: .32em; }
+
+.privacy-dialog { width: min(calc(100% - 2rem), 760px); max-height: min(88dvh, 900px); margin: auto; padding: 0; overflow: hidden; border: 1px solid rgb(216 180 111 / .5); border-radius: 14px; color: var(--ivory); background: var(--navy); box-shadow: 0 28px 80px rgb(0 0 0 / .55); }
+.privacy-dialog::backdrop { background: rgb(0 0 0 / .76); }
+.privacy-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--line-dark); background: var(--navy); }
+.privacy-dialog-header h2 { margin: 0; font-family: var(--serif); font-size: clamp(1.45rem, 3vw, 2rem); }
+.privacy-dialog-header p { margin: .2rem 0 0; color: var(--gold); font-size: .72rem; }
+.privacy-dialog-header button { flex: 0 0 auto; width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--line-dark); border-radius: 50%; color: var(--ivory); background: transparent; cursor: pointer; }
+.privacy-dialog-body { max-height: calc(88dvh - 160px); padding: 1.5rem; overflow-y: auto; overscroll-behavior: contain; font-size: max(.95rem, 16px); line-height: 1.8; scrollbar-color: var(--burgundy) var(--navy); }
+.privacy-dialog-body > p { color: var(--ivory-muted); }
+.privacy-dialog-body section { padding: 1.25rem 0; border-top: 1px solid var(--line-dark); }
+.privacy-dialog-body h3 { margin: 0 0 .55rem; font-family: var(--sans); font-size: 1rem; font-weight: 700; letter-spacing: 0; }
+.privacy-dialog-body section p { margin: 0; color: var(--ivory-muted); }
+.privacy-dialog-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--line-dark); background: var(--navy); }
+.privacy-dialog-confirm { min-height: 48px; padding: .7rem 1.25rem; border: 1px solid var(--ivory); border-radius: 999px; color: var(--navy); background: var(--ivory); cursor: pointer; font-weight: 650; }
 
 /* Privacy policy */
 .privacy-page { min-height: 100dvh; background: var(--navy); }
