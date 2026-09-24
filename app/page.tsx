@@ -25,7 +25,12 @@ export default function Home() {
               <h2 id="concept-title">コース料理を、もっと気軽に。</h2>
             </SectionReveal>
             <SectionReveal className="concept-intro" direction="right" delay={0.1}>
-              <p>旬の食材を生かした料理と、落ち着いて過ごせる空間。かしこまりすぎず、二人の時間をゆっくり楽しめる店です。</p>
+              <p>
+                <span>旬の食材を生かした料理と、</span>
+                <span>落ち着いて過ごせる空間。</span>
+                <span className="concept-sentence-start">かしこまりすぎず、</span>
+                <span>二人の時間をゆっくり楽しめる店です。</span>
+              </p>
             </SectionReveal>
             <SectionReveal className="concept-image" delay={0.2}>
               <Image src={siteContent.images.fish} alt="シェフが白身魚の一皿にソースを添える様子" fill sizes="(max-width: 767px) calc(100vw - 2rem), 58vw" />
@@ -106,8 +111,11 @@ export default function Home() {
             <SectionReveal className="cake-copy" direction="left">
               <p className="section-kicker">記念日ケーキ</p>
               <h2 id="cake-title">記念日ケーキ</h2>
-              <p>お食事の締めくくりに、メッセージ付きのケーキをご用意します。お名前とプレートの言葉は、予約フォームにご入力ください。</p>
-              <p className="cake-note">料金とサイズは、予約確認時にご案内します。</p>
+              <p>お食事の締めくくりに、記念日用のケーキをご用意します。</p>
+              <div className="cake-detail-row">
+                <p className="cake-note">料金とサイズは、予約確認時にご案内します。</p>
+                <p className="cake-description">ホールケーキのプレートに、お名前と短いメッセージを入れられます。内容は予約フォームにご入力ください。</p>
+              </div>
               <Button asChild variant="ivory"><Link href="#reservation">予約フォームへ</Link></Button>
             </SectionReveal>
           </div>

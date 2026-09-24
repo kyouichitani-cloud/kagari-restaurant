@@ -12,19 +12,13 @@ import { siteContent } from "@/content/french-restaurant";
 export function ScrollExpansionHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
-  const brandRef = useRef<HTMLParagraphElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const actionsRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const frame = frameRef.current;
-    const brand = brandRef.current;
-    const title = titleRef.current;
-    const description = descriptionRef.current;
-    const actions = actionsRef.current;
-    if (!section || !frame || !brand || !title || !description || !actions) return;
+    const copy = copyRef.current;
+    if (!section || !frame || !copy) return;
 
     const useNativeMobileScroll = window.matchMedia("(max-width: 1023px), (hover: none), (pointer: coarse)").matches;
     if (useNativeMobileScroll) return;
@@ -51,28 +45,17 @@ export function ScrollExpansionHero() {
           },
         );
       }
-      const exitTransform = (offset: number) => reduceMotion ? "none" : `translate3d(0,${offset}px,0)`;
-      const copyTimeline = gsap.timeline({
+      gsap.to(copy, {
+        opacity: 0.16,
+        transform: reduceMotion ? "none" : "translate3d(0,-12px,0)",
+        ease: "restaurant-expand",
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: reduceMotion ? "26% top" : "42% top",
-          scrub: reduceMotion ? 0.18 : 0.4,
+          end: "45% top",
+          scrub: 0.4,
         },
       });
-
-      copyTimeline
-        .to(actions, {
-          autoAlpha: 0,
-          transform: exitTransform(-8),
-          duration: 0.12,
-          ease: "restaurant-expand",
-          onComplete: () => { actions.style.pointerEvents = "none"; },
-          onReverseComplete: () => { actions.style.pointerEvents = ""; },
-        })
-        .to(description, { autoAlpha: 0, transform: exitTransform(-10), duration: 0.12, ease: "restaurant-expand" })
-        .to(title, { autoAlpha: 0, transform: exitTransform(-12), duration: 0.12, ease: "restaurant-expand" })
-        .to(brand, { autoAlpha: 0, transform: exitTransform(-10), duration: 0.12, ease: "restaurant-expand" });
     }, section);
 
     return () => context.revert();
@@ -101,13 +84,13 @@ export function ScrollExpansionHero() {
           />
         </div>
 
-        <div className="hero-copy">
-          <p ref={brandRef} className="hero-brand">{siteContent.brand.name}<span>{siteContent.brand.descriptor}</span></p>
-          <h1 ref={titleRef} id="hero-title">
+        <div ref={copyRef} className="hero-copy">
+          <p className="hero-brand">{siteContent.brand.name}<span>{siteContent.brand.descriptor}</span></p>
+          <h1 id="hero-title">
             {siteContent.hero.title.split("\n").map((line) => <span key={line}>{line}</span>)}
           </h1>
-          <p ref={descriptionRef} className="hero-description">{siteContent.hero.body}</p>
-          <div ref={actionsRef} className="hero-actions">
+          <p className="hero-description">{siteContent.hero.body}</p>
+          <div className="hero-actions">
             <Button asChild variant="ivory" size="large"><Link className="hero-primary-action" href="/courses">コースを見る</Link></Button>
             <Button asChild variant="outline" size="large"><Link href="#reservation">席を予約する</Link></Button>
           </div>

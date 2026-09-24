@@ -163,8 +163,10 @@ button.button-ivory:hover,
 .concept-section { padding: clamp(6rem, 12vw, 12rem) 0; }
 .concept-grid { display: grid; grid-template-columns: 1.05fr .72fr; gap: clamp(3rem, 8vw, 9rem); align-items: start; }
 .concept-heading h2 { max-width: 17ch; min-width: 0; margin: 0; font-size: clamp(2.4rem, 5.2vw, 5.5rem); }
-.concept-intro { align-self: end; max-width: 29rem; padding-bottom: .65rem; }
-.concept-intro p { margin: 0; color: rgb(19 35 51 / .72); font-size: clamp(.95rem, 1.2vw, 1.08rem); line-height: 2; }
+.concept-intro { align-self: end; max-width: 38rem; padding-bottom: .65rem; }
+.concept-intro p { margin: 0; color: rgb(19 35 51 / .78); font-size: clamp(1.12rem, 1.45vw, 1.34rem); line-height: 1.85; letter-spacing: .01em; text-wrap: pretty; }
+.concept-intro p span { display: block; }
+.concept-intro p .concept-sentence-start { margin-top: .5em; }
 .concept-image { position: relative; grid-column: 1 / -1; width: 78%; aspect-ratio: 16 / 8.4; margin-top: clamp(2rem, 6vw, 6rem); overflow: hidden; border-radius: 14px; }
 .concept-image img { object-position: center 56%; }
 .concept-aside { grid-column: 1 / -1; max-width: 40rem; margin: 2rem 0 0; color: var(--burgundy); font-family: var(--serif); font-size: clamp(1.4rem, 2.6vw, 2.75rem); line-height: 1.55; writing-mode: horizontal-tb; }
@@ -276,7 +278,10 @@ button.button-ivory:hover,
 .cake-copy h2 { max-width: 18ch; box-sizing: border-box; margin: 0; font-size: clamp(2rem, 3.15vw, 2.875rem); line-height: 1.35; }
 .cake-copy > p:not(.section-kicker) { max-width: 100%; overflow-wrap: break-word; }
 .cake-copy .button-ivory { max-width: 100%; box-sizing: border-box; }
-.cake-note { padding-top: 1.2rem; border-top: 1px solid rgb(243 238 229 / .25); color: rgb(243 238 229 / .7); font-size: .82rem; }
+.cake-detail-row { display: grid; grid-template-columns: minmax(12rem, .78fr) minmax(0, 1.22fr); gap: clamp(1.5rem, 3vw, 3rem); margin: 1.4rem 0 1.5rem; padding-top: 1.2rem; border-top: 1px solid rgb(243 238 229 / .25); }
+.cake-detail-row p { margin: 0; }
+.cake-note { color: rgb(243 238 229 / .7); font-size: .82rem; }
+.cake-description { color: rgb(243 238 229 / .88); font-size: .9rem; line-height: 1.8; }
 
 /* Gallery */
 .gallery-section { padding: clamp(7rem, 13vw, 13rem) 0 0; }
@@ -596,6 +601,7 @@ button.button-ivory:hover,
   .cake-content { grid-template-columns: 1fr; width: calc(100% - 2rem); }
   .cake-copy { padding: 1.5rem; }
   .cake-copy h2 { font-size: clamp(1.875rem, 9vw, 2.5rem); line-height: 1.35; }
+  .cake-detail-row { grid-template-columns: 1fr; gap: .75rem; margin: 1.1rem 0 1.25rem; padding-top: 1rem; }
   .gallery-heading { grid-template-columns: 1fr; gap: 1rem; }
   .gallery-heading h2 { font-size: clamp(2.25rem, 12vw, 3rem); }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 35vw; }
