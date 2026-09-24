@@ -63,7 +63,8 @@ export function DesktopDatePicker({ value, onChange, invalid, describedBy }: Des
     const month = visibleMonth.getMonth();
     const firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    return Array.from({ length: 42 }, (_, index) => {
+    const visibleDayCount = Math.ceil((firstWeekday + daysInMonth) / 7) * 7;
+    return Array.from({ length: visibleDayCount }, (_, index) => {
       const day = index - firstWeekday + 1;
       return day >= 1 && day <= daysInMonth ? new Date(year, month, day) : null;
     });

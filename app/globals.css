@@ -588,10 +588,10 @@ button.button-ivory:hover,
   .gallery-heading { grid-template-columns: 1fr; gap: 1rem; }
   .gallery-heading h2 { font-size: clamp(2.25rem, 12vw, 3rem); }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 35vw; }
-  .gallery-wide { grid-column: 1 / 3; grid-row: span 2; }
-  .gallery-tall { grid-column: 2; grid-row: span 3; }
-  .gallery-square { grid-column: 1; grid-row: span 2; }
-  .gallery-landscape { grid-column: 1 / 3; grid-row: span 2; }
+  .gallery-wide { grid-column: 1 / 3; grid-row: 1 / span 2; }
+  .gallery-square { grid-column: 1; grid-row: 3 / span 3; }
+  .gallery-tall { grid-column: 2; grid-row: 3 / span 3; }
+  .gallery-landscape { grid-column: 1 / 3; grid-row: 6 / span 2; }
   .access-grid { gap: 2.5rem; }
   .access-details dl > div { grid-template-columns: 5.5rem 1fr; }
   .access-links { align-items: stretch; }
