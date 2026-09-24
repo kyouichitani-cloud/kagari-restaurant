@@ -17,7 +17,12 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
   useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    root.dataset.motion = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "reduced" : "ready";
+    const staticExperience = window.matchMedia("(max-width: 1023px), (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)").matches;
+    root.dataset.motion = staticExperience ? "reduced" : "ready";
+    if (staticExperience) {
+      root.querySelectorAll<HTMLElement>(".menu-axis-course").forEach((section) => { section.dataset.visible = "true"; });
+      return;
+    }
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
@@ -63,8 +68,8 @@ export function MenuCourses({ courses }: { courses: CompleteMenuCourse[] }) {
     const carousel = root?.querySelector<HTMLElement>(`.dish-carousel[data-course-id="${courseId}"]`);
     const panel = carousel?.querySelector<HTMLElement>(`.dish-panel[data-dish-index="${index}"]`);
     if (!carousel || !panel) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    carousel.scrollTo({ left: panel.offsetLeft, behavior: reduceMotion ? "auto" : "smooth" });
+    const staticExperience = window.matchMedia("(max-width: 1023px), (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)").matches;
+    carousel.scrollTo({ left: panel.offsetLeft, behavior: staticExperience ? "auto" : "smooth" });
     panel.focus({ preventScroll: true });
   };
 

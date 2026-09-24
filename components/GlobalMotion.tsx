@@ -15,8 +15,9 @@ export function GlobalMotion() {
       if (!target) return;
       event.preventDefault();
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const compact = window.matchMedia("(max-width: 1023px), (hover: none), (pointer: coarse)").matches;
       const distance = Math.abs(target.getBoundingClientRect().top);
-      const instant = reduced || anchor.classList.contains("skip-link") || distance > window.innerHeight * 1.5;
+      const instant = compact || reduced || anchor.classList.contains("skip-link") || distance > window.innerHeight * 1.5;
       const previousScrollBehavior = document.documentElement.style.scrollBehavior;
       if (instant) document.documentElement.style.scrollBehavior = "auto";
       if (window.location.hash !== anchor.hash) {

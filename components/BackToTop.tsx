@@ -14,7 +14,8 @@ export function BackToTop() {
     };
   }, []);
   function goTop() {
-    window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    const staticExperience = window.matchMedia("(max-width: 1023px), (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: staticExperience ? "auto" : "smooth" });
   }
   return <button className="back-top" data-visible={visible} type="button" aria-label="ページの一番上へ戻る" tabIndex={visible ? 0 : -1} onClick={goTop}><span>上へ</span><i aria-hidden="true" /></button>;
 }
