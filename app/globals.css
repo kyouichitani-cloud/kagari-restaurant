@@ -469,12 +469,19 @@ button.button-ivory:hover,
 }
 
 @media (max-width: 1023px) {
+  html { scroll-behavior: auto; }
   html, body, body * { touch-action: pan-y pinch-zoom; }
+  *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: 0s !important; }
   body::before { display: none; }
   .hero { height: 100svh; }
   .hero-sticky { min-height: 100svh; }
   .scroll-cue { display: none; }
   .site-header { transform: translateZ(0); backface-visibility: hidden; }
+  .section-reveal { opacity: 1 !important; transform: none !important; }
+  .hero-frame { transform: translate(-50%, -50%) !important; }
+  .drinks-section { min-height: 0; }
+  .drinks-photo { min-height: clamp(360px, 50svh, 520px); }
+  .cake-section { min-height: clamp(560px, 68svh, 680px); }
 }
 
 @media (max-width: 1023px) {
@@ -486,7 +493,7 @@ button.button-ivory:hover,
   .course-story, .course-story-2, .course-story-3 { gap: 3rem; }
   .course-price span { font-size: .72rem; }
   .course-price small { font-size: .9rem; }
-  .drinks-content { padding: 5rem 3rem; }
+  .drinks-content { padding: clamp(3.5rem, 7vw, 5rem) clamp(2rem, 5vw, 3rem); }
   .reservation-heading { grid-template-columns: 1fr .8fr; }
   .course-index-row, .course-index-row:nth-child(even) { width: min(100% - 3rem, 780px); grid-template-columns: 1fr; gap: 2.5rem; }
   .course-index-row:nth-child(even) .course-index-image, .course-index-row:nth-child(even) .course-index-copy { grid-column: 1; }
@@ -549,10 +556,10 @@ button.button-ivory:hover,
   .course-price { margin-block: 1.4rem 1.6rem; font-size: clamp(2.7rem, 14vw, 4rem); }
   .course-price span { font-size: .76rem; }
   .drinks-section { grid-template-columns: 1fr; }
-  .drinks-photo { min-height: 68svh; }
-  .drinks-content { padding: 5rem 1rem; }
+  .drinks-photo { height: clamp(260px, 40svh, 340px); min-height: 0; }
+  .drinks-content { padding: 3.75rem 1rem; }
   .drinks-content h2 { font-size: clamp(2.4rem, 11vw, 3.8rem); }
-  .cake-section { min-height: 820px; align-items: end; padding-bottom: 1rem; }
+  .cake-section { min-height: clamp(540px, 70svh, 620px); align-items: end; padding-bottom: 0; }
   .cake-photo img { object-position: 55% center; }
   .cake-content { grid-template-columns: 1fr; width: calc(100% - 2rem); }
   .cake-copy { padding: 1.5rem; }

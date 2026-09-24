@@ -2,55 +2,70 @@
 
 import { useLayoutEffect } from "react";
 
-function isReloadNavigation() {
-  const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
-  if (navigation) return navigation.type === "reload";
-  return "navigation" in performance && performance.navigation.type === 1;
-}
-
 export function ReloadScrollReset() {
   useLayoutEffect(() => {
-    if (!isReloadNavigation()) return;
+    const compactScreen = window.matchMedia("(max-width: 1023px)");
+    if (!compactScreen.matches || window.location.hash) return;
 
     const previousRestoration = window.history.scrollRestoration;
     const timers: number[] = [];
-    let firstFrame = 0;
-    let secondFrame = 0;
+    const frames: number[] = [];
     let active = true;
 
     const reset = () => {
-      if (active) window.scrollTo(0, 0);
+      if (active && !window.location.hash) {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      }
+    };
+
+    const clearScheduledResets = () => {
+      frames.splice(0).forEach((frame) => window.cancelAnimationFrame(frame));
+      timers.splice(0).forEach((timer) => window.clearTimeout(timer));
     };
 
     const resetAfterRestore = () => {
+      clearScheduledResets();
+      active = true;
       reset();
-      firstFrame = window.requestAnimationFrame(() => {
+      frames.push(window.requestAnimationFrame(() => {
         reset();
-        secondFrame = window.requestAnimationFrame(reset);
-      });
+        frames.push(window.requestAnimationFrame(reset));
+      }));
       timers.push(window.setTimeout(reset, 0));
-      timers.push(window.setTimeout(reset, 100));
-      timers.push(window.setTimeout(reset, 320));
+      timers.push(window.setTimeout(reset, 120));
+      timers.push(window.setTimeout(reset, 400));
+    };
+
+    const stopResetting = () => {
+      active = false;
+      clearScheduledResets();
+    };
+
+    const resetWhenVisible = () => {
+      if (document.visibilityState === "visible") resetAfterRestore();
     };
 
     const finish = () => {
-      active = false;
-      window.cancelAnimationFrame(firstFrame);
-      window.cancelAnimationFrame(secondFrame);
-      timers.forEach((timer) => window.clearTimeout(timer));
+      stopResetting();
       window.removeEventListener("load", resetAfterRestore);
       window.removeEventListener("pageshow", resetAfterRestore);
-      window.removeEventListener("pagehide", finish);
+      document.removeEventListener("visibilitychange", resetWhenVisible);
+      window.removeEventListener("touchstart", stopResetting);
+      window.removeEventListener("pointerdown", stopResetting);
+      window.removeEventListener("wheel", stopResetting);
+      window.removeEventListener("keydown", stopResetting);
       window.history.scrollRestoration = previousRestoration;
     };
 
-    // Only reloads bypass browser scroll restoration. Normal visits keep their URL hash,
-    // and client-side navigation remains under Next.js and browser history control.
     window.history.scrollRestoration = "manual";
     resetAfterRestore();
     window.addEventListener("load", resetAfterRestore, { once: true });
     window.addEventListener("pageshow", resetAfterRestore);
-    window.addEventListener("pagehide", finish, { once: true });
+    document.addEventListener("visibilitychange", resetWhenVisible);
+    window.addEventListener("touchstart", stopResetting, { passive: true, once: true });
+    window.addEventListener("pointerdown", stopResetting, { passive: true, once: true });
+    window.addEventListener("wheel", stopResetting, { passive: true, once: true });
+    window.addEventListener("keydown", stopResetting, { once: true });
 
     return finish;
   }, []);

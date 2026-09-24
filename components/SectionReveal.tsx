@@ -13,23 +13,26 @@ type SectionRevealProps = {
 
 export function SectionReveal({ children, className, direction = "up", delay = 0 }: SectionRevealProps) {
   const reduceMotion = useReducedMotion();
-  const [useLightweightMotion, setUseLightweightMotion] = useState(false);
+  const [useStaticLayout, setUseStaticLayout] = useState(false);
   const revealClassName = ["section-reveal", className].filter(Boolean).join(" ");
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 1023px)");
-    const update = () => setUseLightweightMotion(media.matches);
+    const update = () => setUseStaticLayout(media.matches);
     update();
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
   }, []);
 
-  const distance = useLightweightMotion ? 12 : 28;
-  const offset = reduceMotion ? "translate3d(0,0,0)" : direction === "left"
-    ? `translate3d(-${distance}px,0,0)`
+  if (reduceMotion || useStaticLayout) {
+    return <div className={revealClassName}>{children}</div>;
+  }
+
+  const offset = direction === "left"
+    ? "translate3d(-28px,0,0)"
     : direction === "right"
-      ? `translate3d(${distance}px,0,0)`
-      : `translate3d(0,${useLightweightMotion ? 10 : 26}px,0)`;
+      ? "translate3d(28px,0,0)"
+      : "translate3d(0,26px,0)";
 
   return (
     <motion.div
@@ -38,8 +41,8 @@ export function SectionReveal({ children, className, direction = "up", delay = 0
       whileInView={{ opacity: 1, transform: "translate3d(0,0,0)" }}
       viewport={{ once: true, amount: 0.18 }}
       transition={{
-        duration: reduceMotion ? 0.2 : useLightweightMotion ? 0.42 : 0.7,
-        delay: reduceMotion ? 0 : useLightweightMotion ? Math.min(delay, 0.08) : delay,
+        duration: 0.7,
+        delay,
         ease: [0.23, 1, 0.32, 1],
       }}
     >
