@@ -230,7 +230,7 @@ export function FrenchReservationForm() {
           <div className="mobile-reservation-progress-track" aria-hidden="true"><i style={{ transform: `scaleX(${mobileStep / 4})` }} /></div>
         </div>
 
-        <section className="reservation-group" data-mobile-active={mobileStep === 1}><div className="reservation-group-title"><span>01</span><h3 id="reservation-step-1" tabIndex={-1}>日時と人数</h3></div>
+        <section className="reservation-group" data-mobile-active={mobileStep === 1}><div className="reservation-group-title"><h3 id="reservation-step-1" tabIndex={-1}>日時と人数</h3></div>
         <div className="form-grid form-grid-three">
           <div className="field">
             <label htmlFor="date">予約希望日 <Required /></label>
@@ -251,7 +251,7 @@ export function FrenchReservationForm() {
         <div className="mobile-step-actions mobile-step-actions-next"><Button type="button" variant="ivory" onClick={() => advanceMobileStep(1, 2)}>次へ：コースを選ぶ<ArrowRight size={17} aria-hidden="true" /></Button></div>
         </section>
 
-        <section className="reservation-group" data-mobile-active={mobileStep === 2}><div className="reservation-group-title"><span>02</span><h3 id="reservation-step-2" tabIndex={-1}>コース</h3></div>
+        <section className="reservation-group" data-mobile-active={mobileStep === 2}><div className="reservation-group-title"><h3 id="reservation-step-2" tabIndex={-1}>コース</h3></div>
         <fieldset>
           <legend>希望するコース <Required /></legend>
           <div className="choice-list course-choice-list">
@@ -263,7 +263,7 @@ export function FrenchReservationForm() {
         <div className="mobile-step-actions"><Button type="button" variant="quiet" onClick={() => goToMobileStep(1)}><ArrowLeft size={17} aria-hidden="true" />戻る</Button><Button type="button" variant="ivory" onClick={() => advanceMobileStep(2, 3)}>次へ：オプションを選ぶ<ArrowRight size={17} aria-hidden="true" /></Button></div>
         </section>
 
-        <section className="reservation-group" data-mobile-active={mobileStep === 3}><div className="reservation-group-title"><span>03</span><h3 id="reservation-step-3" tabIndex={-1}>追加オプション</h3></div>
+        <section className="reservation-group" data-mobile-active={mobileStep === 3}><div className="reservation-group-title"><h3 id="reservation-step-3" tabIndex={-1}>追加オプション</h3></div>
         <fieldset>
           <legend>ドリンク単品または飲み放題 <Required /></legend>
           <div className="choice-list compact-choice-list">{siteContent.drinks.map((drink) => <label key={drink.id} className={values.drink === drink.id ? "is-selected" : ""}><input {...inputProps("drink", `drink-${drink.id}`)} type="radio" value={drink.id} checked={values.drink === drink.id} onChange={(e) => update("drink", e.target.value)} /><span><strong>{drink.label}</strong><small>{drink.description}</small></span></label>)}</div>{errors.drink && <p id="drink-error" className="field-error">{errors.drink}</p>}
@@ -276,7 +276,7 @@ export function FrenchReservationForm() {
         <div className="mobile-step-actions"><Button type="button" variant="quiet" onClick={() => goToMobileStep(2)}><ArrowLeft size={17} aria-hidden="true" />戻る</Button><Button type="button" variant="ivory" onClick={() => advanceMobileStep(3, 4)}>次へ：お客様情報へ<ArrowRight size={17} aria-hidden="true" /></Button></div>
         </section>
 
-        <section className="reservation-group" data-mobile-active={mobileStep === 4}><div className="reservation-group-title"><span>04</span><h3 id="reservation-step-4" tabIndex={-1}>お客様情報・確認</h3></div>
+        <section className="reservation-group" data-mobile-active={mobileStep === 4}><div className="reservation-group-title"><h3 id="reservation-step-4" tabIndex={-1}>お客様情報・確認</h3></div>
         <div className="form-grid">
           <div className="field">
             <label htmlFor="name">代表者名 <Required /></label>

@@ -330,7 +330,6 @@ button.button-ivory:hover,
 .reservation-group { display: grid; gap: 1rem; padding: clamp(1.5rem, 2.6vw, 2.25rem) 0; border-top: 1px solid rgb(243 238 229 / .18); }
 .reservation-group:last-child { border-bottom: 1px solid rgb(243 238 229 / .18); }
 .reservation-group-title { display: flex; align-items: baseline; gap: 1rem; margin-bottom: .25rem; }
-.reservation-group-title span { color: var(--gold); font-size: .72rem; letter-spacing: .15em; }
 .reservation-group-title h3 { margin: 0; font-size: clamp(1.35rem, 2vw, 1.7rem); font-weight: 600; }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .form-grid-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -460,6 +459,11 @@ button.button-ivory:hover,
   .choice-list label:hover { border-color: rgb(216 180 111 / .7); transform: translateY(-1px); }
   .instagram-access-button:hover { border-color: #0E0509; color: #F3EEE5 !important; background: #0E0509; }
   .instagram-access-button:hover .instagram-arrow { transform: translate3d(2px, -2px, 0); }
+}
+
+@media (min-width: 1024px) {
+  .field input[type="date"] { min-height: 64px; padding: .85rem 1rem; font-size: 1.08rem; cursor: pointer; }
+  .field input[type="date"]::-webkit-calendar-picker-indicator { width: 24px; height: 24px; cursor: pointer; transform: scale(1.18); transform-origin: center; }
 }
 
 @media (max-width: 1023px) {
