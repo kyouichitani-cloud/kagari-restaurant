@@ -112,7 +112,7 @@ export default function Home() {
 
         <section id="gallery" className="gallery-section" aria-labelledby="gallery-title">
           <div className="section-shell gallery-heading">
-            <SectionReveal><p className="section-kicker">ギャラリー</p><h2 id="gallery-title">料理・店内写真</h2></SectionReveal>
+            <SectionReveal><h2 id="gallery-title">料理・店内写真</h2></SectionReveal>
             <SectionReveal direction="right" delay={0.1}><p>掲載写真は仮素材です。</p></SectionReveal>
           </div>
           <div className="gallery-grid">

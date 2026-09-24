@@ -10,7 +10,7 @@ export const siteContent = {
     { label: "私たちについて", href: "/#concept" },
     { label: "ドリンク", href: "/#drinks" },
     { label: "記念日ケーキ", href: "/#cake" },
-    { label: "ギャラリー", href: "/#gallery" },
+    { label: "料理・店内写真", href: "/#gallery" },
     { label: "店舗情報・アクセス", href: "/#access" },
     { label: "ご予約", href: "/#reservation" },
     { label: "お問い合わせ", href: "/contact" },
