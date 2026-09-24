@@ -15,8 +15,21 @@ export function GlobalMotion() {
       if (!target) return;
       event.preventDefault();
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (window.location.hash !== anchor.hash) window.history.pushState(window.history.state, "", anchor.hash);
-      target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+      const distance = Math.abs(target.getBoundingClientRect().top);
+      const instant = reduced || anchor.classList.contains("skip-link") || distance > window.innerHeight * 1.5;
+      const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+      if (instant) document.documentElement.style.scrollBehavior = "auto";
+      if (window.location.hash !== anchor.hash) {
+        const oldURL = window.location.href;
+        window.history.pushState(window.history.state, "", anchor.hash);
+        window.dispatchEvent(new HashChangeEvent("hashchange", { oldURL, newURL: window.location.href }));
+      }
+      target.scrollIntoView({ behavior: instant ? "auto" : "smooth", block: "start" });
+      if (instant) {
+        window.requestAnimationFrame(() => {
+          document.documentElement.style.scrollBehavior = previousScrollBehavior;
+        });
+      }
       if (anchor.classList.contains("skip-link")) {
         window.requestAnimationFrame(() => target.focus({ preventScroll: true }));
       }

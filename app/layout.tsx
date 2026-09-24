@@ -2,6 +2,7 @@ import "./globals.css";
 import type { CSSProperties } from "react";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { GlobalMotion } from "@/components/GlobalMotion";
 import { ReloadScrollReset } from "@/components/ReloadScrollReset";
 import { withBasePath } from "@/content/paths";
 
@@ -30,5 +31,5 @@ const initialScrollReset = `
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const style = { "--kagari-grain-image": `url("${withBasePath("/images/texture/ink-grain.png")}")` } as CSSProperties;
-  return <html lang="ja"><head><script dangerouslySetInnerHTML={{ __html: initialScrollReset }} /></head><body className={kagariSans.variable} style={style}><ReloadScrollReset />{children}</body></html>;
+  return <html lang="ja"><head><script dangerouslySetInnerHTML={{ __html: initialScrollReset }} /></head><body className={kagariSans.variable} style={style}><ReloadScrollReset /><GlobalMotion />{children}</body></html>;
 }
