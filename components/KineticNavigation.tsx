@@ -3,10 +3,19 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 import { getCourseHref, siteContent } from "@/content/french-restaurant";
 
 const focusableSelector = "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])";
+
+function scrollToSection(targetId: string) {
+  const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = "auto";
+  document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+  window.requestAnimationFrame(() => {
+    document.documentElement.style.scrollBehavior = previousScrollBehavior;
+  });
+}
 
 export function KineticNavigation() {
   const [open, setOpen] = useState(false);
@@ -15,9 +24,12 @@ export function KineticNavigation() {
   const reduceMotion = useReducedMotion();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const restoreTriggerFocusRef = useRef(true);
+  const pendingScrollTargetRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!open) return;
+    restoreTriggerFocusRef.current = true;
     const trigger = buttonRef.current;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -49,11 +61,43 @@ export function KineticNavigation() {
       document.body.style.overflow = previousOverflow;
       delete document.documentElement.dataset.menu;
       document.removeEventListener("keydown", onKeyDown);
-      trigger?.focus();
+      if (restoreTriggerFocusRef.current) trigger?.focus({ preventScroll: true });
     };
   }, [open, reduceMotion]);
 
-  const closeMenu = () => setOpen(false);
+  useEffect(() => {
+    if (pathname !== "/" || !window.location.hash) return;
+    const targetId = window.location.hash.slice(1);
+    const frame = window.requestAnimationFrame(() => scrollToSection(targetId));
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (open || !pendingScrollTargetRef.current) return;
+    const targetId = pendingScrollTargetRef.current;
+    pendingScrollTargetRef.current = null;
+    const timer = window.setTimeout(() => scrollToSection(targetId), 0);
+    return () => window.clearTimeout(timer);
+  }, [open]);
+
+  const closeMenu = () => {
+    restoreTriggerFocusRef.current = false;
+    setOpen(false);
+  };
+  const getNavigationHref = (href: string) => pathname === "/" && href.startsWith("/#") ? href.slice(1) : href;
+  const handleMenuLink = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    const isModifiedClick = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    const targetId = href.startsWith("/#") ? href.slice(2) : "";
+    if (!targetId || !document.getElementById(targetId) || isModifiedClick) {
+      closeMenu();
+      return;
+    }
+
+    event.preventDefault();
+    pendingScrollTargetRef.current = targetId;
+    closeMenu();
+    window.history.pushState(null, "", `#${targetId}`);
+  };
 
   return (
     <>
@@ -106,11 +150,11 @@ export function KineticNavigation() {
                     transition={{ duration: reduceMotion ? 0.18 : 0.42, delay: reduceMotion ? 0 : 0.18 + index * 0.045, ease: [0.23, 1, 0.32, 1] }}
                   >
                     <Link
-                      href={item.href}
+                      href={getNavigationHref(item.href)}
                       aria-current={pathname === item.href ? "page" : undefined}
                       onMouseEnter={() => setActiveIndex(index)}
                       onFocus={() => setActiveIndex(index)}
-                      onClick={closeMenu}
+                      onClick={(event) => handleMenuLink(event, item.href)}
                     >
                       <span>{String(index + 1).padStart(2, "0")}</span>{item.label}
                     </Link>
@@ -123,10 +167,10 @@ export function KineticNavigation() {
                 >
                   <p><span>03</span>コース料理</p>
                   <ul>
-                    <li><Link href="/courses" aria-current={pathname === "/courses" ? "page" : undefined} onMouseEnter={() => setActiveIndex(2)} onFocus={() => setActiveIndex(2)} onClick={closeMenu}>コース一覧</Link></li>
+                    <li><Link href="/courses" aria-current={pathname === "/courses" ? "page" : undefined} onMouseEnter={() => setActiveIndex(2)} onFocus={() => setActiveIndex(2)} onClick={(event) => handleMenuLink(event, "/courses")}>コース一覧</Link></li>
                     {siteContent.courses.map((course) => {
                       const href = getCourseHref(course.id);
-                      return <li key={course.id}><Link href={href} aria-current={pathname === href ? "page" : undefined} onMouseEnter={() => setActiveIndex(2)} onFocus={() => setActiveIndex(2)} onClick={closeMenu}>{course.name}<small>お一人様 {course.price.toLocaleString("ja-JP")}円</small></Link></li>;
+                      return <li key={course.id}><Link href={href} aria-current={pathname === href ? "page" : undefined} onMouseEnter={() => setActiveIndex(2)} onFocus={() => setActiveIndex(2)} onClick={(event) => handleMenuLink(event, href)}>{course.name}<small>お一人様 {course.price.toLocaleString("ja-JP")}円</small></Link></li>;
                     })}
                   </ul>
                 </motion.li>
@@ -137,11 +181,11 @@ export function KineticNavigation() {
                     transition={{ duration: reduceMotion ? 0.18 : 0.42, delay: reduceMotion ? 0 : 0.34 + index * 0.045, ease: [0.23, 1, 0.32, 1] }}
                   >
                     <Link
-                      href={item.href}
+                      href={getNavigationHref(item.href)}
                       aria-current={pathname === item.href ? "page" : undefined}
                       onMouseEnter={() => setActiveIndex(index + 3)}
                       onFocus={() => setActiveIndex(index + 3)}
-                      onClick={closeMenu}
+                      onClick={(event) => handleMenuLink(event, item.href)}
                     >
                       <span>{String(index + 4).padStart(2, "0")}</span>{item.label}
                     </Link>

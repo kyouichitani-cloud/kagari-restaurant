@@ -31,33 +31,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="reasons-section" aria-labelledby="reasons-title">
+        <aside className="news-strip" aria-label="お知らせ">
           <div className="section-shell">
-            <SectionReveal className="reasons-news">
+            <SectionReveal className="news-strip-inner">
               <div className="reasons-news-meta"><span>お知らせ</span><time dateTime="2026-09-18">2026.09.18</time></div>
               <Link href="#reservation">ご予約と記念日ケーキについて<span aria-hidden="true">→</span></Link>
             </SectionReveal>
           </div>
-          <div className="section-shell reasons-layout">
-            <SectionReveal className="reasons-heading" delay={0.1}>
-              <p className="section-kicker">ご予約の前に</p>
-              <h2 id="reasons-title">料金と追加オプション</h2>
-            </SectionReveal>
-            <div className="reasons-list">
-              {[
-                { title: "料金が分かる", body: "5,000円、7,500円、10,000円の3コースです。" },
-                { title: "追加オプション", body: "ドリンクと記念日ケーキを予約時に選べます。" },
-                { title: "予約時に相談できる", body: "ケーキの内容などは、予約時にご相談ください。" },
-              ].map(({ title, body }, index) => (
-                <SectionReveal key={title} className="reason-row" direction="up" delay={0.18 + index * 0.1}>
-                  <span className="reason-number">{String(index + 1).padStart(2, "0")}</span>
-                  <div className="reason-copy"><h3>{title}</h3><p>{body}</p></div>
-                  <i className="reason-marker" aria-hidden="true" />
-                </SectionReveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        </aside>
 
         <section id="courses" className="courses-section" aria-labelledby="courses-title">
           <div className="section-shell courses-intro">
@@ -88,7 +69,6 @@ export default function Home() {
                   </p>
                   <p className="course-description">{course.description}</p>
                   <dl><dt>構成例</dt><dd>{course.composition.join(" ／ ")}</dd></dl>
-                  <p className="course-note">{course.note}</p>
                   <div className="course-actions">
                     <Button asChild variant="quiet"><Link href={getCourseHref(course.id)}>詳しく見る</Link></Button>
                     <Button asChild variant="ivory"><Link href="#reservation">このコースで予約する</Link></Button>
@@ -105,7 +85,6 @@ export default function Home() {
             <SectionReveal>
               <p className="section-kicker">ドリンク</p>
               <h2 id="drinks-title">ドリンクプラン</h2>
-              <p className="drinks-lead">単品または飲み放題を、予約時に選べます。</p>
             </SectionReveal>
             <div className="drink-options">
               {siteContent.drinks.map((drink, index) => (
@@ -146,7 +125,7 @@ export default function Home() {
 
         <section id="access" className="access-section section-ivory" aria-labelledby="access-title">
           <div className="section-shell access-grid">
-            <SectionReveal className="access-heading"><p className="section-kicker">店舗情報・アクセス</p><h2 id="access-title">店舗情報</h2><p>住所は仮情報です。正式決定後に更新します。</p></SectionReveal>
+            <SectionReveal className="access-heading"><p className="section-kicker">店舗情報・アクセス</p><h2 id="access-title">店舗情報</h2></SectionReveal>
             <SectionReveal className="access-details" direction="right" delay={0.12}>
               <dl>
                 <div><dt>店名</dt><dd>{siteContent.brand.name}</dd></div>

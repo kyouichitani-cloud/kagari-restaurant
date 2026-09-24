@@ -64,7 +64,6 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
             <ol>
               {course.composition.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}
             </ol>
-            <p className="course-note">{course.note}</p>
           </SectionReveal>
         </div>
 
