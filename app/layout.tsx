@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { GlobalMotion } from "@/components/GlobalMotion";
 import { withBasePath } from "@/content/paths";
+import { publicationReady, siteUrl } from "@/content/site";
 
 const kagariSans = localFont({
   src: "../public/fonts/kagari-sans.woff2",
@@ -12,13 +13,13 @@ const kagariSans = localFont({
   weight: "100 900",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kagari-restaurant.vercel.app";
 const shareImagePath = "/share/kagari-course-v2.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "KAGARI｜記念日に楽しむフレンチコース",
   description: "KAGARIは、3つのコースから選べるフレンチダイニングです。",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "ja_JP",
@@ -34,7 +35,17 @@ export const metadata: Metadata = {
     description: "KAGARIは、3つのコースから選べるフレンチダイニングです。",
     images: [shareImagePath],
   },
-  robots: { index: false, follow: false },
+  robots: {
+    index: publicationReady,
+    follow: publicationReady,
+    googleBot: {
+      index: publicationReady,
+      follow: publicationReady,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#050A0F", colorScheme: "dark", viewportFit: "cover" };

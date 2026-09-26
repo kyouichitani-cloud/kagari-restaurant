@@ -310,7 +310,7 @@ button.button-ivory:hover,
 .access-details dl > div:last-child { border-bottom: 1px solid var(--line-light); }
 .access-details dt { color: var(--burgundy); font-size: .72rem; letter-spacing: .12em; }
 .access-details dd { margin: 0; }
-.access-details small { display: block; margin-top: .35rem; color: rgb(19 35 51 / .62); }
+.access-details small { display: block; margin-top: .35rem; color: rgb(19 35 51 / .72); }
 .access-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2rem; }
 .access-links a { color: var(--burgundy); font-size: .82rem; text-decoration: underline; text-decoration-color: rgb(109 31 54 / .38); text-underline-offset: .35em; }
 .access-links > a:not(.instagram-access-button) { display: inline-flex; min-height: 44px; align-items: center; }
@@ -365,7 +365,7 @@ button.button-ivory:hover,
 .date-picker-trigger { width: 100%; min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border: 1px solid rgb(216 180 111 / .42); border-radius: 4px; padding: .85rem 1rem; color: var(--ivory); background: #071018; cursor: pointer; font-size: 1.08rem; text-align: left; transition: border-color 150ms ease, background-color 150ms ease; }
 .date-picker-trigger:hover, .date-picker-trigger[aria-expanded="true"] { border-color: #f0cf8a; background: #0b161f; }
 .date-picker-trigger[data-invalid="true"] { border-color: #f3c7c7; }
-.date-picker-trigger .is-placeholder { color: rgb(243 238 229 / .46); }
+.date-picker-trigger .is-placeholder { color: rgb(243 238 229 / .6); }
 .form-grid-three .date-picker-trigger,
 .form-grid-three .field > input,
 .form-grid-three .field > select {

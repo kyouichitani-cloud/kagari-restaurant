@@ -3,9 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CustomEase } from "gsap/CustomEase";
 import { Button } from "@/components/ui/button";
 import { siteContent } from "@/content/french-restaurant";
 
@@ -23,37 +20,55 @@ export function ScrollExpansionHero() {
     const useNativeMobileScroll = window.matchMedia("(max-width: 1023px), (hover: none), (pointer: coarse)").matches;
     if (useNativeMobileScroll) return;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
 
-    gsap.registerPlugin(ScrollTrigger, CustomEase);
-    CustomEase.create("restaurant-expand", "0.23,1,0.32,1");
+    let disposed = false;
+    let revertAnimation: (() => void) | undefined;
 
-    const context = gsap.context(() => {
-      if (reduceMotion) return;
+    const initialiseDesktopAnimation = async () => {
+      const [{ gsap }, { ScrollTrigger }, { CustomEase }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+        import("gsap/CustomEase"),
+      ]);
+      if (disposed) return;
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${Math.round(window.innerHeight * 0.52)}`,
-          pin: section,
-          pinSpacing: true,
-          scrub: 0.55,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
+      gsap.registerPlugin(ScrollTrigger, CustomEase);
+      CustomEase.create("restaurant-expand", "0.23,1,0.32,1");
 
-      timeline
-        .fromTo(frame, { scale: 1 }, { scale: 2.08, ease: "none", duration: 1 }, 0)
-        .to(copy, {
-          autoAlpha: 0,
-          transform: "translate3d(0,-12px,0)",
-          ease: "restaurant-expand",
-          duration: 0.58,
-        }, 0);
-    }, section);
+      const context = gsap.context(() => {
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => `+=${Math.round(window.innerHeight * 0.52)}`,
+            pin: section,
+            pinSpacing: true,
+            scrub: 0.55,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-    return () => context.revert();
+        timeline
+          .fromTo(frame, { scale: 1 }, { scale: 2.08, ease: "none", duration: 1 }, 0)
+          .to(copy, {
+            autoAlpha: 0,
+            transform: "translate3d(0,-12px,0)",
+            ease: "restaurant-expand",
+            duration: 0.58,
+          }, 0);
+      }, section);
+
+      revertAnimation = () => context.revert();
+    };
+
+    void initialiseDesktopAnimation();
+
+    return () => {
+      disposed = true;
+      revertAnimation?.();
+    };
   }, []);
 
   return (
@@ -64,7 +79,9 @@ export function ScrollExpansionHero() {
           src={siteContent.images.background}
           alt="記念日のテーブルが用意された落ち着いた店内"
           fill
-          priority
+          loading="eager"
+          fetchPriority="low"
+          quality={68}
           sizes="100vw"
         />
         <div className="hero-shade" aria-hidden="true" />
@@ -75,6 +92,8 @@ export function ScrollExpansionHero() {
             alt="フレンチ料理と、奥のテーブルで過ごす二人"
             fill
             priority
+            fetchPriority="high"
+            quality={68}
             sizes="(max-width: 767px) 76vw, 46vw"
           />
         </div>

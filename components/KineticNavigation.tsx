@@ -134,7 +134,7 @@ export function KineticNavigation() {
   return (
     <>
       <header className="site-header">
-        <Link className="site-wordmark" href="/" aria-label="KAGARI トップへ" onClick={handleWordmarkClick}><span>{siteContent.brand.name}</span><small>{siteContent.brand.descriptor}</small></Link>
+        <Link className="site-wordmark" href="/" onClick={handleWordmarkClick}><span>{siteContent.brand.name}</span><small>{siteContent.brand.descriptor}</small></Link>
         <button
           ref={buttonRef}
           className="menu-trigger"

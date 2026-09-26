@@ -33,7 +33,7 @@ export default function Home() {
               </p>
             </SectionReveal>
             <SectionReveal className="concept-image" delay={0.2}>
-              <Image src={siteContent.images.fish} alt="シェフが白身魚の一皿にソースを添える様子" fill sizes="(max-width: 767px) calc(100vw - 2rem), 58vw" />
+              <Image src={siteContent.images.fish} alt="シェフが白身魚の一皿にソースを添える様子" fill quality={65} sizes="(max-width: 767px) calc(100vw - 2rem), 58vw" />
             </SectionReveal>
             <p className="concept-aside">誕生日や記念日、いつものデートにも。</p>
           </div>
@@ -64,7 +64,7 @@ export default function Home() {
             {siteContent.courses.map((course, index) => (
               <article key={course.id} className={`course-story course-story-${index + 1}`}>
                 <SectionReveal className="course-photo" direction={index % 2 ? "right" : "left"}>
-                  <Image src={course.image} alt={course.alt} fill sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 60vw, 54vw" />
+                  <Image src={course.image} alt={course.alt} fill quality={65} sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 60vw, 54vw" />
                   <span className="course-index" aria-hidden="true">0{index + 1}</span>
                 </SectionReveal>
                 <SectionReveal className="course-copy" delay={0.12}>
@@ -88,7 +88,7 @@ export default function Home() {
         </section>
 
         <section id="drinks" className="drinks-section section-ivory" aria-labelledby="drinks-title">
-          <div className="drinks-photo"><Image src={siteContent.images.wine} alt="テーブルで赤ワインをグラスへ注ぐ様子" fill sizes="(max-width: 767px) 100vw, 47vw" /></div>
+          <div className="drinks-photo"><Image src={siteContent.images.wine} alt="テーブルで赤ワインをグラスへ注ぐ様子" fill quality={65} sizes="(max-width: 767px) 100vw, 47vw" /></div>
           <div className="drinks-content">
             <SectionReveal>
               <p className="section-kicker">ドリンク</p>
@@ -105,7 +105,7 @@ export default function Home() {
         </section>
 
         <section id="cake" className="cake-section" aria-labelledby="cake-title">
-          <div className="cake-photo"><Image src={siteContent.images.anniversary} alt="記念日ケーキと二人分のグラスが置かれたテーブル" fill sizes="100vw" /></div>
+          <div className="cake-photo"><Image src={siteContent.images.anniversary} alt="記念日ケーキと二人分のグラスが置かれたテーブル" fill quality={65} sizes="100vw" /></div>
           <div className="cake-shade" aria-hidden="true" />
           <div className="section-shell cake-content">
             <SectionReveal className="cake-copy" direction="left">
@@ -127,10 +127,10 @@ export default function Home() {
             <SectionReveal direction="right" delay={0.1}><p>掲載写真は仮素材です。</p></SectionReveal>
           </div>
           <div className="gallery-grid">
-            <SectionReveal className="gallery-item gallery-wide"><Image src={siteContent.images.hero} alt="フレンチ料理を囲む夜の店内" fill sizes="(max-width: 767px) 100vw, 66vw" /></SectionReveal>
-            <SectionReveal className="gallery-item gallery-tall" delay={0.08}><Image src={siteContent.images.wine} alt="赤ワインをグラスへ注ぐ手元" fill sizes="(max-width: 767px) 60vw, 32vw" /></SectionReveal>
-            <SectionReveal className="gallery-item gallery-square" delay={0.12}><Image src={siteContent.images.beef} alt="牛肉と季節の野菜を盛り付けた料理" fill sizes="(max-width: 767px) 100vw, 40vw" /></SectionReveal>
-            <SectionReveal className="gallery-item gallery-landscape" delay={0.16}><Image src={siteContent.images.anniversary} alt="記念日ケーキが用意された店内のテーブル" fill sizes="(max-width: 767px) 100vw, 56vw" /></SectionReveal>
+            <SectionReveal className="gallery-item gallery-wide"><Image src={siteContent.images.hero} alt="フレンチ料理を囲む夜の店内" fill quality={65} sizes="(max-width: 767px) 100vw, 66vw" /></SectionReveal>
+            <SectionReveal className="gallery-item gallery-tall" delay={0.08}><Image src={siteContent.images.wine} alt="赤ワインをグラスへ注ぐ手元" fill quality={65} sizes="(max-width: 767px) 50vw, 32vw" /></SectionReveal>
+            <SectionReveal className="gallery-item gallery-square" delay={0.12}><Image src={siteContent.images.beef} alt="牛肉と季節の野菜を盛り付けた料理" fill quality={65} sizes="(max-width: 767px) 50vw, 40vw" /></SectionReveal>
+            <SectionReveal className="gallery-item gallery-landscape" delay={0.16}><Image src={siteContent.images.anniversary} alt="記念日ケーキが用意された店内のテーブル" fill quality={65} sizes="(max-width: 767px) 100vw, 56vw" /></SectionReveal>
           </div>
         </section>
 
@@ -146,7 +146,7 @@ export default function Home() {
                 <div><dt>最終入店</dt><dd>{siteContent.details.lastEntry}</dd></div>
                 <div><dt>定休日</dt><dd>{siteContent.details.closed}</dd></div>
               </dl>
-              <div className="access-links"><a href={siteContent.details.mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>{siteContent.details.instagram.url && <a className="instagram-access-button" href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer" aria-label={`公式インスタグラム ${siteContent.details.instagram.label} を新しいタブで開く`}><InstagramLogo size={23} weight="thin" aria-hidden="true" /><span className="instagram-access-identity"><strong>公式インスタグラム</strong><small>{siteContent.details.instagram.label}</small></span><span className="instagram-access-cta">最新情報を見る <span className="instagram-arrow" aria-hidden="true">↗</span></span></a>}</div>
+              <div className="access-links"><a href={siteContent.details.mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで見る</a>{siteContent.details.instagram.url && <a className="instagram-access-button" href={siteContent.details.instagram.url} target="_blank" rel="noopener noreferrer"><InstagramLogo size={23} weight="thin" aria-hidden="true" /><span className="instagram-access-identity"><strong>公式インスタグラム</strong><small>{siteContent.details.instagram.label}</small></span><span className="instagram-access-cta">最新情報を見る <span className="instagram-arrow" aria-hidden="true">↗</span></span></a>}</div>
             </SectionReveal>
             <SectionReveal className="map-placeholder" delay={0.2}>
               <span>現在地（仮）</span><p>地図は住所確定後に掲載します</p><i aria-hidden="true" />
